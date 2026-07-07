@@ -1,0 +1,4 @@
+{
+  "$comment": "Fixed glossary for the Phase 6 translation pipeline (CLAUDE.md §6.2 step 3). Keys anchor on the authoritative Arabic legal terms that appear in parentheses inside the Sorani source text. Populate 'en' renderings (human-reviewed) before running scripts/translate-articles.ts so terminology stays consistent across all 557 articles.",
+  "terms": []
+}

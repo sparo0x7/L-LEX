@@ -1,0 +1,22 @@
+[
+  {
+    "id": "iraqi-penal-code-1969",
+    "slug": "iraqi-penal-code-1969",
+    "officialCitation": {
+      "ckb": "یاسای سزادانی عێراقی ژمارە ١١١ی ساڵی ١٩٦٩"
+    },
+    "category": "penal",
+    "articleCount": 503,
+    "lastVerified": "2026-07-07"
+  },
+  {
+    "id": "kurdistan-internal-security-forces-law",
+    "slug": "kurdistan-internal-security-forces-law",
+    "officialCitation": {
+      "ckb": "یاسای هێزەکانی ئاسایشی ناوخۆی کوردستان"
+    },
+    "category": "security",
+    "articleCount": 54,
+    "lastVerified": "2026-07-07"
+  }
+]

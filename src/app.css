@@ -1,0 +1,30 @@
+@import './styles/tokens.css';
+@import 'tailwindcss';
+
+/* Dark variant follows the data-theme attribute set by the pre-paint bootstrap
+   script in index.html, not the OS preference alone. */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+/* Expose the design tokens as Tailwind color utilities
+   (bg-bg, text-text-primary, border-border, bg-surface-hover, …). */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-subtle: var(--bg-subtle);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-border: var(--border);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-accent: var(--accent);
+  --color-accent-gold: var(--accent-gold);
+  --color-danger: var(--danger);
+  --color-success: var(--success);
+
+  --font-sans: 'Vazirmatn', 'Noto Sans Arabic', system-ui, sans-serif;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+}
