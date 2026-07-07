@@ -203,7 +203,7 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 7,
     "penaltyTags": [
-      "other"
+      "dismissal"
     ],
     "content": {
       "ckb": {
@@ -566,7 +566,7 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 18,
     "penaltyTags": [
-      "other"
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -599,7 +599,7 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 19,
     "penaltyTags": [
-      "other"
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -733,7 +733,7 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 23,
     "penaltyTags": [
-      "other"
+      "dismissal"
     ],
     "content": {
       "ckb": {
@@ -898,7 +898,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 28,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -1228,7 +1229,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 38,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -1426,7 +1428,7 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 44,
     "penaltyTags": [
-      "other"
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -1757,7 +1759,8 @@
     "articleNumber": 54,
     "penaltyTags": [
       "imprisonment",
-      "fine"
+      "fine",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -1790,7 +1793,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 55,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -2058,7 +2062,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 63,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -2124,7 +2129,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 65,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -2190,7 +2196,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 67,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -2388,7 +2395,7 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 73,
     "penaltyTags": [
-      "other"
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -2587,7 +2594,8 @@
     "articleNumber": 79,
     "penaltyTags": [
       "imprisonment",
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -2620,7 +2628,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 80,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -2653,7 +2662,7 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 81,
     "penaltyTags": [
-      "other"
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -2720,7 +2729,8 @@
     "articleNumber": 83,
     "penaltyTags": [
       "imprisonment",
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -2786,7 +2796,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 85,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -2852,7 +2863,7 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 87,
     "penaltyTags": [
-      "other"
+      "dismissal"
     ],
     "content": {
       "ckb": {
@@ -2885,7 +2896,7 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 88,
     "penaltyTags": [
-      "other"
+      "suspension"
     ],
     "content": {
       "ckb": {
@@ -2918,7 +2929,7 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 89,
     "penaltyTags": [
-      "other"
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -3017,7 +3028,7 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 92,
     "penaltyTags": [
-      "other"
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -3314,7 +3325,7 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 101,
     "penaltyTags": [
-      "other"
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -3413,7 +3424,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 104,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -3512,7 +3524,7 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 107,
     "penaltyTags": [
-      "other"
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -3844,7 +3856,8 @@
     "penaltyTags": [
       "death-penalty",
       "life-imprisonment",
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -3911,7 +3924,8 @@
     "articleNumber": 119,
     "penaltyTags": [
       "imprisonment",
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -4109,7 +4123,7 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 125,
     "penaltyTags": [
-      "other"
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -4307,7 +4321,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 131,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -4704,7 +4719,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 143,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -5001,7 +5017,7 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 152,
     "penaltyTags": [
-      "other"
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -5133,7 +5149,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 156,
     "penaltyTags": [
-      "death-penalty"
+      "death-penalty",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -5335,7 +5352,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 162,
     "penaltyTags": [
-      "life-imprisonment"
+      "life-imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -5370,7 +5388,8 @@
     "penaltyTags": [
       "death-penalty",
       "life-imprisonment",
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -5403,7 +5422,9 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 164,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -5507,7 +5528,8 @@
     "articleNumber": 167,
     "penaltyTags": [
       "imprisonment",
-      "fine"
+      "fine",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -5607,7 +5629,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 170,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -5640,7 +5663,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 171,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -5708,7 +5732,8 @@
     "penaltyTags": [
       "death-penalty",
       "life-imprisonment",
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -5980,7 +6005,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 181,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -6013,7 +6039,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 182,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -6114,7 +6141,9 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 185,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -6147,7 +6176,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 186,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -6181,7 +6211,9 @@
     "articleNumber": 187,
     "penaltyTags": [
       "imprisonment",
-      "fine"
+      "fine",
+      "detention",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -6215,7 +6247,8 @@
     "articleNumber": 188,
     "penaltyTags": [
       "death-penalty",
-      "life-imprisonment"
+      "life-imprisonment",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -6248,7 +6281,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 189,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -6315,7 +6349,8 @@
     "articleNumber": 191,
     "penaltyTags": [
       "imprisonment",
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -6348,7 +6383,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 192,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -6414,7 +6450,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 194,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -6447,7 +6484,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 195,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -6482,7 +6520,8 @@
     "penaltyTags": [
       "death-penalty",
       "life-imprisonment",
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -6515,7 +6554,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 197,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -6548,7 +6588,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 198,
     "penaltyTags": [
-      "other"
+      "detention",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -6614,7 +6655,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 200,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -6648,7 +6690,8 @@
     "articleNumber": 201,
     "penaltyTags": [
       "death-penalty",
-      "life-imprisonment"
+      "life-imprisonment",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -6681,7 +6724,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 202,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -6715,7 +6759,8 @@
     "articleNumber": 203,
     "penaltyTags": [
       "imprisonment",
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -6748,7 +6793,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 204,
     "penaltyTags": [
-      "other"
+      "detention",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -6781,7 +6827,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 205,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -6814,7 +6861,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 206,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -6847,7 +6895,9 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 207,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -6880,7 +6930,9 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 208,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -6979,7 +7031,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 211,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -7012,7 +7065,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 212,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -7045,7 +7099,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 213,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -7078,7 +7133,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 214,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -7111,7 +7167,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 215,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -7144,7 +7201,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 216,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -7177,7 +7235,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 217,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -7210,7 +7269,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 218,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -7243,7 +7303,7 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 219,
     "penaltyTags": [
-      "other"
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -7276,7 +7336,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 220,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -7310,7 +7371,8 @@
     "articleNumber": 221,
     "penaltyTags": [
       "imprisonment",
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -7343,7 +7405,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 222,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -7411,7 +7474,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 224,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -7444,7 +7508,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 225,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -7477,7 +7542,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 226,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -7510,7 +7576,9 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 227,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -7543,7 +7611,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 228,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -7576,7 +7645,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 229,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -7609,7 +7679,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 230,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -7642,7 +7713,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 231,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -7675,7 +7747,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 232,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -7708,7 +7781,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 233,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -7741,7 +7815,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 234,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -7774,7 +7849,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 235,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -7807,7 +7883,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 236,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -7873,7 +7950,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 238,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -7906,7 +7984,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 239,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -7939,7 +8018,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 240,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -7972,7 +8052,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 241,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -8039,7 +8120,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 243,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -8072,7 +8154,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 244,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -8138,7 +8221,7 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 246,
     "penaltyTags": [
-      "other"
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -8171,7 +8254,7 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 247,
     "penaltyTags": [
-      "other"
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -8204,7 +8287,9 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 248,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -8238,7 +8323,8 @@
     "articleNumber": 249,
     "penaltyTags": [
       "imprisonment",
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -8271,7 +8357,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 250,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -8306,7 +8393,8 @@
     "penaltyTags": [
       "life-imprisonment",
       "imprisonment",
-      "fine"
+      "fine",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -8340,7 +8428,9 @@
     "articleNumber": 252,
     "penaltyTags": [
       "imprisonment",
-      "fine"
+      "fine",
+      "detention",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -8373,7 +8463,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 253,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -8406,7 +8497,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 254,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -8439,7 +8531,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 255,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -8538,7 +8631,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 258,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -8571,7 +8665,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 259,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -8604,7 +8699,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 260,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -8637,7 +8733,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 261,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -8671,7 +8768,8 @@
     "articleNumber": 262,
     "penaltyTags": [
       "imprisonment",
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -8704,7 +8802,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 263,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -8737,7 +8836,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 264,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -8770,7 +8870,9 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 265,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -8803,7 +8905,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 266,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -8837,7 +8940,9 @@
     "articleNumber": 267,
     "penaltyTags": [
       "imprisonment",
-      "fine"
+      "fine",
+      "detention",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -8871,7 +8976,8 @@
     "articleNumber": 268,
     "penaltyTags": [
       "imprisonment",
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -8939,7 +9045,8 @@
     "articleNumber": 270,
     "penaltyTags": [
       "imprisonment",
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -9006,7 +9113,8 @@
     "articleNumber": 272,
     "penaltyTags": [
       "imprisonment",
-      "fine"
+      "fine",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -9040,7 +9148,8 @@
     "articleNumber": 273,
     "penaltyTags": [
       "imprisonment",
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -9073,7 +9182,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 274,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -9106,7 +9216,9 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 275,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -9140,7 +9252,9 @@
     "articleNumber": 276,
     "penaltyTags": [
       "imprisonment",
-      "fine"
+      "fine",
+      "detention",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -9174,7 +9288,8 @@
     "articleNumber": 277,
     "penaltyTags": [
       "imprisonment",
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -9274,7 +9389,9 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 280,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -9307,7 +9424,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 281,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -9340,7 +9458,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 282,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -9373,7 +9492,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 283,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -9406,7 +9526,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 284,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -9439,7 +9560,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 285,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -9472,7 +9594,9 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 286,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention",
+      "dismissal"
     ],
     "content": {
       "ckb": {
@@ -9505,7 +9629,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 287,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -9540,7 +9665,8 @@
     "penaltyTags": [
       "death-penalty",
       "life-imprisonment",
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -9573,7 +9699,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 289,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -9606,7 +9733,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 290,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -9639,7 +9767,9 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 291,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention",
+      "dismissal"
     ],
     "content": {
       "ckb": {
@@ -9672,7 +9802,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 292,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -9707,7 +9838,8 @@
     "penaltyTags": [
       "death-penalty",
       "life-imprisonment",
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -9775,7 +9907,9 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 295,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention",
+      "dismissal"
     ],
     "content": {
       "ckb": {
@@ -9808,7 +9942,9 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 296,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention",
+      "dismissal"
     ],
     "content": {
       "ckb": {
@@ -9841,7 +9977,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 297,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -9874,7 +10011,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 298,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -9940,7 +10078,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 300,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -9973,7 +10112,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 301,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -10006,7 +10146,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 302,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -10039,7 +10180,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 303,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -10072,7 +10214,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 304,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -10105,7 +10248,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 305,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -10138,7 +10282,9 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 306,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention",
+      "dismissal"
     ],
     "content": {
       "ckb": {
@@ -10172,7 +10318,8 @@
     "articleNumber": 307,
     "penaltyTags": [
       "imprisonment",
-      "fine"
+      "fine",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -10206,7 +10353,9 @@
     "articleNumber": 308,
     "penaltyTags": [
       "imprisonment",
-      "fine"
+      "fine",
+      "detention",
+      "dismissal"
     ],
     "content": {
       "ckb": {
@@ -10305,7 +10454,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 311,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -10473,7 +10623,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 316,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -10506,7 +10657,9 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 317,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -10539,7 +10692,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 318,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -10572,7 +10726,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 319,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -10605,7 +10760,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 320,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -10671,7 +10827,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 322,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -10704,7 +10861,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 323,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -10738,7 +10896,8 @@
     "articleNumber": 324,
     "penaltyTags": [
       "imprisonment",
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -10771,7 +10930,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 325,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -10804,7 +10964,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 326,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -10837,7 +10998,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 327,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -10904,7 +11066,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 329,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -10937,7 +11100,10 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 330,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention",
+      "dismissal",
+      "suspension"
     ],
     "content": {
       "ckb": {
@@ -11036,7 +11202,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 333,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -11069,7 +11236,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 334,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -11102,7 +11270,7 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 335,
     "penaltyTags": [
-      "other"
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -11201,7 +11369,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 338,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -11234,7 +11403,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 339,
     "penaltyTags": [
-      "other"
+      "detention",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -11267,7 +11437,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 340,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -11300,7 +11471,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 341,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -11367,7 +11539,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 343,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -11434,7 +11607,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 345,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -11467,7 +11641,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 346,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -11501,7 +11676,8 @@
     "articleNumber": 347,
     "penaltyTags": [
       "imprisonment",
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -11569,7 +11745,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 349,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -11671,7 +11848,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 352,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -11737,7 +11915,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 354,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -11771,7 +11950,8 @@
     "articleNumber": 355,
     "penaltyTags": [
       "imprisonment",
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -11804,7 +11984,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 356,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -11837,7 +12018,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 357,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -11870,7 +12052,7 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 358,
     "penaltyTags": [
-      "other"
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -12007,7 +12189,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 362,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -12040,7 +12223,7 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 363,
     "penaltyTags": [
-      "other"
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -12074,7 +12257,8 @@
     "articleNumber": 364,
     "penaltyTags": [
       "life-imprisonment",
-      "imprisonment"
+      "imprisonment",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -12142,7 +12326,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 366,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -12175,7 +12360,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 367,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -12208,7 +12394,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 368,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -12275,7 +12462,7 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 370,
     "penaltyTags": [
-      "other"
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -12308,7 +12495,9 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 371,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -12341,7 +12530,9 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 372,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -12374,7 +12565,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 373,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -12407,7 +12599,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 374,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -12440,7 +12633,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 375,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -12473,7 +12667,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 376,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -12540,7 +12735,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 378,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -12573,7 +12769,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 379,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -12606,7 +12803,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 380,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -12639,7 +12837,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 381,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -12672,7 +12871,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 382,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -12705,7 +12905,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 383,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -12738,7 +12939,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 384,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -12771,7 +12973,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 385,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -12837,7 +13040,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 387,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -12870,7 +13074,9 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 388,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -12903,7 +13109,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 389,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -12936,7 +13143,9 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 390,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -12969,7 +13178,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 391,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -13002,7 +13212,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 392,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -13035,7 +13246,7 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 393,
     "penaltyTags": [
-      "other"
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -13068,7 +13279,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 394,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -13101,7 +13313,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 395,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -13134,7 +13347,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 396,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -13167,7 +13381,9 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 397,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -13200,7 +13416,9 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 398,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -13233,7 +13451,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 399,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -13299,7 +13518,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 401,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -13332,7 +13552,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 402,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -13365,7 +13586,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 403,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -13398,7 +13620,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 404,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -13500,7 +13723,8 @@
     "articleNumber": 407,
     "penaltyTags": [
       "death-penalty",
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -13533,7 +13757,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 408,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -13566,7 +13791,7 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 409,
     "penaltyTags": [
-      "other"
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -13634,7 +13859,8 @@
     "articleNumber": 411,
     "penaltyTags": [
       "imprisonment",
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -13701,7 +13927,8 @@
     "articleNumber": 413,
     "penaltyTags": [
       "imprisonment",
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -13734,7 +13961,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 414,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -13767,7 +13995,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 415,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -13800,7 +14029,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 416,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -13833,7 +14063,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 417,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -13866,7 +14097,7 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 418,
     "penaltyTags": [
-      "other"
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -13899,7 +14130,7 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 419,
     "penaltyTags": [
-      "other"
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -14069,7 +14300,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 424,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -14102,7 +14334,7 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 425,
     "penaltyTags": [
-      "other"
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -14169,7 +14401,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 427,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -14202,7 +14435,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 428,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -14268,7 +14502,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 430,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -14301,7 +14536,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 431,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -14334,7 +14570,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 432,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -14367,7 +14604,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 433,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -14400,7 +14638,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 434,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -14433,7 +14672,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 435,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -14499,7 +14739,9 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 437,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -14533,7 +14775,8 @@
     "articleNumber": 438,
     "penaltyTags": [
       "imprisonment",
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -14566,7 +14809,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 439,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -14599,7 +14843,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 440,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -14800,7 +15045,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 446,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -14866,7 +15112,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 448,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -14932,7 +15179,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 450,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -14965,7 +15213,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 451,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -14998,7 +15247,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 452,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -15031,7 +15281,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 453,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -15064,7 +15315,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 454,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -15097,7 +15349,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 455,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -15130,7 +15383,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 456,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -15163,7 +15417,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 457,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -15196,7 +15451,7 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 458,
     "penaltyTags": [
-      "other"
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -15229,7 +15484,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 459,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -15394,7 +15650,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 464,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -15427,7 +15684,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 465,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -15460,7 +15718,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 466,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -15493,7 +15752,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 467,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -15526,7 +15786,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 468,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -15559,7 +15820,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 469,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -15592,7 +15854,7 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 470,
     "penaltyTags": [
-      "other"
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -15625,7 +15887,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 471,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -15658,7 +15921,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 472,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -15691,7 +15955,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 473,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -15724,7 +15989,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 474,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -15757,7 +16023,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 475,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -15790,7 +16057,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 476,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -15823,7 +16091,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 477,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -15892,7 +16161,8 @@
     "articleNumber": 479,
     "penaltyTags": [
       "life-imprisonment",
-      "imprisonment"
+      "imprisonment",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -15958,7 +16228,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 481,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -15991,7 +16262,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 482,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -16024,7 +16296,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 483,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -16090,7 +16363,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 485,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -16156,7 +16430,9 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 487,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -16189,7 +16465,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 488,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -16222,7 +16499,9 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 489,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -16255,7 +16534,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 490,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -16288,7 +16568,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 491,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -16321,7 +16602,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 492,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -16354,7 +16636,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 493,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -16387,7 +16670,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 494,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -16420,7 +16704,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 495,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -16453,7 +16738,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 496,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -16486,7 +16772,9 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 497,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -16519,7 +16807,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 498,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -16585,7 +16874,8 @@
     "lawId": "iraqi-penal-code-1969",
     "articleNumber": 500,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -16784,7 +17074,9 @@
     "articleNumber": 3,
     "penaltyTags": [
       "death-penalty",
-      "life-imprisonment"
+      "life-imprisonment",
+      "dismissal",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -16818,7 +17110,9 @@
     "articleNumber": 4,
     "penaltyTags": [
       "death-penalty",
-      "imprisonment"
+      "imprisonment",
+      "dismissal",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -16887,7 +17181,9 @@
     "articleNumber": 6,
     "penaltyTags": [
       "death-penalty",
-      "life-imprisonment"
+      "life-imprisonment",
+      "dismissal",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -16957,7 +17253,8 @@
     "penaltyTags": [
       "death-penalty",
       "life-imprisonment",
-      "imprisonment"
+      "imprisonment",
+      "dismissal"
     ],
     "content": {
       "ckb": {
@@ -16991,7 +17288,8 @@
     "articleNumber": 9,
     "penaltyTags": [
       "imprisonment",
-      "fine"
+      "fine",
+      "dismissal"
     ],
     "content": {
       "ckb": {
@@ -17024,7 +17322,8 @@
     "lawId": "kurdistan-internal-security-forces-law",
     "articleNumber": 10,
     "penaltyTags": [
-      "other"
+      "detention",
+      "salary-cut"
     ],
     "content": {
       "ckb": {
@@ -17057,7 +17356,9 @@
     "lawId": "kurdistan-internal-security-forces-law",
     "articleNumber": 11,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention",
+      "dismissal"
     ],
     "content": {
       "ckb": {
@@ -17090,7 +17391,9 @@
     "lawId": "kurdistan-internal-security-forces-law",
     "articleNumber": 12,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention",
+      "dismissal"
     ],
     "content": {
       "ckb": {
@@ -17123,7 +17426,9 @@
     "lawId": "kurdistan-internal-security-forces-law",
     "articleNumber": 13,
     "penaltyTags": [
-      "other"
+      "detention",
+      "demotion",
+      "salary-cut"
     ],
     "content": {
       "ckb": {
@@ -17156,7 +17461,8 @@
     "lawId": "kurdistan-internal-security-forces-law",
     "articleNumber": 14,
     "penaltyTags": [
-      "other"
+      "detention",
+      "salary-cut"
     ],
     "content": {
       "ckb": {
@@ -17189,7 +17495,9 @@
     "lawId": "kurdistan-internal-security-forces-law",
     "articleNumber": 15,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention",
+      "dismissal"
     ],
     "content": {
       "ckb": {
@@ -17222,7 +17530,9 @@
     "lawId": "kurdistan-internal-security-forces-law",
     "articleNumber": 16,
     "penaltyTags": [
-      "other"
+      "detention",
+      "dismissal",
+      "salary-cut"
     ],
     "content": {
       "ckb": {
@@ -17255,7 +17565,9 @@
     "lawId": "kurdistan-internal-security-forces-law",
     "articleNumber": 17,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "dismissal",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -17288,7 +17600,8 @@
     "lawId": "kurdistan-internal-security-forces-law",
     "articleNumber": 18,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "dismissal"
     ],
     "content": {
       "ckb": {
@@ -17321,7 +17634,7 @@
     "lawId": "kurdistan-internal-security-forces-law",
     "articleNumber": 19,
     "penaltyTags": [
-      "other"
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -17354,7 +17667,9 @@
     "lawId": "kurdistan-internal-security-forces-law",
     "articleNumber": 20,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention",
+      "dismissal"
     ],
     "content": {
       "ckb": {
@@ -17387,7 +17702,8 @@
     "lawId": "kurdistan-internal-security-forces-law",
     "articleNumber": 21,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -17420,7 +17736,8 @@
     "lawId": "kurdistan-internal-security-forces-law",
     "articleNumber": 22,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -17453,7 +17770,9 @@
     "lawId": "kurdistan-internal-security-forces-law",
     "articleNumber": 23,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention",
+      "dismissal"
     ],
     "content": {
       "ckb": {
@@ -17486,7 +17805,9 @@
     "lawId": "kurdistan-internal-security-forces-law",
     "articleNumber": 24,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "detention",
+      "dismissal"
     ],
     "content": {
       "ckb": {
@@ -17519,7 +17840,7 @@
     "lawId": "kurdistan-internal-security-forces-law",
     "articleNumber": 25,
     "penaltyTags": [
-      "other"
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -17552,7 +17873,7 @@
     "lawId": "kurdistan-internal-security-forces-law",
     "articleNumber": 26,
     "penaltyTags": [
-      "other"
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -17587,7 +17908,8 @@
     "penaltyTags": [
       "death-penalty",
       "life-imprisonment",
-      "imprisonment"
+      "imprisonment",
+      "dismissal"
     ],
     "content": {
       "ckb": {
@@ -17620,7 +17942,7 @@
     "lawId": "kurdistan-internal-security-forces-law",
     "articleNumber": 28,
     "penaltyTags": [
-      "other"
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -17653,7 +17975,8 @@
     "lawId": "kurdistan-internal-security-forces-law",
     "articleNumber": 29,
     "penaltyTags": [
-      "other"
+      "detention",
+      "dismissal"
     ],
     "content": {
       "ckb": {
@@ -17687,7 +18010,8 @@
     "articleNumber": 30,
     "penaltyTags": [
       "imprisonment",
-      "fine"
+      "fine",
+      "dismissal"
     ],
     "content": {
       "ckb": {
@@ -17720,7 +18044,8 @@
     "lawId": "kurdistan-internal-security-forces-law",
     "articleNumber": 31,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "dismissal"
     ],
     "content": {
       "ckb": {
@@ -17753,7 +18078,9 @@
     "lawId": "kurdistan-internal-security-forces-law",
     "articleNumber": 32,
     "penaltyTags": [
-      "imprisonment"
+      "imprisonment",
+      "dismissal",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -17788,7 +18115,8 @@
     "penaltyTags": [
       "life-imprisonment",
       "imprisonment",
-      "fine"
+      "fine",
+      "dismissal"
     ],
     "content": {
       "ckb": {
@@ -17822,7 +18150,9 @@
     "articleNumber": 34,
     "penaltyTags": [
       "death-penalty",
-      "imprisonment"
+      "imprisonment",
+      "detention",
+      "confiscation"
     ],
     "content": {
       "ckb": {
@@ -17855,7 +18185,9 @@
     "lawId": "kurdistan-internal-security-forces-law",
     "articleNumber": 35,
     "penaltyTags": [
-      "other"
+      "detention",
+      "dismissal",
+      "salary-cut"
     ],
     "content": {
       "ckb": {
@@ -17888,7 +18220,9 @@
     "lawId": "kurdistan-internal-security-forces-law",
     "articleNumber": 36,
     "penaltyTags": [
-      "other"
+      "dismissal",
+      "demotion",
+      "salary-cut"
     ],
     "content": {
       "ckb": {
@@ -17921,7 +18255,7 @@
     "lawId": "kurdistan-internal-security-forces-law",
     "articleNumber": 37,
     "penaltyTags": [
-      "other"
+      "dismissal"
     ],
     "content": {
       "ckb": {
@@ -17954,7 +18288,8 @@
     "lawId": "kurdistan-internal-security-forces-law",
     "articleNumber": 38,
     "penaltyTags": [
-      "other"
+      "detention",
+      "dismissal"
     ],
     "content": {
       "ckb": {
@@ -17987,7 +18322,8 @@
     "lawId": "kurdistan-internal-security-forces-law",
     "articleNumber": 39,
     "penaltyTags": [
-      "other"
+      "reprimand",
+      "salary-cut"
     ],
     "content": {
       "ckb": {
@@ -18020,7 +18356,8 @@
     "lawId": "kurdistan-internal-security-forces-law",
     "articleNumber": 40,
     "penaltyTags": [
-      "fine"
+      "fine",
+      "detention"
     ],
     "content": {
       "ckb": {
@@ -18053,7 +18390,9 @@
     "lawId": "kurdistan-internal-security-forces-law",
     "articleNumber": 41,
     "penaltyTags": [
-      "other"
+      "detention",
+      "reprimand",
+      "salary-cut"
     ],
     "content": {
       "ckb": {
@@ -18152,7 +18491,7 @@
     "lawId": "kurdistan-internal-security-forces-law",
     "articleNumber": 44,
     "penaltyTags": [
-      "other"
+      "suspension"
     ],
     "content": {
       "ckb": {
@@ -18185,7 +18524,7 @@
     "lawId": "kurdistan-internal-security-forces-law",
     "articleNumber": 45,
     "penaltyTags": [
-      "other"
+      "dismissal"
     ],
     "content": {
       "ckb": {
@@ -18251,7 +18590,9 @@
     "lawId": "kurdistan-internal-security-forces-law",
     "articleNumber": 47,
     "penaltyTags": [
-      "other"
+      "detention",
+      "reprimand",
+      "salary-cut"
     ],
     "content": {
       "ckb": {
@@ -18284,7 +18625,9 @@
     "lawId": "kurdistan-internal-security-forces-law",
     "articleNumber": 48,
     "penaltyTags": [
-      "other"
+      "detention",
+      "reprimand",
+      "salary-cut"
     ],
     "content": {
       "ckb": {
@@ -18317,7 +18660,9 @@
     "lawId": "kurdistan-internal-security-forces-law",
     "articleNumber": 49,
     "penaltyTags": [
-      "other"
+      "detention",
+      "demotion",
+      "salary-cut"
     ],
     "content": {
       "ckb": {

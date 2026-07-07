@@ -12,6 +12,11 @@
  *     the phrase سزای مەرگ from the starting pattern never occurs.
  *   - Life vs temporary imprisonment: زیندانی هەمیشەیی (68×) vs زیندانی کاتی (188×).
  *     Bare زیندانی only counts as `imprisonment` when not followed by هەمیشەیی.
+ *   - زیندان (السجن) is the felony-grade custodial penalty → `imprisonment`;
+ *     حەبس (الحبس, 289×) is the misdemeanor-grade one → `detention`.
+ *   - دەرکردن alone is ambiguous: it means "issuing" (a verdict, order, decree),
+ *     deportation (penal art. 106), or eviction (art. 475). It only counts as
+ *     `dismissal` anchored to service context (لە خزمەت / لە کار / لە ڕیز …).
  *   - Arabic و Kurdish yaa differ (توقيف vs توقیف) — both forms are listed; the
  *     stored text is never normalized (§6.3 normalization applies at search time).
  */
@@ -25,7 +30,19 @@ export const PENALTY_PATTERNS: ReadonlyArray<readonly [PenaltyTag, RegExp]> = [
   ['life-imprisonment', /زیندانی هەمیشەیی|زیندانی تاهەتایی|المؤبد/u],
   ['imprisonment', /زیندانی(?!\s*هەمیشەیی)|السجن(?!\s*المؤبد)/u],
   ['fine', /غەرامە|غرامة/u],
-  ['detention', /بەندکردن|حەپس|حبس|توقیف|التوقيف/u],
+  ['detention', /حەبس|حبس|بەندکردن|توقیف|التوقيف/u],
+  [
+    'dismissal',
+    /دەرکردن[^،.؛]{0,40}لە (?:خزمەت|کار|ڕیز)|لەگەڵ دەرکردن(?!ی)|بڕیاری دەرکردن|الطرد|العزل|فصل من|بەخانەنشینکردنی زۆرەملێ/u,
+  ],
+  ['demotion', /دابەزاندنی پلە|پلەبەزاندن|تنزيل الرتبة/u],
+  [
+    'suspension',
+    /ڕاگرتن[^،.؛]{0,25}لە (?:کار|دەوام|خزمەت)|لە دەوام دەوەستێنرێت|الإيقاف عن العمل|سحب اليد/u,
+  ],
+  ['reprimand', /تەوبیخ|توبیخ|سەرزەنشت|إنذار/u],
+  ['salary-cut', /بڕینی مووچە|قطع الراتب/u],
+  ['confiscation', /زەوتکردن|مصادرة/u],
 ];
 
 export function classifyPenalties(penaltyText: string): PenaltyTag[] {

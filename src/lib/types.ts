@@ -5,7 +5,18 @@ export const SOURCE_LOCALE: Locale = 'ckb'; // ground-truth language of the data
 export type LawId = 'iraqi-penal-code-1969' | 'kurdistan-internal-security-forces-law';
 
 export type PenaltyTag =
-  'death-penalty' | 'life-imprisonment' | 'imprisonment' | 'fine' | 'detention' | 'other';
+  | 'death-penalty'
+  | 'life-imprisonment'
+  | 'imprisonment'
+  | 'fine'
+  | 'detention'
+  | 'dismissal'
+  | 'demotion'
+  | 'suspension'
+  | 'reprimand'
+  | 'salary-cut'
+  | 'confiscation'
+  | 'other';
 
 export interface Law {
   id: LawId;

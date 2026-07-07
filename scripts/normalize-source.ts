@@ -11,7 +11,7 @@
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import type { Article, ArticleContent, Law, LawId } from '../src/lib/types.ts';
+import type { Article, ArticleContent, Law, LawId, Locale } from '../src/lib/types.ts';
 import { classifyPenalties } from './classify-penalties.ts';
 
 interface RawArticle {
@@ -24,16 +24,25 @@ interface RawArticle {
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 
-const SOURCES: ReadonlyArray<{ file: string; lawId: LawId; category: Law['category'] }> = [
+const SOURCES: ReadonlyArray<{
+  file: string;
+  lawId: LawId;
+  category: Law['category'];
+  citations?: Partial<Record<Locale, string>>;
+}> = [
   {
     file: 'iraqi_penal_code_1969.json',
     lawId: 'iraqi-penal-code-1969',
     category: 'penal',
+    // Direct rendering of the number/year already present in law_name (١١١ی ساڵی ١٩٦٩).
+    citations: { en: 'Iraqi Penal Code No. 111 of 1969' },
   },
   {
     file: 'kurdistan_internal_security_forces_law.json',
     lawId: 'kurdistan-internal-security-forces-law',
     category: 'security',
+    // TODO: en/ar citation requires verification against parliament.krd — several
+    // candidate laws exist (No. 17/2008, No. 14/2011 implementing law, …). Do not guess.
   },
 ];
 
@@ -89,9 +98,8 @@ function main(): void {
     laws.push({
       id: source.lawId,
       slug: source.lawId,
-      // en/ar citations and sourceUrl are deliberately absent — they require
-      // human verification against the official source (do not invent them).
-      officialCitation: { ckb: firstArticle.law_name },
+      // sourceUrl stays absent until verified against the official source.
+      officialCitation: { ckb: firstArticle.law_name, ...source.citations },
       category: source.category,
       articleCount: raw.length,
       lastVerified: importDate,
