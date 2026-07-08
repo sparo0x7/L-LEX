@@ -4,6 +4,7 @@ import { initTheme } from './lib/theme.ts';
 import { initLocale, onLocaleChange, t } from './lib/i18n.ts';
 import { renderHeader, wireHeader } from './components/layout/Header.ts';
 import { renderFooter, wireFooter } from './components/layout/Footer.ts';
+import { mountHomePage } from './pages/home.ts';
 
 const appElement = document.querySelector<HTMLDivElement>('#app');
 if (!appElement) throw new Error('#app root element missing');
@@ -20,17 +21,13 @@ function renderShell(): void {
     >${t('nav.skipToContent')}</a>
     <div class="flex min-h-dvh flex-col bg-bg text-text-primary">
       ${renderHeader()}
-      <main
-        id="main"
-        class="mx-auto flex w-full max-w-5xl flex-1 flex-col items-center justify-center gap-4 px-4 py-16 text-center"
-      >
-        <h1 class="text-3xl font-bold text-accent sm:text-4xl">${t('app.tagline')}</h1>
-        <p class="max-w-xl leading-relaxed text-text-secondary">${t('shell.phaseNote')}</p>
-      </main>
+      <main id="main" class="mx-auto w-full max-w-5xl flex-1 px-4 pb-16"></main>
       ${renderFooter()}
     </div>`;
   wireHeader(app);
   wireFooter(app);
+  const main = app.querySelector<HTMLElement>('#main');
+  if (main) mountHomePage(main);
 }
 
 initTheme();

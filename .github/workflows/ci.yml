@@ -19,4 +19,6 @@ jobs:
       - run: npm run lint
       - run: npm run format:check
       - run: npm run data:normalize
+      - run: npm run data:index
+      - run: npm test
       - run: npm run build

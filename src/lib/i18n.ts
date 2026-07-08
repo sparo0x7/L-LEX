@@ -58,8 +58,14 @@ export function onLocaleChange(listener: (locale: Locale) => void): () => void {
   return () => listeners.delete(listener);
 }
 
-export function t(key: MessageKey): string {
-  return dictionaries[currentLocale][key] ?? dictionaries[SOURCE_LOCALE][key] ?? key;
+export function t(key: MessageKey, params?: Record<string, string | number>): string {
+  let message = dictionaries[currentLocale][key] ?? dictionaries[SOURCE_LOCALE][key] ?? key;
+  if (params) {
+    for (const [name, value] of Object.entries(params)) {
+      message = message.replaceAll(`{${name}}`, String(value));
+    }
+  }
+  return message;
 }
 
 /** Restore the stored locale (the pre-paint bootstrap already set lang/dir). */

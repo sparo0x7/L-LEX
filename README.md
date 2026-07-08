@@ -116,7 +116,7 @@ Kurdish Sorani is the **source-of-truth language** of both statutes; the Arabic 
 - [x] Data pipeline — normalization + penalty classification of all 557 articles
 - [x] Design system & shell — trilingual UI, RTL/LTR switching, light/dark themes
 - [x] Branding & public repo — L-LEX identity, MIT license
-- [ ] Search — FlexSearch index, digit/script normalization, filters, keyboard nav
+- [x] Search — FlexSearch index, digit/script normalization, filters, keyboard nav
 - [ ] Law overview & article pages — conditions/penalty sections, citations, favorites
 - [ ] Opening animation — scales of justice, skippable, reduced-motion aware
 - [ ] Translation pipeline — EN/AR machine translation with status badges
