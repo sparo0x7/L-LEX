@@ -1,28 +1,29 @@
 /**
- * Translation pipeline — CLAUDE.md §6.2 step 3 (redesigned 2026-07-08).
+ * Translation pipeline — CLAUDE.md §6.2 step 3 (local-engine redesign,
+ * 2026-07-08, superseding the Azure Translator draft the same day).
  *
- * Engine: Azure Translator REST v3 (free F0 tier — 2M chars/month; ckb
- * "Central Kurdish" is officially supported). Replaces the original LLM-call
- * design. Google Cloud Translation (also with explicit ckb support) is the
- * documented fallback for spot-checking weak articles.
+ * Engine: Meta NLLB-200 (distilled 600M) running FULLY LOCALLY via
+ * @huggingface/transformers (ONNX, CPU). No API, no key, no per-character
+ * cost — the model (~1 GB) downloads once from the Hugging Face Hub and is
+ * cached in .cache/transformers/. NLLB-200 explicitly supports Central
+ * Kurdish (ckb_Arab) → English (eng_Latn) and Arabic (arb_Arab).
  *
- * Only `title`, `conditions`, and `penalties` are translated (~226K source
- * chars → ~452K billed for en+ar); `formattedText` is reconstructed from the
- * translated fields, never re-translated.
+ * Only `title`, `conditions`, and `penalties` are translated; `formattedText`
+ * is reconstructed from the translated fields. Long fields are split into
+ * sentence chunks (NLLB degrades past ~512 tokens) and rejoined.
  *
- * Glossary (§6.2): entries from content/glossary/legal-terms.json are applied
- * per target via Azure's dynamic-dictionary markup, which is why en and ar run
- * as separate passes (multi-target requests would force one rendering into
- * both outputs). After translation, a QA pass warns about any article where a
- * glossary term appeared in the source but the approved rendering is missing
- * from the output. Output carries translationStatus 'machine' — the free
- * engine does not change the §15 human-review requirement or the UI badge.
+ * Glossary (§6.2): NLLB has no term-forcing mechanism, so the glossary is
+ * enforced as a post-run QA report — articles where an approved rendering is
+ * missing are listed as manual spot-check candidates.
  *
- * Setup: AZURE_TRANSLATOR_KEY (required) and AZURE_TRANSLATOR_REGION (for
- * regional resources) in .env — see .env.example. Run via
- * `npm run data:translate`; `--dry-run` prints the batch plan and character
- * budget without calling the API. Reruns resume: articles whose source hash
- * already exists in the output files are skipped.
+ * A local open model is weaker than commercial engines: output keeps
+ * translationStatus 'machine', the UI badge stays, and the §15 human-review
+ * requirement is unchanged (if anything, more important).
+ *
+ * Usage:
+ *   npm run data:translate               # full run (resumes automatically)
+ *   npm run data:translate -- --dry-run  # chunk/char plan, no model load
+ *   npm run data:translate -- --sample 3 # first N articles only (benchmark)
  */
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { createHash } from 'node:crypto';
@@ -31,15 +32,17 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import type { Article, ArticleContent } from '../src/lib/types.ts';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
-const ENDPOINT =
-  process.env.AZURE_TRANSLATOR_ENDPOINT ?? 'https://api.cognitive.microsofttranslator.com';
-
-const MAX_BATCH_TEXTS = 25;
-const MAX_BATCH_CHARS = 8_000;
-const BATCH_DELAY_MS = 300;
-const MAX_ATTEMPTS = 6;
+const MODEL_ID = 'Xenova/nllb-200-distilled-600M';
+const MAX_CHUNK_CHARS = 400;
+const GENERATION_BATCH = 8;
 
 export type TargetLocale = 'en' | 'ar';
+
+const NLLB_CODES: Record<'ckb' | TargetLocale, string> = {
+  ckb: 'ckb_Arab',
+  en: 'eng_Latn',
+  ar: 'arb_Arab',
+};
 
 export interface GlossaryTerm {
   ar: string; // authoritative Arabic legal term as it appears in the source
@@ -70,25 +73,44 @@ export function hashSource(article: Article): string {
 }
 
 /**
- * Wrap glossary source terms in Azure dynamic-dictionary markup so the
- * approved target rendering is forced. Only terms with a rendering for this
- * target are wrapped.
+ * Split text into translation chunks on sentence boundaries (Arabic-script
+ * and Latin terminators), merging sentences up to the char budget. Never
+ * splits mid-sentence unless a single sentence exceeds the budget.
  */
-export function applyGlossaryMarkup(
-  text: string,
-  terms: GlossaryTerm[],
-  target: TargetLocale,
-): string {
-  let result = text;
-  for (const term of terms) {
-    const rendering = target === 'en' ? term.en : undefined; // ar keeps the source term as-is
-    if (!rendering || !term.ar) continue;
-    result = result.replaceAll(
-      term.ar,
-      `<mstrans:dictionary translation="${rendering}">${term.ar}</mstrans:dictionary>`,
-    );
+export function splitIntoChunks(text: string, maxChars = MAX_CHUNK_CHARS): string[] {
+  const sentences = text.split(/(?<=[.!?؟؛])\s+/).filter((s) => s.length > 0);
+  const chunks: string[] = [];
+  let current = '';
+  for (const sentence of sentences) {
+    if (current && current.length + sentence.length + 1 > maxChars) {
+      chunks.push(current);
+      current = '';
+    }
+    if (sentence.length > maxChars) {
+      if (current) {
+        chunks.push(current);
+        current = '';
+      }
+      // Oversized sentence: fall back to comma/space boundaries.
+      let rest = sentence;
+      while (rest.length > maxChars) {
+        const slice = rest.slice(0, maxChars);
+        const cut = Math.max(
+          slice.lastIndexOf('،'),
+          slice.lastIndexOf(','),
+          slice.lastIndexOf(' '),
+        );
+        const at = cut > maxChars / 2 ? cut + 1 : maxChars;
+        chunks.push(rest.slice(0, at).trim());
+        rest = rest.slice(at).trim();
+      }
+      if (rest) current = rest;
+    } else {
+      current = current ? `${current} ${sentence}` : sentence;
+    }
   }
-  return result;
+  if (current) chunks.push(current);
+  return chunks;
 }
 
 /** QA: glossary terms whose approved rendering is absent from the output. */
@@ -120,73 +142,32 @@ export function reconstructFormattedText(
     : `المادة ${articleNumber} > ${content.title}؛ ${content.conditions} > النتيجة: ${content.penalties}`;
 }
 
-export interface BatchItem {
-  articleIndex: number;
-  field: 'title' | 'conditions' | 'penalties';
-  text: string;
-}
+/* ---------- local NLLB engine ---------- */
 
-/** Split items into API batches within the text-count and char limits. */
-export function chunkIntoBatches(items: BatchItem[]): BatchItem[][] {
-  const batches: BatchItem[][] = [];
-  let current: BatchItem[] = [];
-  let currentChars = 0;
-  for (const item of items) {
-    if (
-      current.length > 0 &&
-      (current.length >= MAX_BATCH_TEXTS || currentChars + item.text.length > MAX_BATCH_CHARS)
-    ) {
-      batches.push(current);
-      current = [];
-      currentChars = 0;
+type Translator = (texts: string[], target: TargetLocale) => Promise<string[]>;
+
+async function createLocalTranslator(): Promise<Translator> {
+  const { pipeline, env } = await import('@huggingface/transformers');
+  env.cacheDir = join(ROOT, '.cache/transformers');
+  console.log(`loading ${MODEL_ID} (first run downloads ~1 GB to .cache/transformers/)…`);
+  const started = Date.now();
+  const translate = await pipeline('translation', MODEL_ID);
+  console.log(`model ready in ${Math.round((Date.now() - started) / 1000)}s`);
+
+  return async (texts, target) => {
+    const results: string[] = [];
+    for (let i = 0; i < texts.length; i += GENERATION_BATCH) {
+      const batch = texts.slice(i, i + GENERATION_BATCH);
+      const output = (await translate(batch, {
+        src_lang: NLLB_CODES.ckb,
+        tgt_lang: NLLB_CODES[target],
+      } as Record<string, unknown>)) as
+        Array<{ translation_text: string }> | { translation_text: string };
+      const entries = Array.isArray(output) ? output : [output];
+      results.push(...entries.map((entry) => entry.translation_text ?? ''));
     }
-    current.push(item);
-    currentChars += item.text.length;
-  }
-  if (current.length > 0) batches.push(current);
-  return batches;
-}
-
-/* ---------- Azure API ---------- */
-
-const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
-async function translateBatch(texts: string[], target: TargetLocale): Promise<string[]> {
-  const key = process.env.AZURE_TRANSLATOR_KEY;
-  if (!key) throw new Error('AZURE_TRANSLATOR_KEY is not set');
-  const url = `${ENDPOINT}/translate?api-version=3.0&from=ckb&to=${target}`;
-  const headers: Record<string, string> = {
-    'Ocp-Apim-Subscription-Key': key,
-    'Content-Type': 'application/json',
+    return results;
   };
-  const region = process.env.AZURE_TRANSLATOR_REGION;
-  if (region) headers['Ocp-Apim-Subscription-Region'] = region;
-
-  for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers,
-      body: JSON.stringify(texts.map((text) => ({ Text: text }))),
-    });
-    if (response.ok) {
-      const payload = (await response.json()) as Array<{
-        translations: Array<{ text: string; to: string }>;
-      }>;
-      return payload.map((entry) => entry.translations[0]?.text ?? '');
-    }
-    if ((response.status === 429 || response.status >= 500) && attempt < MAX_ATTEMPTS) {
-      const retryAfter = Number(response.headers.get('Retry-After'));
-      const waitMs =
-        Number.isFinite(retryAfter) && retryAfter > 0 ? retryAfter * 1000 : 2 ** attempt * 1000;
-      console.warn(
-        `  HTTP ${response.status} — retrying in ${waitMs / 1000}s (attempt ${attempt}/${MAX_ATTEMPTS})`,
-      );
-      await sleep(waitMs);
-      continue;
-    }
-    throw new Error(`Azure Translator HTTP ${response.status}: ${await response.text()}`);
-  }
-  throw new Error('unreachable');
 }
 
 /* ---------- pipeline ---------- */
@@ -204,7 +185,7 @@ function writeOutput(
 ): void {
   const file: TranslatedArticleFile = {
     generatedAt: new Date().toISOString(),
-    engine: 'azure-translator-v3',
+    engine: `nllb-200-distilled-600M (local)`,
     locale,
     articles: [...articles.values()],
   };
@@ -212,81 +193,78 @@ function writeOutput(
 }
 
 async function translateLocale(
+  translator: Translator | null,
   articles: Article[],
   terms: GlossaryTerm[],
   target: TargetLocale,
-  dryRun: boolean,
 ): Promise<void> {
   const outPath = join(ROOT, `content/normalized/articles.${target}.json`);
   const existing = loadExisting(outPath);
-
   const pending = articles.filter(
     (article) => existing.get(article.id)?.srcHash !== hashSource(article),
   );
-  const items: BatchItem[] = [];
-  pending.forEach((article, index) => {
-    for (const field of ['title', 'conditions', 'penalties'] as const) {
-      items.push({
-        articleIndex: index,
-        field,
-        text: applyGlossaryMarkup(article.content.ckb[field], terms, target),
-      });
-    }
-  });
-  const batches = chunkIntoBatches(items);
-  const chars = items.reduce((sum, item) => sum + item.text.length, 0);
-  console.log(
-    `→ ${target}: ${pending.length} articles to translate (${existing.size ? articles.length - pending.length : 0} cached), ` +
-      `${chars.toLocaleString()} chars in ${batches.length} batches`,
+
+  const chunkCount = pending.reduce(
+    (sum, a) =>
+      sum +
+      splitIntoChunks(a.content.ckb.title).length +
+      splitIntoChunks(a.content.ckb.conditions).length +
+      splitIntoChunks(a.content.ckb.penalties).length,
+    0,
   );
-  if (dryRun || pending.length === 0) return;
+  const chars = pending.reduce(
+    (sum, a) =>
+      sum +
+      a.content.ckb.title.length +
+      a.content.ckb.conditions.length +
+      a.content.ckb.penalties.length,
+    0,
+  );
+  console.log(
+    `→ ${target}: ${pending.length}/${articles.length} articles pending ` +
+      `(${chars.toLocaleString()} chars, ${chunkCount} chunks)`,
+  );
+  if (!translator || pending.length === 0) return;
 
-  const drafts = new Map<string, Partial<Record<BatchItem['field'], string>>>();
-  let done = 0;
-  for (const batch of batches) {
-    const translated = await translateBatch(
-      batch.map((item) => item.text),
-      target,
-    );
-    batch.forEach((item, i) => {
-      const article = pending[item.articleIndex];
-      if (!article) return;
-      const draft = drafts.get(article.id) ?? {};
-      draft[item.field] = translated[i] ?? '';
-      drafts.set(article.id, draft);
-    });
-
-    // Persist every completed article so interrupted runs resume cleanly.
-    for (const [id, draft] of drafts) {
-      if (
-        draft.title === undefined ||
-        draft.conditions === undefined ||
-        draft.penalties === undefined
-      )
-        continue;
-      const article = pending.find((a) => a.id === id);
-      if (!article) continue;
-      const content: ArticleContent = {
-        title: draft.title,
-        conditions: draft.conditions,
-        penalties: draft.penalties,
-        formattedText: reconstructFormattedText(target, article.articleNumber, {
-          title: draft.title,
-          conditions: draft.conditions,
-          penalties: draft.penalties,
-        }),
-      };
-      existing.set(id, { id, srcHash: hashSource(article), translationStatus: 'machine', content });
-      drafts.delete(id);
+  const startedAt = Date.now();
+  let processedChars = 0;
+  for (const [index, article] of pending.entries()) {
+    const content: Partial<ArticleContent> = {};
+    for (const field of ['title', 'conditions', 'penalties'] as const) {
+      const source = article.content.ckb[field];
+      const chunks = splitIntoChunks(source);
+      const translated = await translator(chunks, target);
+      content[field] = translated.join(' ').trim();
+      processedChars += source.length;
     }
+    const full: ArticleContent = {
+      title: content.title ?? '',
+      conditions: content.conditions ?? '',
+      penalties: content.penalties ?? '',
+      formattedText: reconstructFormattedText(target, article.articleNumber, {
+        title: content.title ?? '',
+        conditions: content.conditions ?? '',
+        penalties: content.penalties ?? '',
+      }),
+    };
+    existing.set(article.id, {
+      id: article.id,
+      srcHash: hashSource(article),
+      translationStatus: 'machine',
+      content: full,
+    });
     writeOutput(outPath, target, existing);
-    done += batch.length;
-    process.stdout.write(`  ${target}: ${done}/${items.length} texts\r`);
-    await sleep(BATCH_DELAY_MS);
-  }
-  console.log(`\n✓ ${target}: ${existing.size}/${articles.length} articles → ${outPath}`);
 
-  // Glossary QA report
+    const elapsed = (Date.now() - startedAt) / 1000;
+    const rate = processedChars / elapsed;
+    const remaining = Math.round((chars - processedChars) / rate);
+    console.log(
+      `  ${target} ${index + 1}/${pending.length} (${article.id}) — ` +
+        `${Math.round(rate)} chars/s, ~${Math.round(remaining / 60)}min left`,
+    );
+  }
+  console.log(`✓ ${target}: ${existing.size}/${articles.length} articles → ${outPath}`);
+
   const warnings: string[] = [];
   for (const article of articles) {
     const output = existing.get(article.id);
@@ -298,7 +276,7 @@ async function translateLocale(
   }
   if (warnings.length > 0) {
     console.warn(
-      `⚠ ${target}: ${warnings.length} articles missing approved glossary renderings (spot-check candidates — Google Cloud Translation is the documented fallback):`,
+      `⚠ ${target}: ${warnings.length} articles missing approved glossary renderings (manual spot-check candidates):`,
     );
     for (const warning of warnings.slice(0, 20)) console.warn(`  ${warning}`);
   }
@@ -306,26 +284,24 @@ async function translateLocale(
 
 async function main(): Promise<void> {
   const dryRun = process.argv.includes('--dry-run');
-  if (!dryRun && !process.env.AZURE_TRANSLATOR_KEY) {
-    console.error(
-      'AZURE_TRANSLATOR_KEY is not set. Create a free F0 Translator resource (see .env.example),\n' +
-        'put the key/region in .env at the repo root, then rerun. Use --dry-run to preview the batch plan.',
-    );
-    process.exit(1);
-  }
+  const sampleFlag = process.argv.indexOf('--sample');
+  const sampleSize = sampleFlag !== -1 ? Number(process.argv[sampleFlag + 1]) || 3 : 0;
 
-  const articles: Article[] = JSON.parse(
+  let articles: Article[] = JSON.parse(
     readFileSync(join(ROOT, 'content/normalized/articles.ckb.json'), 'utf8'),
   );
+  if (sampleSize > 0) articles = articles.slice(0, sampleSize);
   const glossary: { terms: GlossaryTerm[] } = JSON.parse(
     readFileSync(join(ROOT, 'content/glossary/legal-terms.json'), 'utf8'),
   );
   console.log(
-    `${articles.length} articles, ${glossary.terms.length} glossary terms${dryRun ? ' (dry run)' : ''}`,
+    `${articles.length} articles, ${glossary.terms.length} glossary terms` +
+      `${dryRun ? ' (dry run)' : ''}${sampleSize ? ` (sample of ${sampleSize})` : ''}`,
   );
 
+  const translator = dryRun ? null : await createLocalTranslator();
   for (const target of ['en', 'ar'] as const) {
-    await translateLocale(articles, glossary.terms, target, dryRun);
+    await translateLocale(translator, articles, glossary.terms, target);
   }
 }
 

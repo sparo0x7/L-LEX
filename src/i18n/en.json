@@ -67,6 +67,7 @@
   "article.previous": "Previous article",
   "article.next": "Next article",
   "article.notTranslated": "Not yet translated — showing the Sorani source text",
+  "article.machineTranslated": "Machine-translated — not yet legally reviewed. The Sorani source text is authoritative.",
   "favorites.title": "Favorites",
   "favorites.empty": "No saved articles yet. Open any article and tap the star to save it here.",
   "about.title": "About L-LEX",

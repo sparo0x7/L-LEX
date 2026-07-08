@@ -1,6 +1,6 @@
 import type { LawId } from '../lib/types.ts';
 import { getLocale, t } from '../lib/i18n.ts';
-import { lawById, loadData, relatedArticles } from '../lib/data.ts';
+import { lawById, loadData, loadTranslatedContent, relatedArticles } from '../lib/data.ts';
 import { routePath } from '../lib/router.ts';
 import type { SearchDoc } from '../lib/search.ts';
 import { escapeHtml } from '../lib/search.ts';
@@ -77,14 +77,23 @@ export async function mountArticlePage(
   const label = lawLabel(law.id);
   document.title = `L-LEX — ${t('article.number', { n: doc.n })} · ${label}`;
 
-  // Translation-state branching uses doc.status, never content emptiness
-  // (§6.2): en/ar content that is 'missing' or 'machine' shows the Sorani
-  // source with a visible badge.
-  const status = doc.status[locale];
-  const translationBadge =
-    locale !== 'ckb' && (status === 'missing' || status === 'machine')
-      ? `<p class="rounded-md border border-accent-gold/40 bg-accent-gold/10 px-3 py-2 text-sm text-accent-gold">${t('article.notTranslated')}</p>`
-      : '';
+  // Translation-state branching uses status, never content emptiness (§6.2):
+  // 'machine' renders the translation with a "not yet reviewed" badge (§15);
+  // 'missing' falls back to the Sorani source with a "not translated" badge.
+  const translated = locale === 'ckb' ? null : await loadTranslatedContent(doc.id, locale);
+  const status = translated?.status ?? doc.status[locale];
+  const badgeHtml = (text: string) =>
+    `<p class="rounded-md border border-accent-gold/40 bg-accent-gold/10 px-3 py-2 text-sm text-accent-gold">${text}</p>`;
+  let translationBadge = '';
+  if (locale !== 'ckb') {
+    if (translated && status === 'machine')
+      translationBadge = badgeHtml(t('article.machineTranslated'));
+    else if (status !== 'reviewed') translationBadge = badgeHtml(t('article.notTranslated'));
+  }
+  const body = translated ?? doc; // translated fields, or Sorani source fallback
+  const bodyAttrs = translated
+    ? `lang="${locale}" dir="${locale === 'en' ? 'ltr' : 'rtl'}"`
+    : 'lang="ckb" dir="rtl"';
 
   const citation = `${t('article.number', { n: doc.n })}, ${law.officialCitation[locale] ?? label}`;
   const lawDocs = data.byLaw.get(doc.lawId as LawId) ?? [];
@@ -116,7 +125,7 @@ export async function mountArticlePage(
           <span class="ms-auto flex flex-wrap gap-1.5">${renderPenaltyBadges(doc.tags)}</span>
         </div>
         ${translationBadge}
-        <h1 class="text-xl font-bold leading-9 sm:text-2xl" lang="ckb" dir="rtl">${escapeHtml(doc.title)}</h1>
+        <h1 class="text-xl font-bold leading-9 sm:text-2xl" ${bodyAttrs}>${escapeHtml(body.title)}</h1>
         <div class="no-print flex flex-wrap items-center gap-2">
           <button type="button" data-favorite aria-pressed="${favorite}"
             class="flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-sm ${
@@ -138,11 +147,11 @@ export async function mountArticlePage(
       <div class="mt-5 space-y-4">
         <section class="rounded-xl border border-border bg-surface p-5">
           <h2 class="mb-2 text-sm font-semibold text-accent">${t('article.conditions')}</h2>
-          <p class="text-[17px] leading-9" lang="ckb" dir="rtl">${escapeHtml(doc.conditions)}</p>
+          <p class="text-[17px] leading-9" ${bodyAttrs}>${escapeHtml(body.conditions)}</p>
         </section>
         <section class="rounded-xl border border-border bg-surface p-5">
           <h2 class="mb-2 text-sm font-semibold text-accent">${t('article.penalty')}</h2>
-          <p class="text-[17px] leading-9" lang="ckb" dir="rtl">${escapeHtml(doc.penalties)}</p>
+          <p class="text-[17px] leading-9" ${bodyAttrs}>${escapeHtml(body.penalties)}</p>
         </section>
       </div>
 

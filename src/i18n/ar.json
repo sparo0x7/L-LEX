@@ -67,6 +67,7 @@
   "article.previous": "المادة السابقة",
   "article.next": "المادة التالية",
   "article.notTranslated": "لم تُترجم بعد — يُعرض النص السوراني الأصلي",
+  "article.machineTranslated": "ترجمة آلية — لم تُراجع قانونيًا بعد. النص السوراني هو المعتمد.",
   "favorites.title": "المفضلة",
   "favorites.empty": "لا مواد محفوظة بعد. افتح أي مادة واضغط على النجمة لحفظها هنا.",
   "about.title": "حول L-LEX",

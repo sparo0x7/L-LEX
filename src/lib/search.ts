@@ -45,6 +45,19 @@ export interface SearchIndexFile {
   docs: SearchDoc[];
 }
 
+/** Per-locale translated content, lazily fetched when the UI locale needs it. */
+export interface LocaleArticleContent {
+  title: string;
+  conditions: string;
+  penalties: string;
+  status: TranslationStatus;
+}
+
+export interface LocaleContentFile {
+  locale: Locale;
+  articles: Record<string, LocaleArticleContent>;
+}
+
 export type SearchSort = 'relevance' | 'number';
 
 export interface SearchFilters {

@@ -3,10 +3,17 @@
  * (content/normalized/search-index.json) shared by search, law pages, and
  * article pages. Law metadata (tiny) is bundled directly.
  */
-import type { Law, LawId } from './types.ts';
-import type { SearchDoc, SearchIndexFile } from './search.ts';
+import type { Law, LawId, Locale } from './types.ts';
+import type {
+  LocaleArticleContent,
+  LocaleContentFile,
+  SearchDoc,
+  SearchIndexFile,
+} from './search.ts';
 import lawsJson from '../../content/normalized/laws.json';
 import searchIndexUrl from '../../content/normalized/search-index.json?url';
+import contentEnUrl from '../../content/normalized/content.en.json?url';
+import contentArUrl from '../../content/normalized/content.ar.json?url';
 
 export const LAWS = lawsJson as Law[];
 
@@ -38,6 +45,29 @@ export function loadData(): Promise<AppData> {
       return { docs: file.docs, byId, byLaw };
     });
   return dataPromise;
+}
+
+const CONTENT_URLS: Partial<Record<Locale, string>> = { en: contentEnUrl, ar: contentArUrl };
+const contentPromises = new Map<Locale, Promise<LocaleContentFile>>();
+
+/**
+ * Translated article content for en/ar (Phase 6 output), fetched lazily and
+ * cached. Returns null for ckb (the source locale) or when the article has no
+ * translation yet — callers then fall back to the Sorani source per §6.2.
+ */
+export async function loadTranslatedContent(
+  articleId: string,
+  locale: Locale,
+): Promise<LocaleArticleContent | null> {
+  const url = CONTENT_URLS[locale];
+  if (!url) return null;
+  let promise = contentPromises.get(locale);
+  if (!promise) {
+    promise = fetch(url).then((response) => response.json() as Promise<LocaleContentFile>);
+    contentPromises.set(locale, promise);
+  }
+  const file = await promise;
+  return file.articles[articleId] ?? null;
 }
 
 /**
