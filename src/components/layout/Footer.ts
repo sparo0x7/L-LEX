@@ -20,6 +20,14 @@ export function renderFooter(): string {
             class="underline underline-offset-4 hover:text-text-primary"
           >${t('footer.clearData')}</button>
         </div>
+        <p class="text-xs" dir="ltr">
+          © 2026 L-LEX · Built by
+          <a
+            class="underline underline-offset-4 hover:text-text-primary"
+            href="https://github.com/MrGuevar4"
+            rel="author"
+          >Las Khoshnaw</a>
+        </p>
       </div>
     </footer>`;
 }

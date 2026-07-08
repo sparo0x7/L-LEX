@@ -12,7 +12,7 @@ const app: HTMLDivElement = appElement;
 // The whole shell re-renders on locale change — cheap at this scale and keeps
 // every translated string, lang attribute, and RTL/LTR direction consistent.
 function renderShell(): void {
-  document.title = t('app.name');
+  document.title = `L-LEX — ${t('app.name')}`;
   app.innerHTML = `
     <a
       href="#main"

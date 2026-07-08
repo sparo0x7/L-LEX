@@ -19,7 +19,8 @@ export function renderHeader(): string {
       <div class="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-x-4 gap-y-3 px-4 py-3">
         <a href="/" class="flex items-center gap-3 font-semibold text-accent">
           ${BRAND_MARK}
-          <span class="text-lg">${t('app.name')}</span>
+          <span class="text-lg tracking-wide" dir="ltr">L-LEX</span>
+          <span class="sr-only">${t('app.name')}</span>
         </a>
         <div class="flex flex-wrap items-center justify-end gap-2">
           ${renderLanguageSwitcher()}

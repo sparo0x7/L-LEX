@@ -1,7 +1,21 @@
 {
-  "name": "legal-article-search",
+  "name": "l-lex",
   "private": true,
   "version": "0.1.0",
+  "description": "L-LEX — trilingual (Kurdish Sorani / Arabic / English) search engine for Iraqi and Kurdistan Region legislation. Static, fast, no login.",
+  "keywords": [
+    "kurdish",
+    "arabic",
+    "iraqi-law",
+    "legal-search",
+    "kurdistan"
+  ],
+  "author": "Las Khoshnaw",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MrGuevar4/L-LEX.git"
+  },
   "type": "module",
   "engines": {
     "node": ">=24"
