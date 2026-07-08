@@ -12,6 +12,7 @@ import { mountArticlePage } from './pages/article.ts';
 import { mountFavoritesPage } from './pages/favorites.ts';
 import { mountAboutPage } from './pages/about.ts';
 import { mountNotFoundPage } from './pages/notFound.ts';
+import { maybePlayIntro } from './components/hero/JusticeScalesIntro.ts';
 
 const appElement = document.querySelector<HTMLDivElement>('#app');
 if (!appElement) throw new Error('#app root element missing');
@@ -111,3 +112,5 @@ if (initial.locale === 'ckb' && getLocale() !== 'ckb') {
 }
 currentRoute = initial.route;
 renderShell();
+// §9: intro plays only on an initial home-page load, never on internal navigation.
+if (initial.route.name === 'home') maybePlayIntro();

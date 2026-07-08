@@ -43,3 +43,74 @@ body {
     background: #fff;
   }
 }
+
+/* Opening animation (§9) — beam rocks and settles level. */
+.intro-overlay {
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+
+.intro-overlay.intro-closing {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.intro-scales {
+  animation: intro-fade-in 0.5s ease both;
+}
+
+.intro-beam {
+  transform-box: view-box;
+  transform-origin: 32px 20px;
+  animation: intro-settle 2.4s cubic-bezier(0.34, 1.2, 0.64, 1) 0.2s both;
+}
+
+.intro-wordmark {
+  animation: intro-fade-up 0.7s ease 1.7s both;
+}
+
+@keyframes intro-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes intro-settle {
+  0% {
+    transform: rotate(-10deg);
+  }
+  30% {
+    transform: rotate(7deg);
+  }
+  55% {
+    transform: rotate(-3.5deg);
+  }
+  78% {
+    transform: rotate(1.5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes intro-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-scales,
+  .intro-beam,
+  .intro-wordmark {
+    animation: none;
+  }
+}
