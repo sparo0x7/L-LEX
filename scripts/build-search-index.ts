@@ -27,6 +27,7 @@ const docs: SearchDoc[] = articles.map((article) => ({
   title: article.content.ckb.title,
   conditions: article.content.ckb.conditions,
   penalties: article.content.ckb.penalties,
+  status: article.translationStatus,
 }));
 
 const file: SearchIndexFile = {

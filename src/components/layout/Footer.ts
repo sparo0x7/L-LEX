@@ -2,7 +2,7 @@ import { t } from '../../lib/i18n.ts';
 import { clearAllStored } from '../../lib/storage.ts';
 
 // §15 error-report contact — confirm or change before launch.
-const REPORT_EMAIL = 'farhangfatih211@gmail.com';
+export const REPORT_EMAIL = 'farhangfatih211@gmail.com';
 
 export function renderFooter(): string {
   return `

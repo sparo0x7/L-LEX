@@ -6,7 +6,8 @@
  * (?q=&law=&penalty=&sort=) so results are shareable and bookmarkable.
  */
 import type { LawId, PenaltyTag } from '../lib/types.ts';
-import { t } from '../lib/i18n.ts';
+import { getLocale, t } from '../lib/i18n.ts';
+import { navigate } from '../lib/router.ts';
 import { getStored, setStored } from '../lib/storage.ts';
 import type { SearchEngine, SearchIndexFile, SearchResult, SearchSort } from '../lib/search.ts';
 import { createSearchEngine, escapeHtml, normalizeSearchText } from '../lib/search.ts';
@@ -27,7 +28,6 @@ interface SearchPageState {
 }
 
 const state: SearchPageState = { q: '', law: '', penalty: '', sort: 'relevance' };
-let stateRestoredFromUrl = false;
 let engine: SearchEngine | null = null;
 let enginePromise: Promise<SearchEngine> | null = null;
 let selectedIndex = -1;
@@ -55,8 +55,6 @@ function isPenaltyTag(value: string): value is PenaltyTag {
 }
 
 function restoreStateFromUrl(): void {
-  if (stateRestoredFromUrl) return;
-  stateRestoredFromUrl = true;
   const params = new URLSearchParams(location.search);
   state.q = params.get('q') ?? '';
   const law = params.get('law') ?? '';
@@ -218,7 +216,13 @@ export function mountHomePage(container: HTMLElement): void {
       }
     } else if (event.key === 'Enter') {
       const target = lastResults[selectedIndex] ?? lastResults[0];
-      if (target) toggleExpanded(container, target.doc.id);
+      if (target) {
+        addRecentSearch(state.q);
+        navigate(
+          { name: 'article', lawSlug: target.doc.lawId, articleNumber: target.doc.n },
+          getLocale(),
+        );
+      }
     } else if (event.key === 'Escape' && state.q) {
       input.value = '';
       state.q = '';

@@ -1,24 +1,10 @@
-import type { PenaltyTag } from '../../lib/types.ts';
+import type { LawId } from '../../lib/types.ts';
 import { getLocale, t } from '../../lib/i18n.ts';
 import type { SearchResult } from '../../lib/search.ts';
 import { escapeHtml, highlightMatches, makeSnippet } from '../../lib/search.ts';
-import { lawLabel, penaltyLabel } from './Filters.ts';
-
-function badgeClasses(tag: PenaltyTag): string {
-  if (tag === 'death-penalty') return 'border-danger/40 bg-danger/10 text-danger';
-  if (tag === 'life-imprisonment')
-    return 'border-accent-gold/40 bg-accent-gold/10 text-accent-gold';
-  return 'border-border bg-bg-subtle text-text-secondary';
-}
-
-function renderBadges(tags: PenaltyTag[]): string {
-  return tags
-    .map(
-      (tag) =>
-        `<span class="rounded-full border px-2 py-0.5 text-xs ${badgeClasses(tag)}">${penaltyLabel(tag)}</span>`,
-    )
-    .join('');
-}
+import { routePath } from '../../lib/router.ts';
+import { lawLabel } from './Filters.ts';
+import { renderPenaltyBadges } from '../article/PenaltyBadges.ts';
 
 export interface ResultCardOptions {
   query: string;
@@ -35,6 +21,10 @@ export function renderResultCard(result: SearchResult, options: ResultCardOption
   const contentAttrs = 'lang="ckb" dir="rtl"';
   const snippetSource = doc.conditions || doc.penalties;
   const snippet = highlightMatches(makeSnippet(snippetSource, query), query);
+  const articleHref = routePath(
+    { name: 'article', lawSlug: doc.lawId, articleNumber: doc.n },
+    getLocale(),
+  );
   const sourceNote =
     getLocale() === 'ckb'
       ? ''
@@ -67,10 +57,12 @@ export function renderResultCard(result: SearchResult, options: ResultCardOption
         <span class="rounded-md bg-accent px-2 py-0.5 text-sm font-semibold text-bg" dir="ltr">
           ${t('article.number', { n: doc.n })}
         </span>
-        <span class="text-xs text-text-secondary">${lawLabel(doc.lawId)}</span>
-        <span class="ms-auto flex flex-wrap gap-1.5">${renderBadges(doc.tags)}</span>
+        <span class="text-xs text-text-secondary">${lawLabel(doc.lawId as LawId)}</span>
+        <span class="ms-auto flex flex-wrap gap-1.5">${renderPenaltyBadges(doc.tags)}</span>
       </div>
-      <h3 class="mt-2 font-semibold leading-7" ${contentAttrs}>${highlightMatches(doc.title, query)}</h3>
+      <h3 class="mt-2 font-semibold leading-7" ${contentAttrs}>
+        <a data-link href="${articleHref}" class="hover:text-accent">${highlightMatches(doc.title, query)}</a>
+      </h3>
       ${expanded ? '' : `<p class="mt-1 text-sm leading-7 text-text-secondary" ${contentAttrs}>${snippet}</p>`}
       ${expandedBlock}
       <button

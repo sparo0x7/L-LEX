@@ -44,10 +44,19 @@ function applyLocale(locale: Locale): void {
   document.documentElement.dir = dirFor(locale);
 }
 
+/** Explicit user choice — persists as the preference. */
 export function setLocale(locale: Locale): void {
   if (locale === currentLocale) return;
-  currentLocale = locale;
   setStored('locale', locale);
+  currentLocale = locale;
+  applyLocale(locale);
+  for (const listener of listeners) listener(locale);
+}
+
+/** URL-driven locale (following a shared link, back/forward) — not persisted. */
+export function adoptLocale(locale: Locale): void {
+  if (locale === currentLocale) return;
+  currentLocale = locale;
   applyLocale(locale);
   for (const listener of listeners) listener(locale);
 }
@@ -68,9 +77,12 @@ export function t(key: MessageKey, params?: Record<string, string | number>): st
   return message;
 }
 
-/** Restore the stored locale (the pre-paint bootstrap already set lang/dir). */
-export function initLocale(): void {
+/**
+ * Restore the locale: an explicit URL prefix wins (shared links open in their
+ * own language), otherwise the stored preference, otherwise ckb.
+ */
+export function initLocale(urlLocale?: Locale): void {
   const stored = getStored<string>('locale');
-  currentLocale = isLocale(stored) ? stored : SOURCE_LOCALE;
+  currentLocale = urlLocale ?? (isLocale(stored) ? stored : SOURCE_LOCALE);
   applyLocale(currentLocale);
 }

@@ -7,7 +7,7 @@
  * article text is never modified — normalization happens only at match time.
  */
 import { Document as FlexDocument, Encoder } from 'flexsearch';
-import type { LawId, PenaltyTag } from './types.ts';
+import type { LawId, Locale, PenaltyTag, TranslationStatus } from './types.ts';
 
 export function normalizeSearchText(input: string): string {
   return input
@@ -34,6 +34,9 @@ export type SearchDoc = {
   title: string;
   conditions: string;
   penalties: string;
+  // Per-locale translation state. UI branching MUST use this, never
+  // content-string emptiness (CLAUDE.md §6.2 graceful degradation).
+  status: Record<Locale, TranslationStatus>;
 };
 
 export interface SearchIndexFile {
