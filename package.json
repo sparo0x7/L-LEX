@@ -31,6 +31,7 @@
     "data:normalize": "node scripts/normalize-source.ts",
     "data:classify": "node scripts/classify-penalties.ts",
     "data:index": "node scripts/build-search-index.ts",
+    "data:translate": "node --env-file-if-exists=.env scripts/translate-articles.ts",
     "test": "vitest run"
   },
   "devDependencies": {
