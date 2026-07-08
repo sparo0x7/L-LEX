@@ -7,18 +7,29 @@
     <meta name="color-scheme" content="light dark" />
     <title>گەڕان لە یاساکان</title>
     <script>
-      // Stamp the theme before first paint to avoid a light-mode flash.
+      // Stamp theme and locale before first paint to avoid a flash of the wrong
+      // theme or text direction. Keys mirror src/lib/storage.ts ('laws:' + key,
+      // JSON-encoded values) — read-only here.
       (() => {
-        let stored = null;
-        try {
-          stored = localStorage.getItem('theme');
-        } catch {
-          /* storage unavailable (private mode) — fall through to system preference */
-        }
+        const read = (key) => {
+          try {
+            return JSON.parse(localStorage.getItem('laws:' + key));
+          } catch {
+            return null;
+          }
+        };
+        const theme = read('theme');
         const dark =
-          stored === 'dark' ||
-          (stored !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches);
+          theme === 'dark' ||
+          (theme !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches);
         document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+
+        const dirs = { ckb: 'rtl', ar: 'rtl', en: 'ltr' };
+        const locale = read('locale');
+        if (typeof locale === 'string' && dirs[locale]) {
+          document.documentElement.lang = locale;
+          document.documentElement.dir = dirs[locale];
+        }
       })();
     </script>
   </head>

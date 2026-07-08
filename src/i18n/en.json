@@ -1,0 +1,19 @@
+{
+  "app.name": "Legal Article Search",
+  "app.tagline": "Fast search across Iraqi and Kurdistan Region legislation",
+  "nav.skipToContent": "Skip to content",
+  "nav.home": "Home",
+  "nav.favorites": "Favorites",
+  "nav.about": "About",
+  "theme.label": "Theme",
+  "theme.light": "Light",
+  "theme.dark": "Dark",
+  "theme.system": "System",
+  "language.label": "Language",
+  "footer.disclaimer": "Unofficial reference tool — not legal advice. In case of any discrepancy, the official gazette / parliament text is authoritative.",
+  "footer.reportError": "Report an error",
+  "footer.clearData": "Clear my local data",
+  "footer.clearDataConfirm": "Clear all locally stored data (theme, language, favorites, recent searches)?",
+  "footer.clearDataDone": "Local data cleared",
+  "shell.phaseNote": "Phase 2 — design system & shell. Search arrives in the next phase."
+}

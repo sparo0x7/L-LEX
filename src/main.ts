@@ -1,42 +1,39 @@
+import '@fontsource-variable/vazirmatn/index.css';
 import './app.css';
+import { initTheme } from './lib/theme.ts';
+import { initLocale, onLocaleChange, t } from './lib/i18n.ts';
+import { renderHeader, wireHeader } from './components/layout/Header.ts';
+import { renderFooter, wireFooter } from './components/layout/Footer.ts';
 
-// Phase 0 placeholder shell — proves the token system and dark-mode wiring.
-// Replaced by the real layout components in Phase 2.
-const app = document.querySelector<HTMLDivElement>('#app');
-if (!app) throw new Error('#app root element missing');
+const appElement = document.querySelector<HTMLDivElement>('#app');
+if (!appElement) throw new Error('#app root element missing');
+const app: HTMLDivElement = appElement;
 
-app.innerHTML = `
-  <main class="min-h-dvh flex items-center justify-center bg-bg text-text-primary">
-    <div class="text-center space-y-4 p-8">
-      <svg class="mx-auto size-14 text-accent" viewBox="0 0 64 64" fill="none"
-           stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
-           role="img" aria-label="تەرازووی دادپەروەری">
-        <circle cx="32" cy="13" r="3" />
-        <path d="M32 16v30" />
-        <path d="M22 52h20M32 46v6" />
-        <path d="M12 20h40" />
-        <path d="M12 20 5 34m7-14 7 14M5 34a7 7 0 0 0 14 0" />
-        <path d="M52 20l-7 14m7-14 7 14m-14 0a7 7 0 0 0 14 0" />
-      </svg>
-      <h1 class="text-2xl font-semibold">گەڕان لە یاساکان</h1>
-      <p class="text-text-secondary">Phase 0 scaffold — design tokens wired for light and dark.</p>
-      <button
-        id="theme-toggle"
-        class="rounded-md border border-border bg-surface px-4 py-2 text-sm hover:bg-surface-hover"
+// The whole shell re-renders on locale change — cheap at this scale and keeps
+// every translated string, lang attribute, and RTL/LTR direction consistent.
+function renderShell(): void {
+  document.title = t('app.name');
+  app.innerHTML = `
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:start-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-surface focus:px-4 focus:py-2 focus:text-text-primary focus:shadow-lg"
+    >${t('nav.skipToContent')}</a>
+    <div class="flex min-h-dvh flex-col bg-bg text-text-primary">
+      ${renderHeader()}
+      <main
+        id="main"
+        class="mx-auto flex w-full max-w-5xl flex-1 flex-col items-center justify-center gap-4 px-4 py-16 text-center"
       >
-        Toggle theme
-      </button>
-    </div>
-  </main>
-`;
+        <h1 class="text-3xl font-bold text-accent sm:text-4xl">${t('app.tagline')}</h1>
+        <p class="max-w-xl leading-relaxed text-text-secondary">${t('shell.phaseNote')}</p>
+      </main>
+      ${renderFooter()}
+    </div>`;
+  wireHeader(app);
+  wireFooter(app);
+}
 
-document.querySelector<HTMLButtonElement>('#theme-toggle')?.addEventListener('click', () => {
-  const root = document.documentElement;
-  const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
-  root.dataset.theme = next;
-  try {
-    localStorage.setItem('theme', next);
-  } catch {
-    /* storage unavailable — theme still applies for this page view */
-  }
-});
+initTheme();
+initLocale();
+renderShell();
+onLocaleChange(renderShell);
