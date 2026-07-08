@@ -2,7 +2,7 @@ import { t } from '../../lib/i18n.ts';
 import { clearAllStored } from '../../lib/storage.ts';
 
 // §15 error-report contact — confirm or change before launch.
-export const REPORT_EMAIL = 'farhangfatih211@gmail.com';
+export const REPORT_EMAIL = 'lassmohammed98@gmail.com';
 
 export function renderFooter(): string {
   return `
@@ -24,7 +24,7 @@ export function renderFooter(): string {
           © 2026 L-LEX · Built by
           <a
             class="underline underline-offset-4 hover:text-text-primary"
-            href="https://github.com/MrGuevar4"
+            href="https://www.facebook.com/las.mhamad.1"
             rel="author"
           >Las Khoshnaw</a>
         </p>

@@ -33,10 +33,6 @@ export function mountAboutPage(container: HTMLElement): void {
         <h2 class="text-lg font-semibold">${t('about.sources')}</h2>
         <ul class="space-y-3">${sources}</ul>
       </section>
-      <section class="space-y-2">
-        <h2 class="text-lg font-semibold">${t('about.methodTitle')}</h2>
-        <p class="leading-8 text-text-secondary">${t('about.method')}</p>
-      </section>
       <section class="rounded-xl border border-accent-gold/40 bg-accent-gold/5 p-4">
         <p class="text-sm leading-7">${t('footer.disclaimer')}</p>
       </section>
