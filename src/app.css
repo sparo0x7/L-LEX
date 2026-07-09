@@ -41,6 +41,11 @@ body {
   outline-offset: 2px;
 }
 
+/* Tailwind v4 preflight resets button cursors to default. */
+button:not(:disabled) {
+  cursor: pointer;
+}
+
 @media print {
   .no-print {
     display: none !important;
@@ -81,6 +86,37 @@ body {
 
 .stagger-item {
   animation: fade-up 0.6s var(--ease-premium) both;
+}
+
+/* Scroll-triggered reveal: elements with [data-reveal] start hidden and play
+   fade-up when they enter the viewport (wired by an IntersectionObserver in
+   the page code; reduced-motion and no-IO environments render them visible
+   immediately). */
+[data-reveal] {
+  opacity: 0;
+}
+
+[data-reveal].is-revealed {
+  animation: fade-up 0.7s var(--ease-premium) both;
+}
+
+/* Gold section-heading bar that grows in with its section. */
+.grow-bar {
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+}
+
+.is-revealed .grow-bar {
+  animation: grow-x 0.7s var(--ease-premium) 0.25s both;
+}
+
+@keyframes grow-x {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
 }
 
 /* Landing hero (§4) — the §9 scales animation re-scoped as an ambient loop:
@@ -126,8 +162,18 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .stagger-item,
-  .hero-beam {
+  .hero-beam,
+  [data-reveal].is-revealed,
+  .is-revealed .grow-bar {
     animation: none;
+  }
+
+  [data-reveal] {
+    opacity: 1;
+  }
+
+  .grow-bar {
+    transform: none;
   }
 
   .link-underline {
