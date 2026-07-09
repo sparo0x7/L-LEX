@@ -6,13 +6,13 @@ import type { Route } from './lib/router.ts';
 import { navigate, parseLocation, routePath, setRouteListener } from './lib/router.ts';
 import { renderHeader, wireHeader } from './components/layout/Header.ts';
 import { renderFooter, wireFooter } from './components/layout/Footer.ts';
+import { mountLandingPage } from './pages/landing.ts';
 import { mountHomePage } from './pages/home.ts';
 import { mountLawPage } from './pages/law.ts';
 import { mountArticlePage } from './pages/article.ts';
 import { mountFavoritesPage } from './pages/favorites.ts';
 import { mountAboutPage } from './pages/about.ts';
 import { mountNotFoundPage } from './pages/notFound.ts';
-import { maybePlayIntro } from './components/hero/JusticeScalesIntro.ts';
 
 const appElement = document.querySelector<HTMLDivElement>('#app');
 if (!appElement) throw new Error('#app root element missing');
@@ -22,6 +22,9 @@ let currentRoute: Route = { name: 'home' };
 
 function mountPage(main: HTMLElement, route: Route): void {
   switch (route.name) {
+    case 'landing':
+      mountLandingPage(main);
+      break;
     case 'home':
       mountHomePage(main);
       break;
@@ -130,9 +133,19 @@ document.addEventListener('click', (event) => {
   navigate(route, getLocale());
 });
 
+// Back-compat: links shared before the landing page existed used '/' with
+// search params — those still open the search app, not the landing hero.
+function resolveRoute(route: Route): Route {
+  if (route.name === 'landing') {
+    const params = new URLSearchParams(location.search);
+    if (params.has('q') || params.has('law') || params.has('penalty')) return { name: 'home' };
+  }
+  return route;
+}
+
 window.addEventListener('popstate', () => {
   const { locale, route } = parseLocation(location.pathname);
-  currentRoute = route;
+  currentRoute = resolveRoute(route);
   if (locale !== getLocale()) {
     adoptLocale(locale); // triggers the locale-change re-render below
   } else {
@@ -153,7 +166,5 @@ initLocale(initial.locale !== 'ckb' ? initial.locale : undefined);
 if (initial.locale === 'ckb' && getLocale() !== 'ckb') {
   history.replaceState(null, '', routePath(initial.route, getLocale()) + location.search);
 }
-currentRoute = initial.route;
+currentRoute = resolveRoute(initial.route);
 renderShell();
-// §9: intro plays only on an initial home-page load, never on internal navigation.
-if (initial.route.name === 'home') maybePlayIntro();

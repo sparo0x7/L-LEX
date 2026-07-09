@@ -17,7 +17,10 @@ const BRAND_MARK = `
 
 export function renderHeader(activeRoute: Route['name']): string {
   const locale = getLocale();
-  const navLink = (route: Route, labelKey: 'nav.home' | 'nav.favorites' | 'nav.about') => {
+  const navLink = (
+    route: Route,
+    labelKey: 'nav.home' | 'search.label' | 'nav.favorites' | 'nav.about',
+  ) => {
     const active = activeRoute === route.name;
     return `
       <a data-link href="${routePath(route, locale)}"
@@ -33,13 +36,14 @@ export function renderHeader(activeRoute: Route['name']): string {
   return `
     <header class="no-print border-b border-border bg-surface">
       <div class="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-x-4 gap-y-3 px-4 py-3">
-        <a data-link href="${routePath({ name: 'home' }, locale)}" class="flex items-center gap-3 font-semibold text-accent">
+        <a data-link href="${routePath({ name: 'landing' }, locale)}" class="flex items-center gap-3 font-semibold text-accent">
           ${BRAND_MARK}
           <span class="text-lg tracking-wide" dir="ltr">L-LEX</span>
           <span class="sr-only">${t('app.name')}</span>
         </a>
         <nav aria-label="${t('nav.home')}" class="flex items-center gap-1">
-          ${navLink({ name: 'home' }, 'nav.home')}
+          ${navLink({ name: 'landing' }, 'nav.home')}
+          ${navLink({ name: 'home' }, 'search.label')}
           ${navLink({ name: 'favorites' }, 'nav.favorites')}
           ${navLink({ name: 'about' }, 'nav.about')}
         </nav>

@@ -7,7 +7,8 @@
 import type { Locale } from './types.ts';
 
 export type Route =
-  | { name: 'home' }
+  | { name: 'landing' }
+  | { name: 'home' } // the search app, at /search
   | { name: 'law'; lawSlug: string }
   | { name: 'article'; lawSlug: string; articleNumber: number }
   | { name: 'favorites' }
@@ -23,7 +24,9 @@ export function parseLocation(pathname: string): { locale: Locale; route: Route 
   }
 
   let route: Route;
-  if (segments.length === 0 || (segments.length === 1 && segments[0] === 'search')) {
+  if (segments.length === 0) {
+    route = { name: 'landing' };
+  } else if (segments.length === 1 && segments[0] === 'search') {
     route = { name: 'home' };
   } else if (segments.length === 1 && segments[0] === 'favorites') {
     route = { name: 'favorites' };
@@ -48,8 +51,10 @@ export function parseLocation(pathname: string): { locale: Locale; route: Route 
 export function routePath(route: Route, locale: Locale): string {
   const prefix = locale === 'ckb' ? '' : `/${locale}`;
   switch (route.name) {
-    case 'home':
+    case 'landing':
       return prefix || '/';
+    case 'home':
+      return `${prefix}/search`;
     case 'law':
       return `${prefix}/law/${route.lawSlug}`;
     case 'article':

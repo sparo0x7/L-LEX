@@ -81,7 +81,11 @@
   "about.sources": "Data sources",
   "about.method": "Kurdish Sorani is the source-of-truth language of both statutes. English and Arabic translations are machine-generated with a fixed legal glossary and are always labeled with a visible per-article status until human review.",
   "about.creator": "Created and maintained by Las Khoshnaw.",
-  "intro.skip": "Skip",
+  "landing.getStarted": "Get Started",
+  "landing.skipToSearch": "Skip to search",
+  "landing.statsArticles": "Articles indexed",
+  "landing.statsLanguages": "Languages",
+  "landing.statsNoLogin": "No login required",
   "notFound.title": "Page not found",
   "notFound.home": "Back to home"
 }

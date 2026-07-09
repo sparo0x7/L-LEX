@@ -4,12 +4,17 @@ import type { Route } from '../../src/lib/router.ts';
 import type { Locale } from '../../src/lib/types.ts';
 
 describe('parseLocation', () => {
-  it('parses the unprefixed root as ckb home', () => {
-    expect(parseLocation('/')).toEqual({ locale: 'ckb', route: { name: 'home' } });
+  it('parses the unprefixed root as the ckb landing page', () => {
+    expect(parseLocation('/')).toEqual({ locale: 'ckb', route: { name: 'landing' } });
+  });
+
+  it('parses /search as the search app', () => {
+    expect(parseLocation('/search')).toEqual({ locale: 'ckb', route: { name: 'home' } });
+    expect(parseLocation('/en/search')).toEqual({ locale: 'en', route: { name: 'home' } });
   });
 
   it('parses locale prefixes', () => {
-    expect(parseLocation('/en/').locale).toBe('en');
+    expect(parseLocation('/en/')).toEqual({ locale: 'en', route: { name: 'landing' } });
     expect(parseLocation('/ar/favorites')).toEqual({
       locale: 'ar',
       route: { name: 'favorites' },
@@ -27,10 +32,6 @@ describe('parseLocation', () => {
     });
   });
 
-  it('treats /search as the home (search) page', () => {
-    expect(parseLocation('/search').route).toEqual({ name: 'home' });
-  });
-
   it('returns notFound for unknown or malformed paths', () => {
     expect(parseLocation('/nope').route).toEqual({ name: 'notFound' });
     expect(parseLocation('/law/x/article/abc').route).toEqual({ name: 'notFound' });
@@ -39,6 +40,7 @@ describe('parseLocation', () => {
 
   it('round-trips every route through routePath in every locale', () => {
     const routes: Route[] = [
+      { name: 'landing' },
       { name: 'home' },
       { name: 'law', lawSlug: 'iraqi-penal-code-1969' },
       { name: 'article', lawSlug: 'kurdistan-internal-security-forces-law', articleNumber: 45 },
