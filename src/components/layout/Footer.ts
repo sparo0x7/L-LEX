@@ -11,13 +11,13 @@ export function renderFooter(): string {
         <p>${t('footer.disclaimer')}</p>
         <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
           <a
-            class="underline underline-offset-4 hover:text-text-primary"
+            class="link-underline hover:text-text-primary"
             href="mailto:${REPORT_EMAIL}?subject=${encodeURIComponent(t('app.name'))}"
           >${t('footer.reportError')}</a>
           <button
             type="button"
             data-clear-data
-            class="underline underline-offset-4 hover:text-text-primary"
+            class="link-underline hover:text-text-primary"
           >${t('footer.clearData')}</button>
         </div>
         <p class="text-xs">

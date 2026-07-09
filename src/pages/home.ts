@@ -19,7 +19,9 @@ import {
   renderNoResults,
   renderStartHint,
 } from '../components/search/EmptyState.ts';
+import { renderListSkeleton } from '../components/ui/Skeleton.ts';
 import searchIndexUrl from '../../content/normalized/search-index.json?url';
+import { LAWS } from '../lib/data.ts';
 
 const DEBOUNCE_MS = 200;
 const MAX_RECENT = 8;
@@ -142,14 +144,15 @@ function renderResultsArea(container: HTMLElement): void {
     lastResults = [];
     selectedIndex = -1;
     statusHost.textContent = '';
-    resultsHost.innerHTML = `<div class="space-y-4">${renderStartHint()}${renderRecentSearches()}</div>`;
+    const totalArticles = LAWS.reduce((sum, law) => sum + law.articleCount, 0);
+    resultsHost.innerHTML = `<div class="space-y-4">${renderStartHint(totalArticles)}${renderRecentSearches()}</div>`;
     writeStateToUrl();
     return;
   }
 
   if (!engine) {
     statusHost.textContent = t('search.loading');
-    resultsHost.innerHTML = '';
+    resultsHost.innerHTML = renderListSkeleton();
     void ensureEngine().then(() => renderResultsArea(container));
     return;
   }
@@ -164,13 +167,20 @@ function renderResultsArea(container: HTMLElement): void {
         ? renderNoResults(state.q)
         : renderNoFilterResults()
       : `<ul class="space-y-3">${lastResults
-          .map((result, index) =>
-            renderResultCard(result, {
+          .map((result, index) => {
+            const card = renderResultCard(result, {
               query: state.q,
               selected: index === selectedIndex,
               expanded: result.doc.id === expandedId,
-            }),
-          )
+            });
+            // Light stagger on the first few cards only — live-updating list.
+            return index < 8
+              ? card.replace(
+                  '<li',
+                  `<li style="animation-delay:${index * 30}ms;animation-duration:0.35s" data-stagger`,
+                )
+              : card;
+          })
           .join('')}</ul>`;
   writeStateToUrl();
 }

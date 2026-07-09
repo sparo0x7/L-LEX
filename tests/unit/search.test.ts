@@ -46,8 +46,8 @@ const indexFile: SearchIndexFile = JSON.parse(
 const engine = createSearchEngine(indexFile.docs);
 
 describe('SearchEngine against the real corpus', () => {
-  it('indexes all 557 articles', () => {
-    expect(engine.size).toBe(557);
+  it('indexes all 593 articles', () => {
+    expect(engine.size).toBe(593);
   });
 
   it('DoD: "251" and "٢٥١" return the same article, ranked first', () => {
@@ -101,8 +101,8 @@ describe('SearchEngine against the real corpus', () => {
 describe('SearchEngine.browse (filter-only browsing, §3)', () => {
   it('browses a whole law in article-number order', () => {
     const results = engine.browse({ law: 'kurdistan-internal-security-forces-law' });
-    expect(results.length).toBe(54);
-    expect(results.map((r) => r.doc.n)).toEqual(Array.from({ length: 54 }, (_, i) => i + 1));
+    expect(results.length).toBe(90);
+    expect(results.map((r) => r.doc.n)).toEqual(Array.from({ length: 90 }, (_, i) => i + 1));
   });
 
   it('browses by penalty tag across both laws', () => {
@@ -127,7 +127,7 @@ describe('SearchEngine.browse (filter-only browsing, §3)', () => {
   });
 
   it('with no filters browses the entire corpus', () => {
-    expect(engine.browse({}).length).toBe(557);
+    expect(engine.browse({}).length).toBe(593);
   });
 });
 

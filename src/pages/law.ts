@@ -5,9 +5,10 @@ import { navigate, routePath } from '../lib/router.ts';
 import { escapeHtml } from '../lib/search.ts';
 import { lawLabel } from '../components/search/Filters.ts';
 import { mountNotFoundPage } from './notFound.ts';
+import { renderLawSkeleton } from '../components/ui/Skeleton.ts';
 
 export async function mountLawPage(container: HTMLElement, lawSlug: string): Promise<void> {
-  container.innerHTML = `<p class="py-16 text-center text-text-secondary">${t('search.loading')}</p>`;
+  container.innerHTML = renderLawSkeleton();
   const data = await loadData();
   const law = lawById(lawSlug);
   const docs = data.byLaw.get(lawSlug as LawId);
@@ -36,7 +37,7 @@ export async function mountLawPage(container: HTMLElement, lawSlug: string): Pro
           data-link
           href="${routePath({ name: 'article', lawSlug: law.slug, articleNumber: doc.n }, locale)}"
           title="${escapeHtml(doc.title)}"
-          class="flex h-10 items-center justify-center rounded-md border border-border bg-surface text-sm hover:border-accent hover:text-accent"
+          class="card-lift flex h-10 items-center justify-center rounded-md bg-surface text-sm shadow-sm hover:text-accent"
           dir="ltr"
         >${doc.n}</a>`,
     )
@@ -44,12 +45,12 @@ export async function mountLawPage(container: HTMLElement, lawSlug: string): Pro
 
   container.innerHTML = `
     <nav aria-label="${t('nav.breadcrumbLabel')}" class="no-print pt-4 text-sm text-text-secondary">
-      <a data-link href="${routePath({ name: 'home' }, locale)}" class="hover:text-text-primary hover:underline">${t('nav.home')}</a>
+      <a data-link href="${routePath({ name: 'home' }, locale)}" class="link-underline hover:text-text-primary">${t('nav.home')}</a>
       <span aria-hidden="true"> / </span>
       <span aria-current="page">${label}</span>
     </nav>
-    <header class="mt-4 space-y-2 rounded-xl border border-border bg-surface p-5">
-      <h1 class="text-2xl font-bold text-accent">${label}</h1>
+    <header class="mt-4 space-y-2 rounded-xl bg-surface p-5 shadow-md">
+      <h1 class="text-2xl font-bold tracking-[-0.02em] text-accent">${label}</h1>
       ${secondaryCitation}
       <p class="text-sm text-text-secondary">${t('law.articleCount', { count: law.articleCount })}</p>
       ${

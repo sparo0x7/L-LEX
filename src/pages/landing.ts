@@ -19,19 +19,11 @@ import { REPORT_EMAIL } from '../components/layout/Footer.ts';
 
 const COUNT_UP_MS = 1200;
 
-const HERO_SCALES = `
-  <svg class="size-36 text-accent sm:size-44" viewBox="0 0 64 64" fill="none"
-    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
-    aria-hidden="true">
-    <circle cx="32" cy="13" r="3" />
-    <path d="M32 16v30" />
-    <path d="M22 52h20M32 46v6" />
-    <g class="hero-beam">
-      <path d="M12 20h40" />
-      <path d="M12 20 5 34m7-14 7 14M5 34a7 7 0 0 0 14 0" />
-      <path d="M52 20l-7 14m7-14 7 14m-14 0a7 7 0 0 0 14 0" />
-    </g>
-  </svg>`;
+// The main brand logo (public/favicon.svg — traced artwork with baked colors)
+// as the hero, with a gentle ambient float instead of the old beam animation.
+const heroLogo = (alt: string) => `
+  <img src="/favicon.svg" alt="${alt}"
+    class="hero-logo w-48 rounded-3xl shadow-lg sm:w-60" width="910" height="768" />`;
 
 // Lucide-style inline icons (skill checklist: SVG icons, never emoji).
 const icon = (paths: string) => `
@@ -124,7 +116,7 @@ export function mountLandingPage(container: HTMLElement): void {
         class="link-underline absolute end-0 top-4 text-sm text-text-secondary hover:text-text-primary">
         ${t('landing.skipToSearch')} <span aria-hidden="true" class="inline-block rtl:rotate-180">→</span>
       </a>
-      <div class="stagger-item">${HERO_SCALES}</div>
+      <div class="stagger-item">${heroLogo(t('app.name'))}</div>
       <h1 class="stagger-item max-w-2xl text-3xl font-bold leading-tight tracking-[-0.02em] text-accent sm:text-5xl"
         style="animation-delay: 100ms">${t('app.tagline')}</h1>
       <p class="stagger-item max-w-xl leading-8 text-text-secondary" style="animation-delay: 180ms">

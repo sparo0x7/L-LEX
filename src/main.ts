@@ -3,7 +3,7 @@ import './app.css';
 import { initTheme } from './lib/theme.ts';
 import { adoptLocale, getLocale, initLocale, onLocaleChange, t } from './lib/i18n.ts';
 import type { Route } from './lib/router.ts';
-import { navigate, parseLocation, routePath, setRouteListener } from './lib/router.ts';
+import { parseLocation, routePath, setRouteListener } from './lib/router.ts';
 import { renderHeader, wireHeader } from './components/layout/Header.ts';
 import { renderFooter, wireFooter } from './components/layout/Footer.ts';
 import { mountLandingPage } from './pages/landing.ts';
@@ -112,9 +112,11 @@ function renderShell(): void {
 setRouteListener((route) => {
   currentRoute = route;
   renderShell();
+  window.scrollTo(0, 0);
 });
 
-// Same-origin app links (a[data-link]) route client-side.
+// Same-origin app links (a[data-link]) route client-side. The href is pushed
+// verbatim (path + query) so links like /search?penalty=fine keep their params.
 document.addEventListener('click', (event) => {
   if (
     event.defaultPrevented ||
@@ -129,8 +131,16 @@ document.addEventListener('click', (event) => {
   const anchor = (event.target as HTMLElement).closest('a[data-link]');
   if (!(anchor instanceof HTMLAnchorElement)) return;
   event.preventDefault();
-  const { route } = parseLocation(new URL(anchor.href).pathname);
-  navigate(route, getLocale());
+  const url = new URL(anchor.href);
+  const parsed = parseLocation(url.pathname);
+  history.pushState(null, '', url.pathname + url.search);
+  currentRoute = resolveRoute(parsed.route);
+  if (parsed.locale !== getLocale()) {
+    adoptLocale(parsed.locale); // triggers the locale-change re-render
+  } else {
+    renderShell();
+  }
+  window.scrollTo(0, 0);
 });
 
 // Back-compat: links shared before the landing page existed used '/' with

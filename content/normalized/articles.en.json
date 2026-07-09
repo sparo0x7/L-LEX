@@ -1,0 +1,117 @@
+{
+  "generatedAt": "2026-07-09T20:30:50.967Z",
+  "engine": "user-supplied trilingual JSON (quality-gated import)",
+  "locale": "en",
+  "articles": [
+    {
+      "id": "iraqi-penal-code-1969-1",
+      "srcHash": "87448b0ad078fe77cf87a781eeae4f4d06b7ffa0",
+      "translationStatus": "machine",
+      "content": {
+        "title": "Principle of Legality of Crimes and Punishments (Nullum crimen, nulla poena sine lege)",
+        "conditions": "No act or omission shall constitute a criminal offense or be subject to punishment except by virtue of an explicit statutory provision in force at the time of its commission. Furthermore, no penalty or precautionary measure may be imposed unless expressly prescribed by law.",
+        "penalties": "Application of the statutory doctrine prohibiting retroactive or extra-statutory criminalization, whereby courts lack jurisdiction to impose unprescribed sanctions, mandating the dismissal of charges based on non-statutory acts and declaring the acquittal of the accused.",
+        "formattedText": "Article 1 > Principle of Legality of Crimes and Punishments (Nullum crimen, nulla poena sine lege); No act or omission shall constitute a criminal offense or be subject to punishment except by virtue of an explicit statutory provision in force at the time of its commission. Furthermore, no penalty or precautionary measure may be imposed unless expressly prescribed by law. > Outcome: Application of the statutory doctrine prohibiting retroactive or extra-statutory criminalization, whereby courts lack jurisdiction to impose unprescribed sanctions, mandating the dismissal of charges based on non-statutory acts and declaring the acquittal of the accused."
+      }
+    },
+    {
+      "id": "iraqi-penal-code-1969-2",
+      "srcHash": "cdd1ec5f02f12276619b62676c928b538199ee5e",
+      "translationStatus": "machine",
+      "content": {
+        "title": "Temporal Jurisdiction of Penal Law and Application of the Law Most Favorable to the Accused (Lex Mitior)",
+        "conditions": "A criminal offense is governed by the statute in force at the time of its commission, determined by the time the operative act was committed irrespective of when its consequence occurred. However, if one or more statutes are enacted after the commission of the offense and prior to the judgment becoming final and conclusive, the statute most favorable to the accused shall apply exclusively.",
+        "penalties": "If the subsequent enactment decriminalizes the act, the execution of the final sentence is immediately stayed and all associated penal consequences are extinguished. If the subsequent enactment merely reduces the statutory penalty, the court retains jurisdiction to review and reduce the sentence upon application by the convicted person or the Public Prosecution.",
+        "formattedText": "Article 2 > Temporal Jurisdiction of Penal Law and Application of the Law Most Favorable to the Accused (Lex Mitior); A criminal offense is governed by the statute in force at the time of its commission, determined by the time the operative act was committed irrespective of when its consequence occurred. However, if one or more statutes are enacted after the commission of the offense and prior to the judgment becoming final and conclusive, the statute most favorable to the accused shall apply exclusively. > Outcome: If the subsequent enactment decriminalizes the act, the execution of the final sentence is immediately stayed and all associated penal consequences are extinguished. If the subsequent enactment merely reduces the statutory penalty, the court retains jurisdiction to review and reduce the sentence upon application by the convicted person or the Public Prosecution."
+      }
+    },
+    {
+      "id": "iraqi-penal-code-1969-3",
+      "srcHash": "5951c29f9f35a1d4f85f01b28fdfb568eacf9de4",
+      "translationStatus": "machine",
+      "content": {
+        "title": "Enforcement of Temporary Statutes",
+        "conditions": "If a statute enacted to criminalize an act or aggravate its punishment is limited to a specific duration or temporary emergency circumstance (such as wartime, state of emergency, or economic distress), the expiration of such period or cessation of the circumstance does not preclude the initiation of criminal prosecution or the execution of sentences imposed for offenses committed during its period of validity.",
+        "penalties": "Continued statutory accountability and enforcement of penal sanctions under the temporary statute despite its expiration, preventing offenders from evading legal accountability through the passage of time or the termination of emergency states.",
+        "formattedText": "Article 3 > Enforcement of Temporary Statutes; If a statute enacted to criminalize an act or aggravate its punishment is limited to a specific duration or temporary emergency circumstance (such as wartime, state of emergency, or economic distress), the expiration of such period or cessation of the circumstance does not preclude the initiation of criminal prosecution or the execution of sentences imposed for offenses committed during its period of validity. > Outcome: Continued statutory accountability and enforcement of penal sanctions under the temporary statute despite its expiration, preventing offenders from evading legal accountability through the passage of time or the termination of emergency states."
+      }
+    },
+    {
+      "id": "iraqi-penal-code-1969-4",
+      "srcHash": "87ea9a325657132128201e04bfe9060cfcd62551",
+      "translationStatus": "machine",
+      "content": {
+        "title": "Territorial Jurisdiction of Penal Law (Principle of Territoriality)",
+        "conditions": "The provisions of this law apply to all offenses committed within the territorial boundaries of the Republic of Iraq. An offense is deemed committed within Iraq if any operative act constituting the offense is executed therein or if its criminal consequence occurs within Iraq, regardless of the offender's nationality whether Iraqi or foreign.",
+        "penalties": "Subjection of the offender to prosecution before Iraqi courts and the enforcement of statutory principal and accessory penalties, subject to recognized exceptions established under international conventions and diplomatic immunities.",
+        "formattedText": "Article 4 > Territorial Jurisdiction of Penal Law (Principle of Territoriality); The provisions of this law apply to all offenses committed within the territorial boundaries of the Republic of Iraq. An offense is deemed committed within Iraq if any operative act constituting the offense is executed therein or if its criminal consequence occurs within Iraq, regardless of the offender's nationality whether Iraqi or foreign. > Outcome: Subjection of the offender to prosecution before Iraqi courts and the enforcement of statutory principal and accessory penalties, subject to recognized exceptions established under international conventions and diplomatic immunities."
+      }
+    },
+    {
+      "id": "iraqi-penal-code-1969-5",
+      "srcHash": "d2569cbbb5ceec2ef243eb6875d4d7a8e4fef658",
+      "translationStatus": "machine",
+      "content": {
+        "title": "Jurisdiction over Vessels and Aircraft (Flag State and Territorial Waters)",
+        "conditions": "The provisions of this law apply to offenses committed aboard vessels and aircraft flying the Iraqi flag wherever located worldwide. It further applies to offenses committed aboard foreign vessels and aircraft situated within Iraqi airspace or territorial waters if the offense compromises state security or if either the offender or victim is a Republic of Iraq national.",
+        "penalties": "Vesting of exclusive or concurrent judicial jurisdiction in Iraqi courts to conduct investigations, prosecute, and impose statutory penal sentences against offenders in accordance with applicable statutory provisions without prejudice to public international law.",
+        "formattedText": "Article 5 > Jurisdiction over Vessels and Aircraft (Flag State and Territorial Waters); The provisions of this law apply to offenses committed aboard vessels and aircraft flying the Iraqi flag wherever located worldwide. It further applies to offenses committed aboard foreign vessels and aircraft situated within Iraqi airspace or territorial waters if the offense compromises state security or if either the offender or victim is a Republic of Iraq national. > Outcome: Vesting of exclusive or concurrent judicial jurisdiction in Iraqi courts to conduct investigations, prosecute, and impose statutory penal sentences against offenders in accordance with applicable statutory provisions without prejudice to public international law."
+      }
+    },
+    {
+      "id": "kurdistan-internal-security-forces-law-1",
+      "srcHash": "aeebad9335854518b9370686b00834d10c7ce01f",
+      "translationStatus": "machine",
+      "content": {
+        "title": "Scope of Application and Definition of Subject Persons (Statutory Jurisdiction)",
+        "conditions": "The provisions of this law apply to all active-duty officers and personnel of the Internal Security Forces, as well as students of the Police College, institutes, and specialized training academies. It further extends to retired, dismissed, discharged, and resigned personnel if the offense was committed during and arising out of the performance of official duty, irrespective of any subsequent alteration in their administrative status.",
+        "penalties": "Subjection of offenders to prosecution before the Internal Security Forces Courts and the uniform enforcement of statutory penalties across all designated categories without prejudice, ensuring the recovery of public and private rights accrued to the Ministry or victims.",
+        "formattedText": "Article 1 > Scope of Application and Definition of Subject Persons (Statutory Jurisdiction); The provisions of this law apply to all active-duty officers and personnel of the Internal Security Forces, as well as students of the Police College, institutes, and specialized training academies. It further extends to retired, dismissed, discharged, and resigned personnel if the offense was committed during and arising out of the performance of official duty, irrespective of any subsequent alteration in their administrative status. > Outcome: Subjection of offenders to prosecution before the Internal Security Forces Courts and the uniform enforcement of statutory penalties across all designated categories without prejudice, ensuring the recovery of public and private rights accrued to the Ministry or victims."
+      }
+    },
+    {
+      "id": "kurdistan-internal-security-forces-law-2",
+      "srcHash": "0195c57ca043eb64e990b6567325a2217d18c796",
+      "translationStatus": "machine",
+      "content": {
+        "title": "Classification and Types of Statutory Penalties",
+        "conditions": "Penalties applicable to the Internal Security Forces are categorized into three primary classes: Principal Penalties (Death Penalty, Life Imprisonment, Temporary Imprisonment, Detention, Dismissal from Service), Accessory and Supplementary Penalties (Deprivation of rights and privileges, forfeiture of medals and decorations), and Disciplinary and Administrative Penalties (Reprimand, salary deduction, room confinement, unit confinement, extra duties, extra training).",
+        "penalties": "Determination of the jurisdictional scope of courts and commanding officers in imposing proportionate penalties commensurate with the gravity and peril of the felony, misdemeanor, or administrative infraction, coupled with the automatic statutory operation of accessory penalties upon the imposition of a principal sentence.",
+        "formattedText": "Article 2 > Classification and Types of Statutory Penalties; Penalties applicable to the Internal Security Forces are categorized into three primary classes: Principal Penalties (Death Penalty, Life Imprisonment, Temporary Imprisonment, Detention, Dismissal from Service), Accessory and Supplementary Penalties (Deprivation of rights and privileges, forfeiture of medals and decorations), and Disciplinary and Administrative Penalties (Reprimand, salary deduction, room confinement, unit confinement, extra duties, extra training). > Outcome: Determination of the jurisdictional scope of courts and commanding officers in imposing proportionate penalties commensurate with the gravity and peril of the felony, misdemeanor, or administrative infraction, coupled with the automatic statutory operation of accessory penalties upon the imposition of a principal sentence."
+      }
+    },
+    {
+      "id": "kurdistan-internal-security-forces-law-3",
+      "srcHash": "c0886050edf69b01bc673eced547e80c411da098",
+      "translationStatus": "machine",
+      "content": {
+        "title": "Felony of High Treason and Collaboration with the Enemy or Terrorist Organizations",
+        "conditions": "Any officer or personnel who willfully aids the enemy or designated terrorist entities, divulges classified security intelligence and tactical defense plans of the Internal Security Forces, surrenders state-owned weaponry, munitions, or military assets to the enemy, or deserts post and flees during active combat or hostile engagement.",
+        "penalties": "Imposition of the Death Penalty or Life Imprisonment, mandatory summary dismissal from military and security service, and total statutory forfeiture of all accrued financial rights and pension entitlements.",
+        "formattedText": "Article 3 > Felony of High Treason and Collaboration with the Enemy or Terrorist Organizations; Any officer or personnel who willfully aids the enemy or designated terrorist entities, divulges classified security intelligence and tactical defense plans of the Internal Security Forces, surrenders state-owned weaponry, munitions, or military assets to the enemy, or deserts post and flees during active combat or hostile engagement. > Outcome: Imposition of the Death Penalty or Life Imprisonment, mandatory summary dismissal from military and security service, and total statutory forfeiture of all accrued financial rights and pension entitlements."
+      }
+    },
+    {
+      "id": "kurdistan-internal-security-forces-law-4",
+      "srcHash": "797957c480f6efb9602fc6185019153af90fdb33",
+      "translationStatus": "machine",
+      "content": {
+        "title": "Felony of Mutiny and Armed Insurrection within Security Forces",
+        "conditions": "The conspiracy or concerted assembly of two or more officers or personnel of the Security and Police Forces with the intent to mutiny against lawful command authority, or the deployment of armed force and violence to seize security headquarters or obstruct the execution of statutory duties during states of emergency or normal operations.",
+        "penalties": "Imposition of the Death Penalty upon ringleaders and instigators of the mutiny, and Temporary Imprisonment (ranging from 5 to 15 years) for subordinate participants, accompanied by summary dismissal from service and forfeiture of pension entitlements.",
+        "formattedText": "Article 4 > Felony of Mutiny and Armed Insurrection within Security Forces; The conspiracy or concerted assembly of two or more officers or personnel of the Security and Police Forces with the intent to mutiny against lawful command authority, or the deployment of armed force and violence to seize security headquarters or obstruct the execution of statutory duties during states of emergency or normal operations. > Outcome: Imposition of the Death Penalty upon ringleaders and instigators of the mutiny, and Temporary Imprisonment (ranging from 5 to 15 years) for subordinate participants, accompanied by summary dismissal from service and forfeiture of pension entitlements."
+      }
+    },
+    {
+      "id": "kurdistan-internal-security-forces-law-5",
+      "srcHash": "f830685f74c5ae645ae24b2c60251b9b251fd58b",
+      "translationStatus": "machine",
+      "content": {
+        "title": "Felony of Incitement to Mutiny and Subversion of Discipline",
+        "conditions": "Any personnel or officer who disseminates propaganda or incites mutiny or disobedience to superior orders, or circulates false rumors and misleading reports within the ranks of the Internal Security Forces with the intent to demoralize personnel and undermine military and security discipline.",
+        "penalties": "Imposition of Temporary Imprisonment for a term not exceeding 10 years during peacetime operations, subject to statutory escalation to Life Imprisonment or the Death Penalty if committed during wartime or active counter-terrorism operations.",
+        "formattedText": "Article 5 > Felony of Incitement to Mutiny and Subversion of Discipline; Any personnel or officer who disseminates propaganda or incites mutiny or disobedience to superior orders, or circulates false rumors and misleading reports within the ranks of the Internal Security Forces with the intent to demoralize personnel and undermine military and security discipline. > Outcome: Imposition of Temporary Imprisonment for a term not exceeding 10 years during peacetime operations, subject to statutory escalation to Life Imprisonment or the Death Penalty if committed during wartime or active counter-terrorism operations."
+      }
+    }
+  ]
+}

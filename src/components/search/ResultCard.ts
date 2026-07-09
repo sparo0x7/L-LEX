@@ -49,8 +49,8 @@ export function renderResultCard(result: SearchResult, options: ResultCardOption
     <li
       id="result-${escapeHtml(doc.id)}"
       data-result-id="${escapeHtml(doc.id)}"
-      class="rounded-xl border bg-surface p-4 transition-colors ${
-        selected ? 'border-accent-gold ring-2 ring-accent-gold/40' : 'border-border'
+      class="card-lift rounded-xl bg-surface p-4 shadow-sm ${
+        selected ? 'shadow-lg ring-2 ring-accent-gold/60' : ''
       }"
     >
       <div class="flex flex-wrap items-center gap-2">
@@ -69,7 +69,7 @@ export function renderResultCard(result: SearchResult, options: ResultCardOption
         type="button"
         data-expand-toggle="${escapeHtml(doc.id)}"
         aria-expanded="${expanded}"
-        class="mt-2 text-sm text-accent underline underline-offset-4 hover:text-accent-gold"
+        class="link-underline mt-2 text-sm text-accent hover:text-accent-gold"
       >${expanded ? t('article.collapse') : t('article.expand')}</button>
     </li>`;
 }

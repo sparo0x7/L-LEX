@@ -30,13 +30,19 @@ const SOURCES: ReadonlyArray<{
   category: Law['category'];
   citations?: Partial<Record<Locale, string>>;
   totalArticleCount?: number;
+  importDate: string; // when this source file's data last changed — NOT §15 verification
 }> = [
   {
     file: 'iraqi_penal_code_1969.json',
     lawId: 'iraqi-penal-code-1969',
     category: 'penal',
-    // Direct rendering of the number/year already present in law_name (١١١ی ساڵی ١٩٦٩).
-    citations: { en: 'Iraqi Penal Code No. 111 of 1969' },
+    // en/ar are direct renderings of the number/year already present in
+    // law_name (١١١ی ساڵی ١٩٦٩); ar matches the user-supplied trilingual data.
+    citations: {
+      en: 'Iraqi Penal Code No. 111 of 1969',
+      ar: 'قانون العقوبات العراقي رقم ١١١ لسنة ١٩٦٩',
+    },
+    importDate: '2026-07-07',
   },
   {
     file: 'kurdistan_internal_security_forces_law.json',
@@ -44,10 +50,10 @@ const SOURCES: ReadonlyArray<{
     category: 'security',
     // TODO: en/ar citation requires verification against parliament.krd — several
     // candidate laws exist (No. 17/2008, No. 14/2011 implementing law, …). Do not guess.
-    // The actual law has ~90 articles (user audit, 2026-07-09) — the dataset holds
-    // 1–54. Articles 55–90 must come from an official source, never be inferred;
-    // re-confirm the 90 total against that same source when they arrive.
+    // Articles 55–90 were supplied by the user on 2026-07-09, completing the law
+    // at 90 articles (§15 official-source verification still pending).
     totalArticleCount: 90,
+    importDate: '2026-07-09',
   },
 ];
 
@@ -78,10 +84,6 @@ function fail(message: string): never {
 function main(): void {
   const laws: Law[] = [];
   const articles: Article[] = [];
-  // Import date, NOT human verification — must be checked against the official
-  // gazette / parliament.krd and updated before publishing (CLAUDE.md §15).
-  // Pinned: only bump when the source JSON itself actually changes.
-  const importDate = '2026-07-07';
 
   for (const source of SOURCES) {
     const raw: RawArticle[] = JSON.parse(
@@ -109,7 +111,7 @@ function main(): void {
       category: source.category,
       articleCount: raw.length,
       totalArticleCount: source.totalArticleCount,
-      lastVerified: importDate,
+      lastVerified: source.importDate,
     });
 
     for (const record of raw) {

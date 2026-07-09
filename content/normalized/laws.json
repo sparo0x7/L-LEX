@@ -4,7 +4,8 @@
     "slug": "iraqi-penal-code-1969",
     "officialCitation": {
       "ckb": "یاسای سزادانی عێراقی ژمارە ١١١ی ساڵی ١٩٦٩",
-      "en": "Iraqi Penal Code No. 111 of 1969"
+      "en": "Iraqi Penal Code No. 111 of 1969",
+      "ar": "قانون العقوبات العراقي رقم ١١١ لسنة ١٩٦٩"
     },
     "category": "penal",
     "articleCount": 503,
@@ -17,8 +18,8 @@
       "ckb": "یاسای هێزەکانی ئاسایشی ناوخۆی کوردستان"
     },
     "category": "security",
-    "articleCount": 54,
+    "articleCount": 90,
     "totalArticleCount": 90,
-    "lastVerified": "2026-07-07"
+    "lastVerified": "2026-07-09"
   }
 ]

@@ -88,6 +88,10 @@ button:not(:disabled) {
   animation: fade-up 0.6s var(--ease-premium) both;
 }
 
+[data-stagger] {
+  animation: fade-up 0.35s var(--ease-premium) both;
+}
+
 /* Scroll-triggered reveal: elements with [data-reveal] start hidden and play
    fade-up when they enter the viewport (wired by an IntersectionObserver in
    the page code; reduced-motion and no-IO environments render them visible
@@ -119,53 +123,74 @@ button:not(:disabled) {
   }
 }
 
-/* Landing hero (§4) — the §9 scales animation re-scoped as an ambient loop:
-   one settle, then a very subtle perpetual sway. */
-.hero-beam {
-  transform-box: view-box;
-  transform-origin: 32px 20px;
-  animation:
-    hero-settle 2.4s var(--ease-premium) 0.2s both,
-    hero-sway 9s ease-in-out 3s infinite;
+/* Shimmer skeletons (loading states shaped like real content). */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--surface-hover) 25%,
+    var(--border) 40%,
+    var(--surface-hover) 55%
+  );
+  background-size: 300% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
 }
 
-@keyframes hero-settle {
-  0% {
-    transform: rotate(-10deg);
+@keyframes shimmer {
+  from {
+    background-position: 100% 0;
   }
-  30% {
-    transform: rotate(7deg);
-  }
-  55% {
-    transform: rotate(-3.5deg);
-  }
-  78% {
-    transform: rotate(1.5deg);
-  }
-  100% {
-    transform: rotate(0deg);
+  to {
+    background-position: -100% 0;
   }
 }
 
-@keyframes hero-sway {
+/* Consistent clickable-card hover lift (design-elevation pass). */
+.card-lift {
+  transition:
+    transform 0.3s var(--ease-premium),
+    box-shadow 0.3s var(--ease-premium),
+    border-color 0.3s var(--ease-premium);
+}
+
+.card-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--elevation-lg);
+}
+
+/* Landing hero (§4) — the brand logo with a gentle ambient float. */
+.hero-logo {
+  animation: hero-float 7s ease-in-out 1s infinite;
+}
+
+@keyframes hero-float {
   0%,
   100% {
-    transform: rotate(0deg);
+    transform: translateY(0) rotate(0deg);
   }
   30% {
-    transform: rotate(1.1deg);
+    transform: translateY(-7px) rotate(0.8deg);
   }
   70% {
-    transform: rotate(-1.1deg);
+    transform: translateY(3px) rotate(-0.6deg);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .stagger-item,
-  .hero-beam,
+  .hero-logo,
+  .skeleton,
+  [data-stagger],
   [data-reveal].is-revealed,
   .is-revealed .grow-bar {
     animation: none;
+  }
+
+  .card-lift {
+    transition: none;
+  }
+
+  .card-lift:hover {
+    transform: none;
   }
 
   [data-reveal] {

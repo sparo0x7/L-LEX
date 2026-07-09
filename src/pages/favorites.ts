@@ -6,10 +6,11 @@ import { escapeHtml } from '../lib/search.ts';
 import { getFavorites, toggleFavorite } from '../lib/favorites.ts';
 import { lawLabel } from '../components/search/Filters.ts';
 import { renderPenaltyBadges } from '../components/article/PenaltyBadges.ts';
+import { renderListSkeleton } from '../components/ui/Skeleton.ts';
 
 export async function mountFavoritesPage(container: HTMLElement): Promise<void> {
   document.title = `L-LEX — ${t('favorites.title')}`;
-  container.innerHTML = `<p class="py-16 text-center text-text-secondary">${t('search.loading')}</p>`;
+  container.innerHTML = renderListSkeleton();
   const data = await loadData();
 
   const render = () => {
@@ -19,16 +20,21 @@ export async function mountFavoritesPage(container: HTMLElement): Promise<void> 
 
     const body =
       docs.length === 0
-        ? `<p class="rounded-xl border border-border bg-bg-subtle px-6 py-10 text-center text-text-secondary">${t('favorites.empty')}</p>`
+        ? `<div class="rounded-xl bg-bg-subtle px-6 py-10 text-center shadow-sm">
+             <img src="/favicon.svg" alt="" aria-hidden="true"
+               class="mx-auto mb-4 w-16 rounded-xl opacity-60 shadow-sm" width="910" height="768" />
+             <p class="text-text-secondary">${t('favorites.empty')}</p>
+           </div>`
         : `<ul class="space-y-3">${docs
-            .map((doc) => {
+            .map((doc, index) => {
               const lawSlug = doc.lawId;
               const href = routePath(
                 { name: 'article', lawSlug, articleNumber: doc.n },
                 getLocale(),
               );
               return `
-                <li class="rounded-xl border border-border bg-surface p-4">
+                <li class="card-lift stagger-item rounded-xl bg-surface p-4 shadow-sm"
+                  style="animation-delay:${Math.min(index, 12) * 50}ms">
                   <div class="flex flex-wrap items-center gap-2">
                     <span class="rounded-md bg-accent px-2 py-0.5 text-sm font-semibold text-bg" dir="ltr">${t('article.number', { n: doc.n })}</span>
                     <span class="text-xs text-text-secondary">${lawLabel(doc.lawId as LawId)}</span>
@@ -50,7 +56,7 @@ export async function mountFavoritesPage(container: HTMLElement): Promise<void> 
             .join('')}</ul>`;
 
     container.innerHTML = `
-      <h1 class="pt-6 text-2xl font-bold">${t('favorites.title')}</h1>
+      <h1 class="pt-6 text-2xl font-bold tracking-[-0.02em]">${t('favorites.title')}</h1>
       <div class="mt-4">${body}</div>`;
   };
 

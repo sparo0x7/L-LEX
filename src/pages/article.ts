@@ -8,6 +8,7 @@ import { isFavorite, toggleFavorite } from '../lib/favorites.ts';
 import { lawLabel } from '../components/search/Filters.ts';
 import { renderPenaltyBadges } from '../components/article/PenaltyBadges.ts';
 import { mountNotFoundPage } from './notFound.ts';
+import { renderArticleSkeleton } from '../components/ui/Skeleton.ts';
 
 const STAR_OUTLINE =
   '<path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/>';
@@ -45,7 +46,7 @@ function renderRelated(related: SearchDoc[], lawSlug: string): string {
         <a
           data-link
           href="${routePath({ name: 'article', lawSlug, articleNumber: doc.n }, getLocale())}"
-          class="block rounded-lg border border-border bg-surface p-3 hover:border-accent"
+          class="card-lift block rounded-lg bg-surface p-3 shadow-sm"
         >
           <span class="text-sm font-semibold text-accent" dir="ltr">${t('article.number', { n: doc.n })}</span>
           <span class="mt-1 block truncate text-sm text-text-secondary" lang="ckb" dir="rtl">${escapeHtml(doc.title)}</span>
@@ -64,7 +65,7 @@ export async function mountArticlePage(
   lawSlug: string,
   articleNumber: number,
 ): Promise<void> {
-  container.innerHTML = `<p class="py-16 text-center text-text-secondary">${t('search.loading')}</p>`;
+  container.innerHTML = renderArticleSkeleton();
   const data = await loadData();
   const law = lawById(lawSlug);
   const doc = data.byId.get(`${lawSlug}-${articleNumber}`);
@@ -104,15 +105,15 @@ export async function mountArticlePage(
   const neighborLink = (target: SearchDoc | undefined, key: 'article.previous' | 'article.next') =>
     target
       ? `<a data-link href="${routePath({ name: 'article', lawSlug, articleNumber: target.n }, locale)}"
-          class="text-sm text-accent underline underline-offset-4 hover:text-accent-gold"
+          class="link-underline text-sm text-accent hover:text-accent-gold"
         >${t(key)}</a>`
       : '<span></span>';
 
   container.innerHTML = `
     <nav aria-label="${t('nav.breadcrumbLabel')}" class="no-print pt-4 text-sm text-text-secondary">
-      <a data-link href="${routePath({ name: 'home' }, locale)}" class="hover:text-text-primary hover:underline">${t('nav.home')}</a>
+      <a data-link href="${routePath({ name: 'home' }, locale)}" class="link-underline hover:text-text-primary">${t('nav.home')}</a>
       <span aria-hidden="true"> / </span>
-      <a data-link href="${routePath({ name: 'law', lawSlug }, locale)}" class="hover:text-text-primary hover:underline">${label}</a>
+      <a data-link href="${routePath({ name: 'law', lawSlug }, locale)}" class="link-underline hover:text-text-primary">${label}</a>
       <span aria-hidden="true"> / </span>
       <span aria-current="page" dir="ltr">${t('article.number', { n: doc.n })}</span>
     </nav>
@@ -125,7 +126,7 @@ export async function mountArticlePage(
           <span class="ms-auto flex flex-wrap gap-1.5">${renderPenaltyBadges(doc.tags)}</span>
         </div>
         ${translationBadge}
-        <h1 class="text-xl font-bold leading-9 sm:text-2xl" ${bodyAttrs}>${escapeHtml(body.title)}</h1>
+        <h1 class="text-xl font-bold leading-9 tracking-[-0.02em] sm:text-2xl" ${bodyAttrs}>${escapeHtml(body.title)}</h1>
         <div class="no-print flex flex-wrap items-center gap-2">
           <button type="button" data-favorite aria-pressed="${favorite}"
             class="flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-sm ${
@@ -145,13 +146,13 @@ export async function mountArticlePage(
       </header>
 
       <div class="mt-5 space-y-4">
-        <section class="rounded-xl border border-border bg-surface p-5">
+        <section class="rounded-xl bg-surface p-5 shadow-sm">
           <h2 class="mb-2 text-sm font-semibold text-accent">${t('article.conditions')}</h2>
-          <p class="text-[17px] leading-9" ${bodyAttrs}>${escapeHtml(body.conditions)}</p>
+          <p class="max-w-[70ch] text-[17px] leading-9" ${bodyAttrs}>${escapeHtml(body.conditions)}</p>
         </section>
-        <section class="rounded-xl border border-border bg-surface p-5">
+        <section class="rounded-xl bg-surface p-5 shadow-sm">
           <h2 class="mb-2 text-sm font-semibold text-accent">${t('article.penalty')}</h2>
-          <p class="text-[17px] leading-9" ${bodyAttrs}>${escapeHtml(body.penalties)}</p>
+          <p class="max-w-[70ch] text-[17px] leading-9" ${bodyAttrs}>${escapeHtml(body.penalties)}</p>
         </section>
       </div>
 

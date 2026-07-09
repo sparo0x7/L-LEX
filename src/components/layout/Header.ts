@@ -4,16 +4,11 @@ import { routePath } from '../../lib/router.ts';
 import { renderLanguageSwitcher, wireLanguageSwitcher } from './LanguageSwitcher.ts';
 import { renderThemeToggle, wireThemeToggle } from './ThemeToggle.ts';
 
+// The brand logo is the traced artwork in public/favicon.svg (baked colors,
+// non-square) — rendered as a rounded app-icon mark, not an inline icon.
 const BRAND_MARK = `
-  <svg class="size-8 shrink-0" viewBox="0 0 64 64" fill="none" stroke="currentColor"
-    stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-    <circle cx="32" cy="13" r="3" />
-    <path d="M32 16v30" />
-    <path d="M22 52h20M32 46v6" />
-    <path d="M12 20h40" />
-    <path d="M12 20 5 34m7-14 7 14M5 34a7 7 0 0 0 14 0" />
-    <path d="M52 20l-7 14m7-14 7 14m-14 0a7 7 0 0 0 14 0" />
-  </svg>`;
+  <img src="/favicon.svg" alt="" aria-hidden="true"
+    class="h-9 w-auto shrink-0 rounded-lg shadow-sm" />`;
 
 export function renderHeader(activeRoute: Route['name']): string {
   const locale = getLocale();
