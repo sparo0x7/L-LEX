@@ -14,7 +14,11 @@ import { createSearchEngine, escapeHtml, normalizeSearchText } from '../lib/sear
 import { renderSearchBar } from '../components/search/SearchBar.ts';
 import { LAW_IDS, PENALTY_TAGS, renderFilters } from '../components/search/Filters.ts';
 import { renderResultCard } from '../components/search/ResultCard.ts';
-import { renderNoResults, renderStartHint } from '../components/search/EmptyState.ts';
+import {
+  renderNoFilterResults,
+  renderNoResults,
+  renderStartHint,
+} from '../components/search/EmptyState.ts';
 import searchIndexUrl from '../../content/normalized/search-index.json?url';
 
 const DEBOUNCE_MS = 200;
@@ -111,8 +115,17 @@ function renderRecentSearches(): string {
 
 /* ---------- rendering ---------- */
 
+function hasActiveFilters(): boolean {
+  return Boolean(state.law || state.penalty);
+}
+
 function runSearch(): SearchResult[] {
-  if (!engine || !state.q.trim()) return [];
+  if (!engine) return [];
+  // §3: filters alone browse the corpus, article-number order (no relevance
+  // score exists without a query).
+  if (!state.q.trim()) {
+    return hasActiveFilters() ? engine.browse({ law: state.law, penalty: state.penalty }) : [];
+  }
   return engine.search(state.q, {
     law: state.law,
     penalty: state.penalty,
@@ -125,7 +138,7 @@ function renderResultsArea(container: HTMLElement): void {
   const statusHost = container.querySelector<HTMLElement>('[data-search-status]');
   if (!resultsHost || !statusHost) return;
 
-  if (!state.q.trim()) {
+  if (!state.q.trim() && !hasActiveFilters()) {
     lastResults = [];
     selectedIndex = -1;
     statusHost.textContent = '';
@@ -147,7 +160,9 @@ function renderResultsArea(container: HTMLElement): void {
 
   resultsHost.innerHTML =
     lastResults.length === 0
-      ? renderNoResults(state.q)
+      ? state.q.trim()
+        ? renderNoResults(state.q)
+        : renderNoFilterResults()
       : `<ul class="space-y-3">${lastResults
           .map((result, index) =>
             renderResultCard(result, {

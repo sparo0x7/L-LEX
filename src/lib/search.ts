@@ -107,6 +107,22 @@ export class SearchEngine {
     return this.docs.get(id);
   }
 
+  /**
+   * Filter-only browsing (no query): all matching articles, article-number
+   * order — there is no relevance score without a query.
+   */
+  browse(filters: SearchFilters = {}): SearchResult[] {
+    const { law = '', penalty = '' } = filters;
+    const results: SearchResult[] = [];
+    for (const doc of this.docs.values()) {
+      if (law && doc.lawId !== law) continue;
+      if (penalty && !doc.tags.includes(penalty)) continue;
+      results.push({ doc, score: 0 });
+    }
+    results.sort((a, b) => a.doc.lawId.localeCompare(b.doc.lawId) || a.doc.n - b.doc.n);
+    return results;
+  }
+
   search(rawQuery: string, filters: SearchFilters = {}): SearchResult[] {
     const query = normalizeSearchText(rawQuery);
     if (!query) return [];

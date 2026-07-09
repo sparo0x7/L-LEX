@@ -29,6 +29,7 @@ const SOURCES: ReadonlyArray<{
   lawId: LawId;
   category: Law['category'];
   citations?: Partial<Record<Locale, string>>;
+  totalArticleCount?: number;
 }> = [
   {
     file: 'iraqi_penal_code_1969.json',
@@ -43,6 +44,10 @@ const SOURCES: ReadonlyArray<{
     category: 'security',
     // TODO: en/ar citation requires verification against parliament.krd — several
     // candidate laws exist (No. 17/2008, No. 14/2011 implementing law, …). Do not guess.
+    // The actual law has ~90 articles (user audit, 2026-07-09) — the dataset holds
+    // 1–54. Articles 55–90 must come from an official source, never be inferred;
+    // re-confirm the 90 total against that same source when they arrive.
+    totalArticleCount: 90,
   },
 ];
 
@@ -75,7 +80,8 @@ function main(): void {
   const articles: Article[] = [];
   // Import date, NOT human verification — must be checked against the official
   // gazette / parliament.krd and updated before publishing (CLAUDE.md §15).
-  const importDate = new Date().toISOString().slice(0, 10);
+  // Pinned: only bump when the source JSON itself actually changes.
+  const importDate = '2026-07-07';
 
   for (const source of SOURCES) {
     const raw: RawArticle[] = JSON.parse(
@@ -102,6 +108,7 @@ function main(): void {
       officialCitation: { ckb: firstArticle.law_name, ...source.citations },
       category: source.category,
       articleCount: raw.length,
+      totalArticleCount: source.totalArticleCount,
       lastVerified: importDate,
     });
 

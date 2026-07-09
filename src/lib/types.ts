@@ -23,7 +23,8 @@ export interface Law {
   slug: string;
   officialCitation: Partial<Record<Locale, string>>; // e.g. en: "Iraqi Penal Code No. 111 of 1969"
   category: 'penal' | 'security';
-  articleCount: number;
+  articleCount: number; // articles present in the dataset
+  totalArticleCount?: number; // articles in the actual law, when known to exceed articleCount
   sourceUrl?: string; // official gazette / parliament link, once verified
   lastVerified: string; // ISO date — when a human last checked this against an official source
 }

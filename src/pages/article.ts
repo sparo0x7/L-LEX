@@ -109,7 +109,7 @@ export async function mountArticlePage(
       : '<span></span>';
 
   container.innerHTML = `
-    <nav aria-label="breadcrumb" class="no-print pt-4 text-sm text-text-secondary">
+    <nav aria-label="${t('nav.breadcrumbLabel')}" class="no-print pt-4 text-sm text-text-secondary">
       <a data-link href="${routePath({ name: 'home' }, locale)}" class="hover:text-text-primary hover:underline">${t('nav.home')}</a>
       <span aria-hidden="true"> / </span>
       <a data-link href="${routePath({ name: 'law', lawSlug }, locale)}" class="hover:text-text-primary hover:underline">${label}</a>

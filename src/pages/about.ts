@@ -20,6 +20,14 @@ export function mountAboutPage(container: HTMLElement): void {
           ${t('law.imported', { date: law.lastVerified })} —
           ${t('law.verificationPending')}
         </p>
+        ${
+          law.totalArticleCount && law.totalArticleCount > law.articleCount
+            ? `<p class="mt-1 text-sm font-medium text-accent-gold">${t('law.completeness', {
+                available: law.articleCount,
+                total: law.totalArticleCount,
+              })}</p>`
+            : ''
+        }
       </li>`,
   ).join('');
 

@@ -43,7 +43,7 @@ export async function mountLawPage(container: HTMLElement, lawSlug: string): Pro
     .join('');
 
   container.innerHTML = `
-    <nav aria-label="breadcrumb" class="no-print pt-4 text-sm text-text-secondary">
+    <nav aria-label="${t('nav.breadcrumbLabel')}" class="no-print pt-4 text-sm text-text-secondary">
       <a data-link href="${routePath({ name: 'home' }, locale)}" class="hover:text-text-primary hover:underline">${t('nav.home')}</a>
       <span aria-hidden="true"> / </span>
       <span aria-current="page">${label}</span>
@@ -52,6 +52,14 @@ export async function mountLawPage(container: HTMLElement, lawSlug: string): Pro
       <h1 class="text-2xl font-bold text-accent">${label}</h1>
       ${secondaryCitation}
       <p class="text-sm text-text-secondary">${t('law.articleCount', { count: law.articleCount })}</p>
+      ${
+        law.totalArticleCount && law.totalArticleCount > law.articleCount
+          ? `<p class="rounded-md border border-accent-gold/40 bg-accent-gold/10 px-3 py-2 text-sm text-accent-gold">${t(
+              'law.completeness',
+              { available: law.articleCount, total: law.totalArticleCount },
+            )}</p>`
+          : ''
+      }
       ${sourceLine}
     </header>
     <section class="mt-6">

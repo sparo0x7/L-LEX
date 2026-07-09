@@ -20,12 +20,13 @@ export function renderFooter(): string {
             class="underline underline-offset-4 hover:text-text-primary"
           >${t('footer.clearData')}</button>
         </div>
-        <p class="text-xs" dir="ltr">
-          © 2026 L-LEX · Built by
+        <p class="text-xs">
+          <span dir="ltr">© 2026 L-LEX</span> · ${t('footer.builtBy')}
           <a
             class="underline underline-offset-4 hover:text-text-primary"
             href="https://www.facebook.com/las.mhamad.1"
             rel="author"
+            dir="ltr"
           >Las Khoshnaw</a>
         </p>
       </div>

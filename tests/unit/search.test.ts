@@ -98,6 +98,39 @@ describe('SearchEngine against the real corpus', () => {
   });
 });
 
+describe('SearchEngine.browse (filter-only browsing, §3)', () => {
+  it('browses a whole law in article-number order', () => {
+    const results = engine.browse({ law: 'kurdistan-internal-security-forces-law' });
+    expect(results.length).toBe(54);
+    expect(results.map((r) => r.doc.n)).toEqual(Array.from({ length: 54 }, (_, i) => i + 1));
+  });
+
+  it('browses by penalty tag across both laws', () => {
+    const results = engine.browse({ penalty: 'death-penalty' });
+    expect(results.length).toBeGreaterThan(0);
+    expect(results.every((r) => r.doc.tags.includes('death-penalty'))).toBe(true);
+  });
+
+  it('combines law and penalty filters', () => {
+    const results = engine.browse({
+      law: 'kurdistan-internal-security-forces-law',
+      penalty: 'dismissal',
+    });
+    expect(results.length).toBeGreaterThan(0);
+    expect(
+      results.every(
+        (r) =>
+          r.doc.lawId === 'kurdistan-internal-security-forces-law' &&
+          r.doc.tags.includes('dismissal'),
+      ),
+    ).toBe(true);
+  });
+
+  it('with no filters browses the entire corpus', () => {
+    expect(engine.browse({}).length).toBe(557);
+  });
+});
+
 describe('display helpers', () => {
   it('highlightMatches wraps matching tokens in <mark> across scripts', () => {
     const html = highlightMatches('سزای دزی و غەرامە', 'دزی');

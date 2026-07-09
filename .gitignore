@@ -14,4 +14,4 @@ coverage/
 CLAUDE.md
 CLAUDE.local.md
 .anthropic/
-PHASE_BRANDING_GITHUB_README_PROMPT.md
+PHASE_*.md
