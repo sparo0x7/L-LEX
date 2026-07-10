@@ -35,13 +35,11 @@ interface TrilingualRow {
   [key: string]: string | number;
 }
 
-const SOURCES: ReadonlyArray<{ file: string; lawId: LawId }> = [
-  { file: 'iraqi_penal_code_1969_trilingual.json', lawId: 'iraqi-penal-code-1969' },
-  {
-    file: 'kurdistan_internal_security_forces_law_trilingual.json',
-    lawId: 'kurdistan-internal-security-forces-law',
-  },
-];
+function getLawId(lawNameEn: string): LawId | null {
+  if (lawNameEn === 'Kurdistan Internal Security Forces Law') return 'kurdistan-internal-security-forces-law';
+  if (lawNameEn === 'Iraqi Penal Code No. 111 of 1969') return 'iraqi-penal-code-1969';
+  return null;
+}
 
 // Kurdish-only letters — legitimate Arabic/English translations never contain them.
 const KURDISH_LETTERS = /[ەێۆڕڵگچپڤ]/u;
@@ -86,35 +84,37 @@ function main(): void {
     const accepted: TranslatedArticle[] = [];
     const rejectedByLaw = new Map<LawId, number>();
 
-    for (const source of SOURCES) {
-      const rows: TrilingualRow[] = JSON.parse(
-        readFileSync(join(ROOT, 'law_data_json', source.file), 'utf8'),
-      );
-      for (const row of rows) {
-        const id = `${source.lawId}-${row.article_number}`;
-        const article = articleById.get(id);
-        const rawTitle = String(row[`title_and_conditions_${target}`] ?? '');
-        const rawPenalties = String(row[`consequences_and_penalties_${target}`] ?? '');
-        if (!article || !rawTitle.trim() || !rawPenalties.trim()) continue;
+    const rows: TrilingualRow[] = JSON.parse(
+      readFileSync(join(ROOT, 'law_data_json', 'all_laws_trilingual.json'), 'utf8'),
+    );
 
-        if (!isGenuineTranslation(rawTitle, rawPenalties, target)) {
-          rejectedByLaw.set(source.lawId, (rejectedByLaw.get(source.lawId) ?? 0) + 1);
-          continue;
-        }
+    for (const row of rows) {
+      const lawId = getLawId(String(row.law_name_en ?? ''));
+      if (!lawId) continue;
 
-        const { title, conditions } = splitImportedTitle(rawTitle, row.article_number, target);
-        const content: ArticleContent = {
+      const id = `${lawId}-${row.article_number}`;
+      const article = articleById.get(id);
+      const rawTitle = String(row[`title_and_conditions_${target}`] ?? '');
+      const rawPenalties = String(row[`consequences_and_penalties_${target}`] ?? '');
+      if (!article || !rawTitle.trim() || !rawPenalties.trim()) continue;
+
+      if (!isGenuineTranslation(rawTitle, rawPenalties, target)) {
+        rejectedByLaw.set(lawId, (rejectedByLaw.get(lawId) ?? 0) + 1);
+        continue;
+      }
+
+      const { title, conditions } = splitImportedTitle(rawTitle, row.article_number, target);
+      const content: ArticleContent = {
+        title,
+        conditions,
+        penalties: rawPenalties.trim(),
+        formattedText: reconstructFormattedText(target, row.article_number, {
           title,
           conditions,
           penalties: rawPenalties.trim(),
-          formattedText: reconstructFormattedText(target, row.article_number, {
-            title,
-            conditions,
-            penalties: rawPenalties.trim(),
-          }),
-        };
-        accepted.push({ id, srcHash: hashSource(article), translationStatus: 'machine', content });
-      }
+        }),
+      };
+      accepted.push({ id, srcHash: hashSource(article), translationStatus: 'machine', content });
     }
 
     const file: TranslatedArticleFile = {
