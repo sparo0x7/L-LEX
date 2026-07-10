@@ -36,7 +36,8 @@ interface TrilingualRow {
 }
 
 function getLawId(lawNameEn: string): LawId | null {
-  if (lawNameEn === 'Kurdistan Internal Security Forces Law') return 'kurdistan-internal-security-forces-law';
+  if (lawNameEn === 'Kurdistan Internal Security Forces Law')
+    return 'kurdistan-internal-security-forces-law';
   if (lawNameEn === 'Iraqi Penal Code No. 111 of 1969') return 'iraqi-penal-code-1969';
   return null;
 }
