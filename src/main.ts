@@ -1,5 +1,6 @@
 import '@fontsource-variable/vazirmatn/index.css';
 import './app.css';
+import { inject } from '@vercel/analytics';
 import { initTheme } from './lib/theme.ts';
 import { adoptLocale, getLocale, initLocale, onLocaleChange, t } from './lib/i18n.ts';
 import type { Route } from './lib/router.ts';
@@ -182,3 +183,4 @@ if (initial.locale === 'ckb' && getLocale() !== 'ckb') {
 }
 currentRoute = resolveRoute(initial.route);
 renderShell();
+inject();
