@@ -55,6 +55,7 @@
   "dependencies": {
     "@fontsource-variable/vazirmatn": "^5.2.8",
     "@upstash/redis": "^1.41.0",
+    "@vercel/analytics": "^2.0.1",
     "flexsearch": "^0.8.212"
   }
 }
