@@ -5,11 +5,11 @@
  * locale change, and every search state is mirrored into the URL query string
  * (?q=&law=&penalty=&sort=) so results are shareable and bookmarkable.
  */
-import type { LawId, PenaltyTag } from '../lib/types.ts';
+import type { LawId, Locale, PenaltyTag } from '../lib/types.ts';
 import { getLocale, t } from '../lib/i18n.ts';
 import { navigate } from '../lib/router.ts';
 import { getStringArray, setStored } from '../lib/storage.ts';
-import type { SearchEngine, SearchResult, SearchSort } from '../lib/search.ts';
+import type { LocaleContentFile, SearchEngine, SearchResult, SearchSort } from '../lib/search.ts';
 import { createSearchEngine, escapeHtml, normalizeSearchText } from '../lib/search.ts';
 import { renderSearchBar } from '../components/search/SearchBar.ts';
 import { LAW_IDS, PENALTY_TAGS, renderFilters } from '../components/search/Filters.ts';
@@ -21,7 +21,7 @@ import {
 } from '../components/search/EmptyState.ts';
 import { renderListSkeleton } from '../components/ui/Skeleton.ts';
 import { showLoadError } from '../components/ui/ErrorState.ts';
-import { LAWS, lawSlugById, loadData } from '../lib/data.ts';
+import { LAWS, lawSlugById, loadData, loadLocaleContent } from '../lib/data.ts';
 
 const DEBOUNCE_MS = 200;
 const MAX_RECENT = 8;
@@ -39,6 +39,9 @@ let enginePromise: Promise<SearchEngine> | null = null;
 let selectedIndex = -1;
 let expandedId: string | null = null;
 let lastResults: SearchResult[] = [];
+let localeContent: { locale: Locale; file: LocaleContentFile | null } | undefined;
+let localeContentPromise: Promise<void> | null = null;
+let localeContentRequestId = 0;
 
 function resetSelection(): void {
   selectedIndex = -1;
@@ -143,6 +146,34 @@ function runSearch(): SearchResult[] {
   });
 }
 
+function ensureLocaleContent(container: HTMLElement): boolean {
+  const locale = getLocale();
+  if (locale === 'ckb') {
+    localeContent = { locale, file: null };
+    return true;
+  }
+  if (localeContent?.locale === locale) return true;
+
+  const requestId = ++localeContentRequestId;
+  const promise: Promise<void> = loadLocaleContent(locale)
+    .then((file) => {
+      if (requestId === localeContentRequestId && getLocale() === locale) {
+        localeContent = { locale, file };
+      }
+    })
+    .catch(() => {
+      if (requestId === localeContentRequestId && getLocale() === locale) {
+        localeContent = { locale, file: null };
+      }
+    })
+    .finally(() => {
+      if (localeContentPromise === promise) localeContentPromise = null;
+      if (container.isConnected) renderResultsArea(container);
+    });
+  localeContentPromise = promise;
+  return false;
+}
+
 function renderResultsArea(container: HTMLElement): void {
   const resultsHost = container.querySelector<HTMLElement>('[data-results]');
   const statusHost = container.querySelector<HTMLElement>('[data-search-status]');
@@ -172,6 +203,12 @@ function renderResultsArea(container: HTMLElement): void {
     return;
   }
 
+  if (!ensureLocaleContent(container)) {
+    statusHost.textContent = t('search.loading');
+    resultsHost.innerHTML = renderListSkeleton();
+    return;
+  }
+
   lastResults = runSearch();
   if (selectedIndex >= lastResults.length) selectedIndex = lastResults.length - 1;
   statusHost.textContent = t('search.resultsCount', { count: lastResults.length });
@@ -187,6 +224,10 @@ function renderResultsArea(container: HTMLElement): void {
               query: state.q,
               selected: index === selectedIndex,
               expanded: result.doc.id === expandedId,
+              content:
+                getLocale() === 'ckb'
+                  ? null
+                  : (localeContent?.file?.articles[result.doc.id] ?? null),
             });
             // Light stagger on the first few cards only — live-updating list.
             return index < 8
@@ -210,6 +251,8 @@ function toggleExpanded(container: HTMLElement, id: string): void {
 
 export function mountHomePage(container: HTMLElement): void {
   restoreStateFromUrl();
+  localeContent = undefined;
+  localeContentPromise = null;
   void ensureEngine();
 
   container.innerHTML = `

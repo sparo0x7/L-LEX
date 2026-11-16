@@ -5,7 +5,6 @@ import { escapeHtml } from '../lib/search.ts';
 import { lawLabel } from '../components/search/Filters.ts';
 import { REPORT_EMAIL } from '../components/layout/Footer.ts';
 
-const CREATOR_GITHUB = 'https://github.com/MrGuevar4';
 const CREATOR_FACEBOOK = 'https://www.facebook.com/las.mhamad.1';
 
 export function mountAboutPage(container: HTMLElement): void {
@@ -23,6 +22,7 @@ export function mountAboutPage(container: HTMLElement): void {
           ${t('law.imported', { date: law.importedAt })} —
           ${t('law.verificationPending')}
         </p>
+      
         ${
           law.totalArticleCount && law.totalArticleCount > law.articleCount
             ? `<p class="mt-1 text-sm font-medium text-accent-gold">${t('law.completeness', {
@@ -40,6 +40,11 @@ export function mountAboutPage(container: HTMLElement): void {
         <h1 class="text-3xl font-bold">${t('about.title')}</h1>
         <p class="text-lg leading-9 text-text-secondary">${t('about.body')}</p>
       </header>
+        <div class="mt-5 flex flex-wrap gap-x-6 gap-y-3 text-sm">
+          <a class="link-underline hover:text-text-primary" href="${CREATOR_FACEBOOK}" rel="me" dir="ltr">Facebook — Las Khoshnaw</a>
+          <a class="link-underline hover:text-text-primary"
+            href="mailto:${REPORT_EMAIL}?subject=${encodeURIComponent('L-LEX')}">${t('about.contact')}</a>
+        </div>
 
       <section class="grid gap-4 md:grid-cols-2">
         <div class="rounded-xl border border-border bg-surface p-5">
@@ -55,23 +60,7 @@ export function mountAboutPage(container: HTMLElement): void {
       <section class="space-y-4">
         <h2 class="text-xl font-semibold">${t('about.sources')}</h2>
         <ul class="grid gap-3 md:grid-cols-2">${sources}</ul>
-        <p class="leading-8 text-text-secondary">${t('about.method')}</p>
       </section>
 
-      <section class="rounded-xl border border-accent/30 bg-surface p-6">
-        <h2 class="text-xl font-semibold">${t('about.creatorTitle')}</h2>
-        <p class="mt-3 leading-8 text-text-secondary">${t('about.creatorBody')}</p>
-        <div class="mt-5 flex flex-wrap gap-x-6 gap-y-3 text-sm">
-          <a class="link-underline hover:text-text-primary" href="${CREATOR_GITHUB}" rel="me" dir="ltr">GitHub — MrGuevar4</a>
-          <a class="link-underline hover:text-text-primary" href="${CREATOR_FACEBOOK}" rel="me" dir="ltr">Facebook — Las Khoshnaw</a>
-          <a class="link-underline hover:text-text-primary"
-            href="mailto:${REPORT_EMAIL}?subject=${encodeURIComponent('L-LEX')}">${t('about.contact')}</a>
-        </div>
-      </section>
-
-      <section class="rounded-xl border border-border bg-bg-subtle p-5">
-        <h2 class="text-lg font-semibold">${t('about.legalTitle')}</h2>
-        <p class="mt-2 text-sm leading-7 text-text-secondary">${t('about.legalNotice')}</p>
-      </section>
     </div>`;
 }

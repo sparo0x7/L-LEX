@@ -131,6 +131,46 @@ describe('SearchEngine.browse (filter-only browsing, §3)', () => {
   });
 });
 
+describe('locale-aware search index', () => {
+  it('indexes translated English fields only for articles with EN content', () => {
+    const translated = indexFile.docs.filter((doc) => doc.titleEn);
+    const missing = indexFile.docs.find((doc) => doc.status.en === 'missing');
+    expect(translated.length).toBe(302);
+    expect(missing?.titleEn).toBeUndefined();
+    expect(missing?.conditionsEn).toBeUndefined();
+    expect(missing?.penaltiesEn).toBeUndefined();
+  });
+
+  it('indexes translated Arabic fields only for articles with AR content', () => {
+    const translated = indexFile.docs.filter((doc) => doc.titleAr);
+    const missing = indexFile.docs.find((doc) => doc.status.ar === 'missing');
+    expect(translated.length).toBe(302);
+    expect(missing?.titleAr).toBeUndefined();
+    expect(missing?.conditionsAr).toBeUndefined();
+    expect(missing?.penaltiesAr).toBeUndefined();
+  });
+
+  it('finds English-translated articles by English keywords', () => {
+    const results = engine.search('legality');
+    expect(
+      results.some(
+        (result) =>
+          result.doc.id === 'iraqi-penal-code-1969-1' &&
+          normalizeSearchText(result.doc.titleEn ?? '').includes('legality'),
+      ),
+    ).toBe(true);
+  });
+
+  it('finds Arabic-translated articles by Arabic keywords', () => {
+    const results = engine.search('العقوبات');
+    expect(
+      results.some((result) =>
+        normalizeSearchText(result.doc.titleAr ?? '').includes(normalizeSearchText('العقوبات')),
+      ),
+    ).toBe(true);
+  });
+});
+
 describe('display helpers', () => {
   it('highlightMatches wraps matching tokens in <mark> across scripts', () => {
     const html = highlightMatches('سزای دزی و غەرامە', 'دزی');

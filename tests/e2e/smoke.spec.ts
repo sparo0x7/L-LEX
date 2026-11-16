@@ -43,6 +43,55 @@ test.describe('L-LEX smoke', () => {
     expect(pageErrors).toEqual([]);
   });
 
+  test('renders English search results in English with LTR content', async ({ page }) => {
+    const pageErrors: string[] = [];
+    page.on('pageerror', (error) => pageErrors.push(error.message));
+
+    await page.goto('/en/search');
+    await page.locator('[data-search-input]').fill('legality');
+    const firstResult = page.locator('[data-result-id]').first();
+    await expect(firstResult).toBeVisible({ timeout: 15_000 });
+
+    const title = firstResult.locator('h3');
+    await expect(title).toHaveAttribute('lang', 'en');
+    await expect(title).toHaveAttribute('dir', 'ltr');
+    await expect(title).toContainText(/legality/i);
+    expect(pageErrors).toEqual([]);
+  });
+
+  test('renders Arabic search results in Arabic with RTL content', async ({ page }) => {
+    const pageErrors: string[] = [];
+    page.on('pageerror', (error) => pageErrors.push(error.message));
+
+    await page.goto('/ar/search');
+    await page.locator('[data-search-input]').fill('العقوبات');
+    const firstResult = page.locator('[data-result-id]').first();
+    await expect(firstResult).toBeVisible({ timeout: 15_000 });
+
+    const title = firstResult.locator('h3');
+    await expect(title).toHaveAttribute('lang', 'ar');
+    await expect(title).toHaveAttribute('dir', 'rtl');
+    await expect(title).toContainText('العقوبات');
+    expect(pageErrors).toEqual([]);
+  });
+
+  test('marks missing EN translations with explicit Sorani fallback', async ({ page }) => {
+    const pageErrors: string[] = [];
+    page.on('pageerror', (error) => pageErrors.push(error.message));
+
+    await page.goto('/en/search?law=iraqi-penal-code-1969&q=6');
+    const firstResult = page.locator('[data-result-id]').first();
+    await expect(firstResult).toBeVisible({ timeout: 15_000 });
+    await expect(firstResult).toContainText(
+      'Original Sorani text — English/Arabic translation pending.',
+    );
+
+    const title = firstResult.locator('h3');
+    await expect(title).toHaveAttribute('lang', 'ckb');
+    await expect(title).toHaveAttribute('dir', 'rtl');
+    expect(pageErrors).toEqual([]);
+  });
+
   test('shows translation status honestly and persists favorites/theme', async ({ page }) => {
     const pageErrors: string[] = [];
     page.on('pageerror', (error) => pageErrors.push(error.message));

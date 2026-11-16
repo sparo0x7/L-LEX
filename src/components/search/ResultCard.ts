@@ -1,6 +1,6 @@
 import type { LawId } from '../../lib/types.ts';
 import { getLocale, t } from '../../lib/i18n.ts';
-import type { SearchResult } from '../../lib/search.ts';
+import type { LocaleArticleContent, SearchResult } from '../../lib/search.ts';
 import { escapeHtml, highlightMatches, makeSnippet } from '../../lib/search.ts';
 import { routePath } from '../../lib/router.ts';
 import { lawLabel } from './Filters.ts';
@@ -11,16 +11,19 @@ export interface ResultCardOptions {
   query: string;
   selected: boolean;
   expanded: boolean;
+  content?: LocaleArticleContent | null;
 }
 
 export function renderResultCard(result: SearchResult, options: ResultCardOptions): string {
   const { doc } = result;
-  const { query, selected, expanded } = options;
-
-  // Article content is always the Sorani source text (until the Phase 6
-  // translation pipeline lands), so it keeps lang=ckb dir=rtl in every UI locale.
-  const contentAttrs = 'lang="ckb" dir="rtl"';
-  const snippetSource = doc.conditions || doc.penalties;
+  const { query, selected, expanded, content } = options;
+  const locale = getLocale();
+  const translated = locale !== 'ckb' ? (content ?? null) : null;
+  const body = translated ?? doc;
+  const contentAttrs = translated
+    ? `lang="${locale}" dir="${locale === 'en' ? 'ltr' : 'rtl'}"`
+    : 'lang="ckb" dir="rtl"';
+  const snippetSource = body.conditions || body.penalties;
   const snippet = highlightMatches(makeSnippet(snippetSource, query), query);
   const articleHref = routePath(
     {
@@ -28,29 +31,32 @@ export function renderResultCard(result: SearchResult, options: ResultCardOption
       lawSlug: lawSlugById(doc.lawId) ?? doc.lawId,
       articleNumber: doc.n,
     },
-    getLocale(),
+    locale,
   );
-  const sourceNote =
-    getLocale() === 'ckb'
-      ? ''
-      : `<p class="text-xs italic text-text-secondary">${t('article.sourceNote')}</p>`;
+  const fallbackNote =
+    !translated && locale !== 'ckb'
+      ? `<p class="mt-2 text-xs italic text-text-secondary">${t('article.sourceNote')}</p>`
+      : '';
+  const machineBadge =
+    translated?.status === 'machine'
+      ? `<span class="rounded border border-accent-gold/40 bg-accent-gold/10 px-2 py-0.5 text-xs text-accent-gold">${t('article.machineBadge')}</span>`
+      : '';
 
   const expandedBlock = expanded
     ? `
       <div class="mt-3 space-y-3 border-t border-border pt-3" ${contentAttrs}>
         <div>
-          <h4 class="mb-1 text-sm font-semibold text-accent">${doc.penalties ? t('article.conditions') : t('article.text')}</h4>
-          <p class="leading-8">${highlightMatches(doc.conditions, query)}</p>
+          <h4 class="mb-1 text-sm font-semibold text-accent">${body.penalties ? t('article.conditions') : t('article.text')}</h4>
+          <p class="leading-8">${highlightMatches(body.conditions, query)}</p>
         </div>
         ${
-          doc.penalties
+          body.penalties
             ? `<div>
           <h4 class="mb-1 text-sm font-semibold text-accent">${t('article.penalty')}</h4>
-          <p class="leading-8">${highlightMatches(doc.penalties, query)}</p>
+          <p class="leading-8">${highlightMatches(body.penalties, query)}</p>
         </div>`
             : ''
         }
-        ${sourceNote}
       </div>`
     : '';
 
@@ -67,12 +73,14 @@ export function renderResultCard(result: SearchResult, options: ResultCardOption
           ${t('article.number', { n: doc.n })}
         </span>
         <span class="text-xs text-text-secondary">${lawLabel(doc.lawId as LawId)}</span>
+        ${machineBadge}
         <span class="ms-auto flex flex-wrap gap-1.5">${renderPenaltyBadges(doc.tags)}</span>
       </div>
       <h3 class="mt-2 font-semibold leading-7" ${contentAttrs}>
-        <a data-link href="${articleHref}" class="hover:text-accent">${highlightMatches(doc.title, query)}</a>
+        <a data-link href="${articleHref}" class="hover:text-accent">${highlightMatches(body.title, query)}</a>
       </h3>
       ${expanded ? '' : `<p class="mt-1 text-sm leading-7 text-text-secondary" ${contentAttrs}>${snippet}</p>`}
+      ${fallbackNote}
       ${expandedBlock}
       <button
         type="button"

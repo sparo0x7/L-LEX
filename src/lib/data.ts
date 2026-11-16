@@ -68,12 +68,9 @@ const contentPromises = new Map<Locale, Promise<LocaleContentFile>>();
  * cached. Returns null for ckb (the source locale) or when the article has no
  * translation yet — callers then fall back to the Sorani source per §6.2.
  */
-export async function loadTranslatedContent(
-  articleId: string,
-  locale: Locale,
-): Promise<LocaleArticleContent | null> {
+export function loadLocaleContent(locale: Locale): Promise<LocaleContentFile | null> {
   const url = CONTENT_URLS[locale];
-  if (!url) return null;
+  if (!url) return Promise.resolve(null);
   let promise = contentPromises.get(locale);
   if (!promise) {
     promise = fetchJson<LocaleContentFile>(url).catch((error: unknown) => {
@@ -82,8 +79,15 @@ export async function loadTranslatedContent(
     });
     contentPromises.set(locale, promise);
   }
-  const file = await promise;
-  return file.articles[articleId] ?? null;
+  return promise;
+}
+
+export async function loadTranslatedContent(
+  articleId: string,
+  locale: Locale,
+): Promise<LocaleArticleContent | null> {
+  const file = await loadLocaleContent(locale);
+  return file?.articles[articleId] ?? null;
 }
 
 /**

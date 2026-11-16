@@ -34,6 +34,14 @@ export type SearchDoc = {
   title: string;
   conditions: string;
   penalties: string;
+  // Optional localized searchable text (en/ar only). Present only when a real
+  // translation entry exists; the Sorani fields above are always the fallback.
+  titleEn?: string;
+  conditionsEn?: string;
+  penaltiesEn?: string;
+  titleAr?: string;
+  conditionsAr?: string;
+  penaltiesAr?: string;
   // Per-locale translation state. UI branching MUST use this, never
   // content-string emptiness (CLAUDE.md §6.2 graceful degradation).
   status: Record<Locale, TranslationStatus>;
@@ -72,11 +80,27 @@ export interface SearchResult {
   score: number;
 }
 
-type TextField = 'title' | 'conditions' | 'penalties';
-const FIELD_WEIGHTS: Record<TextField, number> = { title: 3, penalties: 2, conditions: 1 };
+const FIELD_WEIGHTS: Record<string, number> = { title: 3, penalties: 2, conditions: 1 };
+const INDEXED_FIELDS = [
+  'title',
+  'conditions',
+  'penalties',
+  'titleEn',
+  'conditionsEn',
+  'penaltiesEn',
+  'titleAr',
+  'conditionsAr',
+  'penaltiesAr',
+] as const;
 const NUMBER_EXACT_BOOST = 100;
 const NUMBER_PREFIX_BOOST = 5;
 const DEFAULT_LIMIT = 50;
+
+function fieldWeight(field: string | undefined): number {
+  if (!field) return 1;
+  const base = field.replace(/(En|Ar)$/, '');
+  return FIELD_WEIGHTS[base] ?? 1;
+}
 
 export class SearchEngine {
   private docs = new Map<string, SearchDoc>();
@@ -88,7 +112,7 @@ export class SearchEngine {
     }),
     document: {
       id: 'id',
-      index: ['title', 'conditions', 'penalties'],
+      index: [...INDEXED_FIELDS],
     },
   });
 
@@ -145,7 +169,7 @@ export class SearchEngine {
       result: Array<string | number>;
     }>;
     for (const { field, result } of fieldResults) {
-      const weight = FIELD_WEIGHTS[field as TextField] ?? 1;
+      const weight = fieldWeight(field);
       result.forEach((id, position) => {
         bump(String(id), weight * ((result.length - position) / result.length));
       });

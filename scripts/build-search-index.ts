@@ -23,6 +23,7 @@ const articles: Article[] = JSON.parse(readFileSync(ARTICLES_PATH, 'utf8'));
 // Translated locales (Phase 6 output) — optional inputs; content.{en,ar}.json
 // are ALWAYS written (empty until translations exist) so the client's static
 // imports resolve, and doc.status reflects what is actually available.
+const localeContent = new Map<Locale, LocaleContentFile>();
 for (const locale of ['en', 'ar'] as const) {
   const inPath = join(ROOT, `content/normalized/articles.${locale}.json`);
   const contentFile: LocaleContentFile = { locale, articles: {} };
@@ -37,6 +38,7 @@ for (const locale of ['en', 'ar'] as const) {
       };
     }
   }
+  localeContent.set(locale, contentFile);
   writeFileSync(
     join(ROOT, `content/normalized/content.${locale}.json`),
     JSON.stringify(contentFile),
@@ -46,24 +48,40 @@ for (const locale of ['en', 'ar'] as const) {
 
 const translatedStatus = new Map<string, Partial<Record<Locale, 'machine' | 'reviewed'>>>();
 for (const locale of ['en', 'ar'] as const) {
-  const file: LocaleContentFile = JSON.parse(
-    readFileSync(join(ROOT, `content/normalized/content.${locale}.json`), 'utf8'),
-  );
+  const file = localeContent.get(locale);
+  if (!file) continue;
   for (const [id, entry] of Object.entries(file.articles)) {
     translatedStatus.set(id, { ...translatedStatus.get(id), [locale]: entry.status });
   }
 }
 
-const docs: SearchDoc[] = articles.map((article) => ({
-  id: article.id,
-  lawId: article.lawId,
-  n: article.articleNumber,
-  tags: article.penaltyTags,
-  title: article.content.ckb.title,
-  conditions: article.content.ckb.conditions,
-  penalties: article.content.ckb.penalties,
-  status: { ...article.translationStatus, ...translatedStatus.get(article.id) },
-}));
+const docs: SearchDoc[] = articles.map((article) => {
+  const doc: SearchDoc = {
+    id: article.id,
+    lawId: article.lawId,
+    n: article.articleNumber,
+    tags: article.penaltyTags,
+    title: article.content.ckb.title,
+    conditions: article.content.ckb.conditions,
+    penalties: article.content.ckb.penalties,
+    status: { ...article.translationStatus, ...translatedStatus.get(article.id) },
+  };
+
+  for (const locale of ['en', 'ar'] as const) {
+    const entry = localeContent.get(locale)?.articles[article.id];
+    if (!entry || entry.status === 'missing') continue;
+    if (locale === 'en') {
+      doc.titleEn = entry.title;
+      doc.conditionsEn = entry.conditions;
+      doc.penaltiesEn = entry.penalties;
+    } else {
+      doc.titleAr = entry.title;
+      doc.conditionsAr = entry.conditions;
+      doc.penaltiesAr = entry.penalties;
+    }
+  }
+  return doc;
+});
 
 const file: SearchIndexFile = {
   generatedAt: new Date().toISOString(),
