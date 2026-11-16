@@ -14,7 +14,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sparo0x7/L-LEX.git"
+    "url": "https://github.com/MrGuevar4/L-LEX.git"
   },
   "type": "module",
   "engines": {
@@ -22,7 +22,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "npm run typecheck && vite build",
+    "build": "npm run typecheck && npm run seo:sitemap && vite build",
     "preview": "vite preview",
     "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.node.json && tsc -p tsconfig.test.json",
     "lint": "eslint .",
@@ -33,11 +33,14 @@
     "data:index": "node scripts/build-search-index.ts",
     "data:translate": "node scripts/translate-articles.ts",
     "data:import-translations": "node scripts/import-translations.ts",
-    "test": "vitest run"
+    "seo:sitemap": "node scripts/build-sitemap.ts",
+    "test": "vitest run",
+    "test:e2e": "playwright test"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@huggingface/transformers": "^4.2.0",
+    "@playwright/test": "^1.64.0",
     "@tailwindcss/vite": "^4.3.2",
     "@types/node": "^26.1.0",
     "eslint": "^10.6.0",
@@ -51,6 +54,7 @@
   },
   "dependencies": {
     "@fontsource-variable/vazirmatn": "^5.2.8",
+    "@upstash/redis": "^1.41.0",
     "flexsearch": "^0.8.212"
   }
 }

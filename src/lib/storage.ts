@@ -28,6 +28,14 @@ export function setStored(key: StorageKey, value: unknown): void {
   }
 }
 
+/** Stored string arrays are user-editable JSON — never trust the shape. */
+export function getStringArray(key: StorageKey): string[] {
+  const value = getStored<unknown>(key);
+  return Array.isArray(value)
+    ? value.filter((item): item is string => typeof item === 'string')
+    : [];
+}
+
 export function clearAllStored(): void {
   for (const key of STORAGE_KEYS) {
     try {

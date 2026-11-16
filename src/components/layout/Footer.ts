@@ -1,5 +1,6 @@
 import { t } from '../../lib/i18n.ts';
 import { clearAllStored } from '../../lib/storage.ts';
+import { formatVisitorCount, getVisitorCount } from '../../lib/visitors.ts';
 
 // §15 error-report contact — confirm or change before launch.
 export const REPORT_EMAIL = 'lassmohammed98@gmail.com';
@@ -19,6 +20,9 @@ export function renderFooter(): string {
             data-clear-data
             class="link-underline hover:text-text-primary"
           >${t('footer.clearData')}</button>
+          <span data-visitor class="hidden text-text-primary">
+            ${t('footer.visitors')}: <span dir="ltr" data-visitor-count></span>
+          </span>
         </div>
         <p class="text-xs">
           <span dir="ltr">© 2026 L-LEX</span> · ${t('footer.builtBy')}
@@ -34,15 +38,20 @@ export function renderFooter(): string {
 }
 
 export function wireFooter(root: ParentNode): void {
+  void getVisitorCount().then((count) => {
+    const wrap = root.querySelector<HTMLElement>('[data-visitor]');
+    const target = root.querySelector<HTMLElement>('[data-visitor-count]');
+    if (count === null || !wrap?.isConnected || !target) return;
+    target.textContent = formatVisitorCount(count);
+    wrap.classList.remove('hidden');
+  });
+
   const button = root.querySelector<HTMLButtonElement>('[data-clear-data]');
   button?.addEventListener('click', () => {
     if (!confirm(t('footer.clearDataConfirm'))) return;
     clearAllStored();
     button.textContent = t('footer.clearDataDone');
     button.disabled = true;
-    setTimeout(() => {
-      button.textContent = t('footer.clearData');
-      button.disabled = false;
-    }, 2000);
+    setTimeout(() => location.reload(), 600);
   });
 }

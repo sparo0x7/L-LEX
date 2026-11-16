@@ -1,6 +1,5 @@
-import type { LawId } from '../lib/types.ts';
 import { getLocale, t } from '../lib/i18n.ts';
-import { lawById, loadData, loadTranslatedContent, relatedArticles } from '../lib/data.ts';
+import { lawBySlug, loadData, loadTranslatedContent, relatedArticles } from '../lib/data.ts';
 import { routePath } from '../lib/router.ts';
 import type { SearchDoc } from '../lib/search.ts';
 import { escapeHtml } from '../lib/search.ts';
@@ -9,6 +8,7 @@ import { lawLabel } from '../components/search/Filters.ts';
 import { renderPenaltyBadges } from '../components/article/PenaltyBadges.ts';
 import { mountNotFoundPage } from './notFound.ts';
 import { renderArticleSkeleton } from '../components/ui/Skeleton.ts';
+import { showLoadError } from '../components/ui/ErrorState.ts';
 
 const STAR_OUTLINE =
   '<path d="m12 2 3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/>';
@@ -48,7 +48,7 @@ function renderRelated(related: SearchDoc[], lawSlug: string): string {
           href="${routePath({ name: 'article', lawSlug, articleNumber: doc.n }, getLocale())}"
           class="card-lift block rounded-lg bg-surface p-3 shadow-sm"
         >
-          <span class="text-sm font-semibold text-accent" dir="ltr">${t('article.number', { n: doc.n })}</span>
+          <span class="text-sm font-semibold text-accent">${t('article.number', { n: doc.n })}</span>
           <span class="mt-1 block truncate text-sm text-text-secondary" lang="ckb" dir="rtl">${escapeHtml(doc.title)}</span>
         </a>`,
     )
@@ -66,62 +66,72 @@ export async function mountArticlePage(
   articleNumber: number,
 ): Promise<void> {
   container.innerHTML = renderArticleSkeleton();
-  const data = await loadData();
-  const law = lawById(lawSlug);
-  const doc = data.byId.get(`${lawSlug}-${articleNumber}`);
-  if (!law || !doc) {
-    mountNotFoundPage(container);
-    return;
-  }
+  try {
+    const data = await loadData();
+    if (!container.isConnected) return;
+    const law = lawBySlug(lawSlug);
+    const doc = law ? data.byId.get(`${law.id}-${articleNumber}`) : undefined;
+    if (!law || !doc) {
+      mountNotFoundPage(container);
+      return;
+    }
 
-  const locale = getLocale();
-  const label = lawLabel(law.id);
-  document.title = `L-LEX — ${t('article.number', { n: doc.n })} · ${label}`;
+    const locale = getLocale();
+    // Translation-state branching uses status, never content emptiness (§6.2):
+    // 'machine' renders the translation with a "not yet reviewed" badge (§15);
+    // 'missing' falls back to the Sorani source with a "not translated" badge.
+    const translated =
+      locale === 'ckb' ? null : await loadTranslatedContent(doc.id, locale).catch(() => null);
+    if (!container.isConnected) return;
+    const label = lawLabel(law.id);
+    document.title = `L-LEX — ${t('article.number', { n: doc.n })} · ${label}`;
+    const status = translated?.status ?? doc.status[locale];
+    const badgeHtml = (text: string) =>
+      `<p class="rounded-md border border-accent-gold/40 bg-accent-gold/10 px-3 py-2 text-sm text-accent-gold">${text}</p>`;
+    let translationBadge = '';
+    if (locale !== 'ckb') {
+      if (translated && status === 'machine')
+        translationBadge = badgeHtml(t('article.machineTranslated'));
+      else if (status !== 'reviewed') translationBadge = badgeHtml(t('article.notTranslated'));
+    }
+    const body = translated ?? doc; // translated fields, or Sorani source fallback
+    const bodyAttrs = translated
+      ? `lang="${locale}" dir="${locale === 'en' ? 'ltr' : 'rtl'}"`
+      : 'lang="ckb" dir="rtl"';
 
-  // Translation-state branching uses status, never content emptiness (§6.2):
-  // 'machine' renders the translation with a "not yet reviewed" badge (§15);
-  // 'missing' falls back to the Sorani source with a "not translated" badge.
-  const translated = locale === 'ckb' ? null : await loadTranslatedContent(doc.id, locale);
-  const status = translated?.status ?? doc.status[locale];
-  const badgeHtml = (text: string) =>
-    `<p class="rounded-md border border-accent-gold/40 bg-accent-gold/10 px-3 py-2 text-sm text-accent-gold">${text}</p>`;
-  let translationBadge = '';
-  if (locale !== 'ckb') {
-    if (translated && status === 'machine')
-      translationBadge = badgeHtml(t('article.machineTranslated'));
-    else if (status !== 'reviewed') translationBadge = badgeHtml(t('article.notTranslated'));
-  }
-  const body = translated ?? doc; // translated fields, or Sorani source fallback
-  const bodyAttrs = translated
-    ? `lang="${locale}" dir="${locale === 'en' ? 'ltr' : 'rtl'}"`
-    : 'lang="ckb" dir="rtl"';
+    const citation = `${t('article.number', { n: doc.n })}, ${law.officialCitation[locale] ?? label}`;
+    const lawDocs = data.byLaw.get(doc.lawId) ?? [];
+    const currentIndex = lawDocs.findIndex((d) => d.id === doc.id);
+    const previous = currentIndex > 0 ? lawDocs[currentIndex - 1] : undefined;
+    const next =
+      currentIndex >= 0 && currentIndex < lawDocs.length - 1
+        ? lawDocs[currentIndex + 1]
+        : undefined;
+    const favorite = isFavorite(doc.id);
 
-  const citation = `${t('article.number', { n: doc.n })}, ${law.officialCitation[locale] ?? label}`;
-  const lawDocs = data.byLaw.get(doc.lawId as LawId) ?? [];
-  const previous = lawDocs.find((d) => d.n === doc.n - 1);
-  const next = lawDocs.find((d) => d.n === doc.n + 1);
-  const favorite = isFavorite(doc.id);
-
-  const neighborLink = (target: SearchDoc | undefined, key: 'article.previous' | 'article.next') =>
-    target
-      ? `<a data-link href="${routePath({ name: 'article', lawSlug, articleNumber: target.n }, locale)}"
+    const neighborLink = (
+      target: SearchDoc | undefined,
+      key: 'article.previous' | 'article.next',
+    ) =>
+      target
+        ? `<a data-link href="${routePath({ name: 'article', lawSlug: law.slug, articleNumber: target.n }, locale)}"
           class="link-underline text-sm text-accent hover:text-accent-gold"
         >${t(key)}</a>`
-      : '<span></span>';
+        : '<span></span>';
 
-  container.innerHTML = `
+    container.innerHTML = `
     <nav aria-label="${t('nav.breadcrumbLabel')}" class="no-print pt-4 text-sm text-text-secondary">
       <a data-link href="${routePath({ name: 'home' }, locale)}" class="link-underline hover:text-text-primary">${t('nav.home')}</a>
       <span aria-hidden="true"> / </span>
-      <a data-link href="${routePath({ name: 'law', lawSlug }, locale)}" class="link-underline hover:text-text-primary">${label}</a>
+      <a data-link href="${routePath({ name: 'law', lawSlug: law.slug }, locale)}" class="link-underline hover:text-text-primary">${label}</a>
       <span aria-hidden="true"> / </span>
-      <span aria-current="page" dir="ltr">${t('article.number', { n: doc.n })}</span>
+      <span aria-current="page">${t('article.number', { n: doc.n })}</span>
     </nav>
 
     <article class="mt-4">
       <header class="space-y-3">
         <div class="flex flex-wrap items-center gap-2">
-          <span class="rounded-md bg-accent px-2.5 py-1 font-semibold text-bg" dir="ltr">${t('article.number', { n: doc.n })}</span>
+          <span class="rounded-md bg-accent px-2.5 py-1 font-semibold text-bg">${t('article.number', { n: doc.n })}</span>
           <span class="text-sm text-text-secondary">${label}</span>
           <span class="ms-auto flex flex-wrap gap-1.5">${renderPenaltyBadges(doc.tags)}</span>
         </div>
@@ -147,13 +157,17 @@ export async function mountArticlePage(
 
       <div class="mt-5 space-y-4">
         <section class="rounded-xl bg-surface p-5 shadow-sm">
-          <h2 class="mb-2 text-sm font-semibold text-accent">${t('article.conditions')}</h2>
+          <h2 class="mb-2 text-sm font-semibold text-accent">${body.penalties ? t('article.conditions') : t('article.text')}</h2>
           <p class="max-w-[70ch] text-[17px] leading-9" ${bodyAttrs}>${escapeHtml(body.conditions)}</p>
         </section>
-        <section class="rounded-xl bg-surface p-5 shadow-sm">
+        ${
+          body.penalties
+            ? `<section class="rounded-xl bg-surface p-5 shadow-sm">
           <h2 class="mb-2 text-sm font-semibold text-accent">${t('article.penalty')}</h2>
           <p class="max-w-[70ch] text-[17px] leading-9" ${bodyAttrs}>${escapeHtml(body.penalties)}</p>
-        </section>
+        </section>`
+            : ''
+        }
       </div>
 
       <div class="no-print mt-5 flex items-center justify-between">
@@ -162,38 +176,41 @@ export async function mountArticlePage(
       </div>
     </article>
 
-    ${renderRelated(relatedArticles(doc, lawDocs), lawSlug)}`;
+    ${renderRelated(relatedArticles(doc, lawDocs), law.slug)}`;
 
-  const favoriteButton = container.querySelector<HTMLButtonElement>('[data-favorite]');
-  favoriteButton?.addEventListener('click', () => {
-    const nowFavorite = toggleFavorite(doc.id);
-    favoriteButton.setAttribute('aria-pressed', String(nowFavorite));
-    favoriteButton.className = `flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-sm ${
-      nowFavorite
-        ? 'border-accent-gold/60 bg-accent-gold/10 text-accent-gold'
-        : 'border-border bg-surface hover:bg-surface-hover'
-    }`;
-    favoriteButton
-      .querySelector('svg')
-      ?.setAttribute('fill', nowFavorite ? 'currentColor' : 'none');
-    const labelSpan = favoriteButton.querySelector('span:last-child');
-    if (labelSpan)
-      labelSpan.textContent = nowFavorite ? t('article.unfavorite') : t('article.favorite');
-  });
-
-  container
-    .querySelector<HTMLButtonElement>('[data-copy-citation]')
-    ?.addEventListener('click', async (event) => {
-      const button = event.currentTarget as HTMLButtonElement;
-      if (await copyText(citation)) transientLabel(button, t('article.copied'));
+    const favoriteButton = container.querySelector<HTMLButtonElement>('[data-favorite]');
+    favoriteButton?.addEventListener('click', () => {
+      const nowFavorite = toggleFavorite(doc.id);
+      favoriteButton.setAttribute('aria-pressed', String(nowFavorite));
+      favoriteButton.className = `flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-sm ${
+        nowFavorite
+          ? 'border-accent-gold/60 bg-accent-gold/10 text-accent-gold'
+          : 'border-border bg-surface hover:bg-surface-hover'
+      }`;
+      favoriteButton
+        .querySelector('svg')
+        ?.setAttribute('fill', nowFavorite ? 'currentColor' : 'none');
+      const labelSpan = favoriteButton.querySelector('span:last-child');
+      if (labelSpan)
+        labelSpan.textContent = nowFavorite ? t('article.unfavorite') : t('article.favorite');
     });
 
-  container
-    .querySelector<HTMLButtonElement>('[data-copy-link]')
-    ?.addEventListener('click', async (event) => {
-      const button = event.currentTarget as HTMLButtonElement;
-      if (await copyText(location.href)) transientLabel(button, t('article.copied'));
-    });
+    container
+      .querySelector<HTMLButtonElement>('[data-copy-citation]')
+      ?.addEventListener('click', async (event) => {
+        const button = event.currentTarget as HTMLButtonElement;
+        if (await copyText(citation)) transientLabel(button, t('article.copied'));
+      });
 
-  container.querySelector('[data-print]')?.addEventListener('click', () => window.print());
+    container
+      .querySelector<HTMLButtonElement>('[data-copy-link]')
+      ?.addEventListener('click', async (event) => {
+        const button = event.currentTarget as HTMLButtonElement;
+        if (await copyText(location.href)) transientLabel(button, t('article.copied'));
+      });
+
+    container.querySelector('[data-print]')?.addEventListener('click', () => window.print());
+  } catch {
+    if (container.isConnected) showLoadError(container);
+  }
 }

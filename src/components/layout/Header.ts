@@ -36,7 +36,7 @@ export function renderHeader(activeRoute: Route['name']): string {
           <span class="text-lg tracking-wide" dir="ltr">L-LEX</span>
           <span class="sr-only">${t('app.name')}</span>
         </a>
-        <nav aria-label="${t('nav.home')}" class="flex items-center gap-1">
+        <nav aria-label="${t('nav.primary')}" class="flex items-center gap-1">
           ${navLink({ name: 'landing' }, 'nav.home')}
           ${navLink({ name: 'home' }, 'search.label')}
           ${navLink({ name: 'favorites' }, 'nav.favorites')}

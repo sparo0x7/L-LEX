@@ -5,13 +5,21 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light dark" />
-    <!-- Beta safety (§0): remove ONLY when the Kurdistan law is complete (90/90)
-         AND both laws are verified against the official source (§15). -->
-    <meta name="robots" content="noindex, nofollow" />
     <meta name="description" content="گەڕانێکی خێرا لە یاساکانی عێراق و هەرێمی کوردستان — L-LEX" />
     <meta name="author" content="Las Khoshnaw" />
     <meta property="og:site_name" content="L-LEX" />
+    <meta property="og:type" content="website" />
     <meta property="og:title" content="L-LEX — یاسا بدۆزەرەوە | Legal Article Search" />
+    <meta
+      property="og:description"
+      content="گەڕانێکی خێرا لە یاساکانی عێراق و هەرێمی کوردستان — L-LEX"
+    />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="L-LEX — یاسا بدۆزەرەوە | Legal Article Search" />
+    <meta
+      name="twitter:description"
+      content="گەڕانێکی خێرا لە یاساکانی عێراق و هەرێمی کوردستان — L-LEX"
+    />
     <title>L-LEX — یاسا بدۆزەرەوە | Legal Article Search</title>
     <script>
       // Stamp theme and locale before first paint to avoid a flash of the wrong
@@ -32,7 +40,9 @@
         document.documentElement.dataset.theme = dark ? 'dark' : 'light';
 
         const dirs = { ckb: 'rtl', ar: 'rtl', en: 'ltr' };
-        const locale = read('locale');
+        const firstSegment = location.pathname.split('/').filter(Boolean)[0];
+        const urlLocale = firstSegment === 'en' || firstSegment === 'ar' ? firstSegment : null;
+        const locale = urlLocale ?? read('locale');
         if (typeof locale === 'string' && dirs[locale]) {
           document.documentElement.lang = locale;
           document.documentElement.dir = dirs[locale];

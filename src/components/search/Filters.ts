@@ -3,7 +3,19 @@ import type { MessageKey } from '../../lib/i18n.ts';
 import { t } from '../../lib/i18n.ts';
 import type { SearchSort } from '../../lib/search.ts';
 
-export const LAW_IDS: LawId[] = ['iraqi-penal-code-1969', 'kurdistan-internal-security-forces-law'];
+export const LAW_IDS: LawId[] = [
+  'iraqi-penal-code-1969',
+  'kurdistan-internal-security-forces-law',
+  'kri-peshmerga-ministry-law-2007',
+  'kri-peshmerga-honoring-law-2007',
+  'kri-peshmerga-disability-law-2007',
+  'kri-peshmerga-service-pension-law-2007',
+  'iraqi-military-penal-code-2007',
+  'iraqi-military-procedure-code-2016',
+  'kri-peshmerga-service-reg-2011',
+  'kri-reform-law-2020-peshmerga',
+  'iraqi-military-penal-amendment-2012',
+];
 
 export const PENALTY_TAGS: PenaltyTag[] = [
   'death-penalty',

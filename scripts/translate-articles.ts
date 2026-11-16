@@ -54,7 +54,7 @@ export interface GlossaryTerm {
 export interface TranslatedArticle {
   id: string;
   srcHash: string;
-  translationStatus: 'machine';
+  translationStatus: 'machine' | 'reviewed';
   content: ArticleContent;
 }
 

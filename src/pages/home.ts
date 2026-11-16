@@ -8,8 +8,8 @@
 import type { LawId, PenaltyTag } from '../lib/types.ts';
 import { getLocale, t } from '../lib/i18n.ts';
 import { navigate } from '../lib/router.ts';
-import { getStored, setStored } from '../lib/storage.ts';
-import type { SearchEngine, SearchIndexFile, SearchResult, SearchSort } from '../lib/search.ts';
+import { getStringArray, setStored } from '../lib/storage.ts';
+import type { SearchEngine, SearchResult, SearchSort } from '../lib/search.ts';
 import { createSearchEngine, escapeHtml, normalizeSearchText } from '../lib/search.ts';
 import { renderSearchBar } from '../components/search/SearchBar.ts';
 import { LAW_IDS, PENALTY_TAGS, renderFilters } from '../components/search/Filters.ts';
@@ -20,8 +20,8 @@ import {
   renderStartHint,
 } from '../components/search/EmptyState.ts';
 import { renderListSkeleton } from '../components/ui/Skeleton.ts';
-import searchIndexUrl from '../../content/normalized/search-index.json?url';
-import { LAWS } from '../lib/data.ts';
+import { showLoadError } from '../components/ui/ErrorState.ts';
+import { LAWS, lawSlugById, loadData } from '../lib/data.ts';
 
 const DEBOUNCE_MS = 200;
 const MAX_RECENT = 8;
@@ -40,12 +40,20 @@ let selectedIndex = -1;
 let expandedId: string | null = null;
 let lastResults: SearchResult[] = [];
 
+function resetSelection(): void {
+  selectedIndex = -1;
+  expandedId = null;
+}
+
 function ensureEngine(): Promise<SearchEngine> {
-  enginePromise ??= fetch(searchIndexUrl)
-    .then((response) => response.json() as Promise<SearchIndexFile>)
-    .then((file) => {
-      engine = createSearchEngine(file.docs);
+  enginePromise ??= loadData()
+    .then((data) => {
+      engine = createSearchEngine(data.docs);
       return engine;
+    })
+    .catch((error: unknown) => {
+      enginePromise = null; // allow retry instead of caching a permanent failure
+      throw error;
     });
   return enginePromise;
 }
@@ -83,7 +91,7 @@ function writeStateToUrl(): void {
 /* ---------- recent searches ---------- */
 
 function getRecentSearches(): string[] {
-  return getStored<string[]>('recent-searches') ?? [];
+  return getStringArray('recent-searches');
 }
 
 function addRecentSearch(query: string): void {
@@ -153,7 +161,14 @@ function renderResultsArea(container: HTMLElement): void {
   if (!engine) {
     statusHost.textContent = t('search.loading');
     resultsHost.innerHTML = renderListSkeleton();
-    void ensureEngine().then(() => renderResultsArea(container));
+    void ensureEngine()
+      .then(() => renderResultsArea(container))
+      .catch(() => {
+        if (resultsHost.isConnected) {
+          statusHost.textContent = '';
+          showLoadError(resultsHost);
+        }
+      });
     return;
   }
 
@@ -212,14 +227,18 @@ export function mountHomePage(container: HTMLElement): void {
   const clearButton = container.querySelector<HTMLButtonElement>('[data-search-clear]');
   if (!input || !clearButton) return;
 
+  const commitQuery = (preserveSelection = false) => {
+    const queryChanged = input.value !== state.q;
+    state.q = input.value;
+    if (!preserveSelection || queryChanged) resetSelection();
+    clearButton.classList.toggle('hidden', !state.q);
+  };
+
   let debounceTimer: ReturnType<typeof setTimeout> | undefined;
   input.addEventListener('input', () => {
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(() => {
-      state.q = input.value;
-      selectedIndex = -1;
-      expandedId = null;
-      clearButton.classList.toggle('hidden', !state.q);
+      commitQuery();
       renderResultsArea(container);
     }, DEBOUNCE_MS);
   });
@@ -240,41 +259,45 @@ export function mountHomePage(container: HTMLElement): void {
           ?.scrollIntoView({ block: 'nearest' });
       }
     } else if (event.key === 'Enter') {
-      const target = lastResults[selectedIndex] ?? lastResults[0];
+      clearTimeout(debounceTimer);
+      commitQuery(true);
+      const results = engine ? runSearch() : [];
+      const target = results[selectedIndex] ?? results[0];
+      renderResultsArea(container);
       if (target) {
         addRecentSearch(state.q);
         navigate(
-          { name: 'article', lawSlug: target.doc.lawId, articleNumber: target.doc.n },
+          {
+            name: 'article',
+            lawSlug: lawSlugById(target.doc.lawId) ?? target.doc.lawId,
+            articleNumber: target.doc.n,
+          },
           getLocale(),
         );
       }
     } else if (event.key === 'Escape' && state.q) {
       input.value = '';
-      state.q = '';
-      selectedIndex = -1;
-      expandedId = null;
-      clearButton.classList.add('hidden');
+      commitQuery();
       renderResultsArea(container);
     }
   });
 
   clearButton.addEventListener('click', () => {
     input.value = '';
-    state.q = '';
-    selectedIndex = -1;
-    expandedId = null;
-    clearButton.classList.add('hidden');
+    commitQuery();
     renderResultsArea(container);
     input.focus();
   });
 
   container.querySelector('[data-penalty-filter]')?.addEventListener('change', (event) => {
+    commitQuery();
     const value = (event.target as HTMLSelectElement).value;
     state.penalty = isPenaltyTag(value) ? value : '';
     renderResultsArea(container);
   });
 
   container.querySelector('[data-sort]')?.addEventListener('change', (event) => {
+    commitQuery();
     state.sort = (event.target as HTMLSelectElement).value === 'number' ? 'number' : 'relevance';
     renderResultsArea(container);
   });
@@ -285,6 +308,7 @@ export function mountHomePage(container: HTMLElement): void {
 
     const lawChip = target.closest<HTMLButtonElement>('[data-law-filter]');
     if (lawChip) {
+      commitQuery();
       const value = lawChip.dataset.lawFilter ?? '';
       state.law = isLawId(value) ? value : '';
       for (const chip of container.querySelectorAll<HTMLButtonElement>('[data-law-filter]')) {
@@ -310,6 +334,7 @@ export function mountHomePage(container: HTMLElement): void {
     if (recentChip?.dataset.recentQuery) {
       state.q = recentChip.dataset.recentQuery;
       input.value = state.q;
+      resetSelection();
       clearButton.classList.remove('hidden');
       renderResultsArea(container);
       return;

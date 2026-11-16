@@ -48,9 +48,9 @@ L-LEX is a fast, elegant, trilingual **legal article search engine** for Iraqi a
 
 - 🔍 **Instant search** — by article number (Western `251` or Eastern-Arabic `٢٥١` digits), keyword, or penalty type, with Sorani/Arabic script normalization
 - 🌐 **Trilingual** — Kurdish Sorani, Arabic, and English UI with correct RTL/LTR handling throughout
-- ⚖️ **Two full statutes indexed** — Iraqi Penal Code No. 111 of 1969 (503 articles) and the Kurdistan Internal Security Forces Law (54 articles), classified across 12 penalty categories
+- ⚖️ **Eleven laws indexed** — 885 articles across Iraqi and Kurdistan Region legislation, including the Iraqi Penal Code No. 111 of 1969 (503), the Kurdistan Internal Security Forces Law (90), and Peshmerga/military laws from the supplied trilingual bundle; partial coverage is shown explicitly where a law is incomplete
 - 🌓 **True dark mode** — a designed dark palette, not inverted colors, with system-preference tracking
-- 🔒 **No login, no backend** — fully static, served from a CDN; favorites and preferences live in your browser only, with a one-click "clear my local data" control
+- 🔒 **No login** — favorites and preferences live in your browser only, with a one-click "clear my local data" control; the only serverless piece is an optional global visitor counter
 
 ## Screenshots / Demo
 
@@ -60,16 +60,16 @@ _Coming after the search and article pages land — see the [Roadmap](#roadmap).
 
 ## Tech Stack
 
-| Layer       | Choice                                             |
-| ----------- | -------------------------------------------------- |
-| Language    | TypeScript (strict mode)                           |
-| Framework   | Vite + vanilla TypeScript — no component framework |
-| Styling     | Tailwind CSS v4 with logical properties for RTL    |
-| Search      | FlexSearch (client-side, no server)                |
-| Typography  | Vazirmatn Variable (unified Latin/Arabic/Sorani)   |
-| Persistence | `localStorage` only — no accounts, no database     |
-| Testing     | Vitest (unit) + Playwright (e2e) — planned         |
-| Hosting     | Any static host / CDN                              |
+| Layer       | Choice                                                                |
+| ----------- | --------------------------------------------------------------------- |
+| Language    | TypeScript (strict mode)                                              |
+| Framework   | Vite + vanilla TypeScript — no component framework                    |
+| Styling     | Tailwind CSS v4 with logical properties for RTL                       |
+| Search      | FlexSearch (client-side, no server)                                   |
+| Typography  | Vazirmatn Variable (unified Latin/Arabic/Sorani)                      |
+| Persistence | `localStorage` for preferences; Upstash Redis for the visitor counter |
+| Testing     | Vitest (unit + corpus integrity); Playwright e2e                      |
+| Hosting     | Vercel static frontend + serverless `/api/visitors`                   |
 
 ## Getting Started
 
@@ -81,9 +81,14 @@ npm run dev             # dev server
 npm run build           # typecheck + production build
 npm run preview         # serve the production build locally
 
-npm run data:normalize  # rebuild content/normalized/ from the source law JSON
-npm run data:classify   # re-run penalty tagging on normalized articles
+npm run data:normalize        # rebuild content/normalized/ from the source law JSON
+npm run data:classify         # re-run penalty tagging on normalized articles
+npm run data:import-translations  # import accepted EN/AR translations
+npm run data:index            # rebuild search-index.json and locale content files
+npm run seo:sitemap           # regenerate public/sitemap.xml for Search Console
 ```
+
+For the visitor counter on Vercel, add an Upstash Redis integration and set `UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN` (legacy `KV_REST_API_URL`/`KV_REST_API_TOKEN` also work). Set `SITE_URL` when generating the sitemap for a non-default domain.
 
 ## Project Structure
 
@@ -92,19 +97,21 @@ npm run data:classify   # re-run penalty tagging on normalized articles
 │   ├── source/          # original law JSON — untouched ground truth
 │   ├── normalized/      # generated laws.json + articles — never hand-edit
 │   └── glossary/        # fixed legal-term glossary for translation
-├── scripts/             # build-time pipeline: normalize, classify penalties
+├── law_data_json/       # supplied trilingual legal bundles
+├── scripts/             # build-time pipeline: normalize, classify, translate, index
 ├── src/
 │   ├── components/      # layout, search, article, ui
 │   ├── i18n/            # UI-string dictionaries (ckb / en / ar)
 │   ├── lib/             # types, i18n, theme, storage, search
 │   └── styles/          # design tokens (light + dark)
-├── public/              # favicon, animation assets
+├── api/                # Vercel serverless visitor counter
+├── public/              # favicon, robots.txt, generated sitemap.xml
 └── tests/               # unit + e2e
 ```
 
 ## Data & Translation Methodology
 
-Kurdish Sorani is the **source-of-truth language** of both statutes; the Arabic legal terms embedded in parentheses in the source text are treated as authoritative terminology anchors. English and Arabic article translations are produced by a glossary-constrained machine-translation pipeline and carry a **visible per-article status badge** ("machine-translated, pending human review") — machine output is never presented with the same visual authority as the verified Sorani text. Penalty categories (death penalty, imprisonment, fine, dismissal, …) are derived by pattern-matching refined against the full 557-article corpus.
+Kurdish Sorani is the **source-of-truth language** for the 593 articles in `content/source/`; the Arabic legal terms embedded in parentheses are treated as authoritative terminology anchors. The supplied `law_data_json/` bundle adds 292 trilingual articles across nine further laws, bringing the normalized corpus to 885 articles. English and Arabic entries currently total 302 articles and are all marked **machine / pending human review** — none are represented as legally reviewed. Penalty categories (death penalty, imprisonment, fine, dismissal, …) are derived by pattern-matching refined against the 593 source articles.
 
 ## Legal Disclaimer
 
@@ -113,16 +120,16 @@ Kurdish Sorani is the **source-of-truth language** of both statutes; the Arabic 
 ## Roadmap
 
 - [x] Project scaffold — Vite + TypeScript + Tailwind CSS v4
-- [x] Data pipeline — normalization + penalty classification of all 557 articles
+- [x] Data pipeline — normalization + penalty classification of all 593 source articles, plus the 292-article trilingual bundle (885 normalized articles)
 - [x] Design system & shell — trilingual UI, RTL/LTR switching, light/dark themes
 - [x] Branding & public repo — L-LEX identity, MIT license
 - [x] Search — FlexSearch index, digit/script normalization, filters, keyboard nav
 - [x] Law overview & article pages — conditions/penalty sections, citations, favorites
 - [x] Opening animation — scales of justice, skippable, reduced-motion aware
-- [ ] Translation pipeline — EN/AR machine translation with status badges
+- [ ] Translation pipeline — EN/AR coverage is 302/885 articles; all entries are machine/pending review and the remaining 583 articles per locale still need translation + human legal review
 - [ ] Accessibility & performance — WCAG 2.1 AA, Lighthouse 90+
-- [ ] Testing — Vitest unit + Playwright e2e
-- [ ] Deploy — pending human verification of both statutes against official sources
+- [x] Testing — Vitest unit/corpus suite + Playwright e2e smoke tests
+- [ ] Deploy — SEO assets ready (sitemap/robots/canonical metadata); official-source verification is still recommended before relying on the corpus
 
 ## Contributing
 

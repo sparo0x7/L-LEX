@@ -16,7 +16,7 @@
  * Imported content is marked translationStatus 'machine' — user-supplied but
  * not §15-reviewed; the "not yet legally reviewed" badge stays.
  */
-import { readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { Article, ArticleContent } from '../src/lib/types.ts';
@@ -27,6 +27,7 @@ import type {
   TranslatedArticleFile,
 } from './translate-articles.ts';
 import { hashSource, reconstructFormattedText } from './translate-articles.ts';
+import { BUNDLE_LAW_CONFIGS } from './normalize-source.ts';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -116,6 +117,44 @@ function main(): void {
         }),
       };
       accepted.push({ id, srcHash: hashSource(article), translationStatus: 'machine', content });
+    }
+
+    const bundlePath = join(ROOT, 'law_data_json', 'yasay_peshmerga_military_justice.json');
+    if (existsSync(bundlePath)) {
+      const bundle = JSON.parse(readFileSync(bundlePath, 'utf8'));
+      const sections = [
+        'regional_peshmerga_laws',
+        'federal_military_justice_laws',
+        'related_legal_instruments',
+      ];
+      for (const sec of sections) {
+        for (const blaw of bundle[sec] ?? []) {
+          const cfg = BUNDLE_LAW_CONFIGS[blaw.id];
+          if (!cfg) continue;
+          for (const art of blaw.articles) {
+            const id = `${cfg.lawId}-${art.number}`;
+            const article = articleById.get(id);
+            if (!article) continue;
+            const title = (target === 'en' ? art.title_en : art.title_ar).trim();
+            const conditions = (target === 'en' ? art.content_en : art.content_ar).trim();
+            const content: ArticleContent = {
+              title,
+              conditions,
+              penalties: '',
+              formattedText:
+                target === 'en'
+                  ? `Article ${art.number} > ${title} > ${conditions}`
+                  : `المادة ${art.number} > ${title} > ${conditions}`,
+            };
+            accepted.push({
+              id,
+              srcHash: hashSource(article),
+              translationStatus: 'machine',
+              content,
+            });
+          }
+        }
+      }
     }
 
     const file: TranslatedArticleFile = {

@@ -1,38 +1,42 @@
-import type { LawId } from '../lib/types.ts';
 import { getLocale, t } from '../lib/i18n.ts';
-import { lawById, loadData } from '../lib/data.ts';
+import { lawBySlug, loadData } from '../lib/data.ts';
 import { navigate, routePath } from '../lib/router.ts';
 import { escapeHtml } from '../lib/search.ts';
 import { lawLabel } from '../components/search/Filters.ts';
 import { mountNotFoundPage } from './notFound.ts';
 import { renderLawSkeleton } from '../components/ui/Skeleton.ts';
+import { showLoadError } from '../components/ui/ErrorState.ts';
 
 export async function mountLawPage(container: HTMLElement, lawSlug: string): Promise<void> {
   container.innerHTML = renderLawSkeleton();
-  const data = await loadData();
-  const law = lawById(lawSlug);
-  const docs = data.byLaw.get(lawSlug as LawId);
-  if (!law || !docs || docs.length === 0) {
-    mountNotFoundPage(container);
-    return;
-  }
+  try {
+    const data = await loadData();
+    if (!container.isConnected) return;
+    const law = lawBySlug(lawSlug);
+    const docs = law ? data.byLaw.get(law.id) : undefined;
+    if (!law || !docs || docs.length === 0) {
+      mountNotFoundPage(container);
+      return;
+    }
 
-  const locale = getLocale();
-  const label = lawLabel(law.id);
-  document.title = `L-LEX — ${label}`;
+    const locale = getLocale();
+    const label = lawLabel(law.id);
+    document.title = `L-LEX — ${label}`;
 
-  const secondaryCitation =
-    locale !== 'ckb' && law.officialCitation.ckb
-      ? `<p class="text-sm text-text-secondary" lang="ckb" dir="rtl">${escapeHtml(law.officialCitation.ckb)}</p>`
-      : '';
+    const secondaryCitation =
+      locale !== 'ckb' && law.officialCitation.ckb
+        ? `<p class="text-sm text-text-secondary" lang="ckb" dir="rtl">${escapeHtml(law.officialCitation.ckb)}</p>`
+        : '';
 
-  const sourceLine = law.sourceUrl
-    ? `<a class="text-sm text-accent underline underline-offset-4" href="${escapeHtml(law.sourceUrl)}" rel="noopener">${escapeHtml(law.sourceUrl)}</a>`
-    : `<p class="text-sm text-text-secondary">${t('law.imported', { date: law.lastVerified })} — ${t('law.verificationPending')}.</p>`;
+    const safeSourceUrl =
+      law.sourceUrl && /^https?:\/\//i.test(law.sourceUrl) ? law.sourceUrl : undefined;
+    const sourceLine = safeSourceUrl
+      ? `<a class="text-sm text-accent underline underline-offset-4" href="${escapeHtml(safeSourceUrl)}" rel="noopener noreferrer">${escapeHtml(safeSourceUrl)}</a>`
+      : `<p class="text-sm text-text-secondary">${t('law.imported', { date: law.importedAt })} — ${t('law.verificationPending')}.</p>`;
 
-  const tocCells = docs
-    .map(
-      (doc) => `
+    const tocCells = docs
+      .map(
+        (doc) => `
         <a
           data-link
           href="${routePath({ name: 'article', lawSlug: law.slug, articleNumber: doc.n }, locale)}"
@@ -40,10 +44,13 @@ export async function mountLawPage(container: HTMLElement, lawSlug: string): Pro
           class="card-lift flex h-10 items-center justify-center rounded-md bg-surface text-sm shadow-sm hover:text-accent"
           dir="ltr"
         >${doc.n}</a>`,
-    )
-    .join('');
+      )
+      .join('');
 
-  container.innerHTML = `
+    const minArticle = docs[0]?.n ?? 1;
+    const maxArticle = docs[docs.length - 1]?.n ?? law.articleCount;
+
+    container.innerHTML = `
     <nav aria-label="${t('nav.breadcrumbLabel')}" class="no-print pt-4 text-sm text-text-secondary">
       <a data-link href="${routePath({ name: 'home' }, locale)}" class="link-underline hover:text-text-primary">${t('nav.home')}</a>
       <span aria-hidden="true"> / </span>
@@ -68,7 +75,7 @@ export async function mountLawPage(container: HTMLElement, lawSlug: string): Pro
         <h2 class="text-lg font-semibold">${t('law.overviewTitle')}</h2>
         <form data-jump class="flex items-center gap-2">
           <label class="text-sm text-text-secondary" for="jump-input">${t('law.jumpLabel')}</label>
-          <input id="jump-input" type="number" min="1" max="${law.articleCount}" required
+          <input id="jump-input" type="number" min="${minArticle}" max="${maxArticle}" required
             class="w-24 rounded-md border border-border bg-surface px-2 py-1.5 text-sm" dir="ltr" />
           <button type="submit"
             class="rounded-md bg-accent px-3 py-1.5 text-sm font-medium text-bg hover:opacity-90"
@@ -80,14 +87,17 @@ export async function mountLawPage(container: HTMLElement, lawSlug: string): Pro
       </div>
     </section>`;
 
-  container.querySelector<HTMLFormElement>('[data-jump]')?.addEventListener('submit', (event) => {
-    event.preventDefault();
-    const input = container.querySelector<HTMLInputElement>('#jump-input');
-    const number = Number(input?.value);
-    if (input && Number.isInteger(number) && number >= 1 && number <= law.articleCount) {
-      navigate({ name: 'article', lawSlug: law.slug, articleNumber: number }, getLocale());
-    } else {
-      input?.reportValidity();
-    }
-  });
+    container.querySelector<HTMLFormElement>('[data-jump]')?.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const input = container.querySelector<HTMLInputElement>('#jump-input');
+      const number = Number(input?.value);
+      if (input && Number.isInteger(number) && docs.some((d) => d.n === number)) {
+        navigate({ name: 'article', lawSlug: law.slug, articleNumber: number }, getLocale());
+      } else {
+        input?.reportValidity();
+      }
+    });
+  } catch {
+    if (container.isConnected) showLoadError(container);
+  }
 }

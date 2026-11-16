@@ -183,6 +183,7 @@ function setupCountUps(container: HTMLElement): void {
     }
     const startedAt = performance.now();
     const tick = (now: number) => {
+      if (!counter.isConnected) return;
       const progress = Math.min((now - startedAt) / COUNT_UP_MS, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
       counter.textContent = String(Math.round(target * eased));
@@ -203,6 +204,10 @@ function setupReveals(container: HTMLElement): void {
   }
   const observer = new IntersectionObserver(
     (entries) => {
+      if (!container.isConnected) {
+        observer.disconnect();
+        return;
+      }
       for (const entry of entries) {
         if (!entry.isIntersecting) continue;
         const element = entry.target as HTMLElement;

@@ -9,7 +9,7 @@
     },
     "category": "penal",
     "articleCount": 503,
-    "lastVerified": "2026-07-07"
+    "importedAt": "2026-07-07"
   },
   {
     "id": "kurdistan-internal-security-forces-law",
@@ -20,6 +20,123 @@
     "category": "security",
     "articleCount": 90,
     "totalArticleCount": 90,
-    "lastVerified": "2026-07-09"
+    "importedAt": "2026-07-09"
+  },
+  {
+    "id": "kri-peshmerga-ministry-law-2007",
+    "slug": "kri-peshmerga-ministry-law-2007",
+    "officialCitation": {
+      "ckb": "یاسای وەزارەتی پێشمەرگە لە هەرێمی کوردستان ـ عێراق ژمارە (١٩)ی ساڵی ٢٠٠٧",
+      "ar": "قانون رقم (19) لسنة 2007 قانون وزارة البيشمركة في إقليم كوردستان ـ العراق",
+      "en": "Kurdistan Region Ministry of Peshmerga Law No. 19 of 2007"
+    },
+    "category": "security",
+    "articleCount": 11,
+    "totalArticleCount": 11,
+    "importedAt": "2026-11-11"
+  },
+  {
+    "id": "kri-peshmerga-honoring-law-2007",
+    "slug": "kri-peshmerga-honoring-law-2007",
+    "officialCitation": {
+      "ckb": "یاسای ڕێزلێنانی پێشمەرگە (زێرەڤانی هەرێمی کوردستان ـ عێراق) ژمارە (٣٣)ی ساڵی ٢٠٠٧",
+      "ar": "قانون رقم (33) لسنة 2007 قانون تكريم البيشمركة (حرس إقليم كوردستان ـ العراق)",
+      "en": "Kurdistan Region Peshmerga (Regional Guard) Honoring Law No. 33 of 2007"
+    },
+    "category": "security",
+    "articleCount": 11,
+    "totalArticleCount": 11,
+    "importedAt": "2026-11-11"
+  },
+  {
+    "id": "kri-peshmerga-disability-law-2007",
+    "slug": "kri-peshmerga-disability-law-2007",
+    "officialCitation": {
+      "ckb": "یاسای خانەنشینی کەمئەندامانی پێشمەرگە (زێرەڤانی هەرێمی کوردستان ـ عێراق) ژمارە (٣٤)ی ساڵی ٢٠٠٧",
+      "ar": "قانون رقم (34) لسنة 2007 قانون تقاعد معوقي البيشمركة (حرس اقليم كوردستان ـ العراق)",
+      "en": "Kurdistan Region Peshmerga Disability Retirement Law No. 34 of 2007"
+    },
+    "category": "security",
+    "articleCount": 11,
+    "totalArticleCount": 11,
+    "importedAt": "2026-11-11"
+  },
+  {
+    "id": "kri-peshmerga-service-pension-law-2007",
+    "slug": "kri-peshmerga-service-pension-law-2007",
+    "officialCitation": {
+      "ckb": "یاسای ڕاژە و خانەنشینی پێشمەرگە (زێرەڤانی هەرێمی کوردستان) ژمارە (٣٨)ی ساڵی ٢٠٠٧",
+      "ar": "قانون رقم (38) لسنة 2007 قانون الخدمة والتقاعد لقوات پیشمەرگە كوردستان (حرس إقليم كوردستان)",
+      "en": "Kurdistan Region Peshmerga (Regional Guard) Service and Retirement Law No. 38 of 2007"
+    },
+    "category": "security",
+    "articleCount": 52,
+    "totalArticleCount": 52,
+    "importedAt": "2026-11-11"
+  },
+  {
+    "id": "iraqi-military-penal-code-2007",
+    "slug": "iraqi-military-penal-code-2007",
+    "officialCitation": {
+      "ckb": "یاسای سزای سەربازی عێراقی فیدراڵ ژمارە (١٩)ی ساڵی ٢٠٠٧ (تەواوی دەق و ماددەکان)",
+      "ar": "قانون العقوبات العسكري العراقي الاتحادي رقم (19) لسنة 2007 (النصوص والمواد الكاملة)",
+      "en": "Iraqi Federal Military Penal Code No. 19 of 2007 (Complete Articles and Provisions)"
+    },
+    "category": "penal",
+    "articleCount": 83,
+    "totalArticleCount": 83,
+    "importedAt": "2026-11-11"
+  },
+  {
+    "id": "iraqi-military-procedure-code-2016",
+    "slug": "iraqi-military-procedure-code-2016",
+    "officialCitation": {
+      "ckb": "یاسای بنەماکانی دادگاییکردنی سزایی سەربازی عێراقی فیدراڵ ژمارە (٢٢)ی ساڵی ٢٠١٦ (تەواوی ١٠٨ ماددە)",
+      "ar": "قانون أصول المحاكمات الجزائية العسكري الاتحادي رقم (22) لسنة 2016 (كامل المواد 108)",
+      "en": "Iraqi Federal Military Criminal Procedure Code No. 22 of 2016 (Complete 108 Articles)"
+    },
+    "category": "penal",
+    "articleCount": 108,
+    "totalArticleCount": 108,
+    "importedAt": "2026-11-11"
+  },
+  {
+    "id": "kri-peshmerga-service-reg-2011",
+    "slug": "kri-peshmerga-service-reg-2011",
+    "officialCitation": {
+      "ckb": "پەیڕەوی ژمارە (٦)ی ساڵی ٢٠١١ ـ پەیڕەوی ڕاژە و خانەنشینی پێشمەرگە تایبەت بە یاسای ژمارە (٣٨)ی ساڵی ٢٠٠٧",
+      "ar": "نظام رقم (6) لسنة 2011 ـ نظام خدمة وتقاعد البيشمركة الصادر لتنفيذ قانون رقم (38) لسنة 2007",
+      "en": "Kurdistan Region Regulation No. 6 of 2011 Implementing Peshmerga Service and Retirement Law No. 38 of 2007"
+    },
+    "category": "security",
+    "articleCount": 6,
+    "totalArticleCount": 6,
+    "importedAt": "2026-11-11"
+  },
+  {
+    "id": "kri-reform-law-2020-peshmerga",
+    "slug": "kri-reform-law-2020-peshmerga",
+    "officialCitation": {
+      "ckb": "یاسای چاکسازی لە مووچە و دەرماڵە و بەخشین و ئیمتیازات و خانەنشینی لە هەرێمی کوردستان ـ عێراق ژمارە (٢)ی ساڵی ٢٠٢٠ (ماددە پەیوەندیدارەکانی پێشمەرگە و سەربازی)",
+      "ar": "قانون الإصلاح في الرواتب والمخصصات والمنح والامتيازات والتقاعد في إقليم كوردستان ـ العراق رقم (2) لسنة 2020 (المواد الخاصة بالبيشمركة والتقاعد العسكري)",
+      "en": "Kurdistan Region Reform Law No. 2 of 2020 (Peshmerga, Military Justice, and Defense Pension Articles)"
+    },
+    "category": "security",
+    "articleCount": 5,
+    "totalArticleCount": 19,
+    "importedAt": "2026-11-11"
+  },
+  {
+    "id": "iraqi-military-penal-amendment-2012",
+    "slug": "iraqi-military-penal-amendment-2012",
+    "officialCitation": {
+      "ckb": "یاسای هەموارکردنی یەکەمی یاسای سزای سەربازی ژمارە (١٩)ی ساڵی ٢٠٠٧ (یاسای ژمارە ٣٦ی ساڵی ٢٠١٢)",
+      "ar": "قانون التعديل الأول لقانون العقوبات العسكري رقم (19) لسنة 2007 (قانون رقم 36 لسنة 2012)",
+      "en": "First Amendment Law No. 36 of 2012 to Federal Military Penal Code No. 19 of 2007"
+    },
+    "category": "penal",
+    "articleCount": 5,
+    "totalArticleCount": 5,
+    "importedAt": "2026-11-11"
   }
 ]

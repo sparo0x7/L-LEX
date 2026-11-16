@@ -2,12 +2,16 @@ node_modules/
 dist/
 dist-ssr/
 coverage/
+.test-results/
+test-results/
+playwright-report/
 .cache/
 *.log
 *.local
 .DS_Store
 .env
 .env.*
+!.env.example
 
 # Agent tooling — not part of the public project
 .claude/

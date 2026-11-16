@@ -17,8 +17,12 @@ import contentArUrl from '../../content/normalized/content.ar.json?url';
 
 export const LAWS = lawsJson as Law[];
 
-export function lawById(lawId: string): Law | undefined {
-  return LAWS.find((law) => law.id === lawId);
+export function lawBySlug(slug: string): Law | undefined {
+  return LAWS.find((law) => law.slug === slug);
+}
+
+export function lawSlugById(lawId: string): string | undefined {
+  return LAWS.find((law) => law.id === lawId)?.slug;
 }
 
 export interface AppData {
@@ -29,9 +33,14 @@ export interface AppData {
 
 let dataPromise: Promise<AppData> | null = null;
 
+async function fetchJson<T>(url: string): Promise<T> {
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(`Failed to load ${url}: ${response.status}`);
+  return (await response.json()) as T;
+}
+
 export function loadData(): Promise<AppData> {
-  dataPromise ??= fetch(searchIndexUrl)
-    .then((response) => response.json() as Promise<SearchIndexFile>)
+  dataPromise ??= fetchJson<SearchIndexFile>(searchIndexUrl)
     .then((file) => {
       const byId = new Map<string, SearchDoc>();
       const byLaw = new Map<LawId, SearchDoc[]>();
@@ -43,6 +52,10 @@ export function loadData(): Promise<AppData> {
       }
       for (const list of byLaw.values()) list.sort((a, b) => a.n - b.n);
       return { docs: file.docs, byId, byLaw };
+    })
+    .catch((error: unknown) => {
+      dataPromise = null; // allow retry instead of caching a permanent failure
+      throw error;
     });
   return dataPromise;
 }
@@ -63,7 +76,10 @@ export async function loadTranslatedContent(
   if (!url) return null;
   let promise = contentPromises.get(locale);
   if (!promise) {
-    promise = fetch(url).then((response) => response.json() as Promise<LocaleContentFile>);
+    promise = fetchJson<LocaleContentFile>(url).catch((error: unknown) => {
+      contentPromises.delete(locale); // allow retry instead of caching a permanent failure
+      throw error;
+    });
     contentPromises.set(locale, promise);
   }
   const file = await promise;

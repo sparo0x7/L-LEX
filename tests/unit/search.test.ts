@@ -46,8 +46,8 @@ const indexFile: SearchIndexFile = JSON.parse(
 const engine = createSearchEngine(indexFile.docs);
 
 describe('SearchEngine against the real corpus', () => {
-  it('indexes all 593 articles', () => {
-    expect(engine.size).toBe(593);
+  it('indexes all 885 articles', () => {
+    expect(engine.size).toBe(885);
   });
 
   it('DoD: "251" and "٢٥١" return the same article, ranked first', () => {
@@ -127,7 +127,7 @@ describe('SearchEngine.browse (filter-only browsing, §3)', () => {
   });
 
   it('with no filters browses the entire corpus', () => {
-    expect(engine.browse({}).length).toBe(593);
+    expect(engine.browse({}).length).toBe(885);
   });
 });
 

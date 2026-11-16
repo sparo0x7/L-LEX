@@ -2,3 +2,10 @@ dist/
 node_modules/
 content/
 package-lock.json
+fix_ar.js
+fix_ar.mjs
+test-results/
+playwright-report/
+public/robots.txt
+public/sitemap.xml
+.env*

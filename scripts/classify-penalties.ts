@@ -7,7 +7,7 @@
  *
  * Patterns were refined against the actual corpus before implementation — the
  * brief's starting patterns were a first pass. Key corrections from the audit of
- * all 557 penalty texts:
+ * all 593 penalty texts:
  *   - Death sentences are phrased with سێدارە "gallows" (54×) or Arabic إعدام (17×);
  *     the phrase سزای مەرگ from the starting pattern never occurs.
  *   - Life vs temporary imprisonment: زیندانی هەمیشەیی (68×) vs زیندانی کاتی (188×).

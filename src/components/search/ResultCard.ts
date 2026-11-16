@@ -4,6 +4,7 @@ import type { SearchResult } from '../../lib/search.ts';
 import { escapeHtml, highlightMatches, makeSnippet } from '../../lib/search.ts';
 import { routePath } from '../../lib/router.ts';
 import { lawLabel } from './Filters.ts';
+import { lawSlugById } from '../../lib/data.ts';
 import { renderPenaltyBadges } from '../article/PenaltyBadges.ts';
 
 export interface ResultCardOptions {
@@ -22,7 +23,11 @@ export function renderResultCard(result: SearchResult, options: ResultCardOption
   const snippetSource = doc.conditions || doc.penalties;
   const snippet = highlightMatches(makeSnippet(snippetSource, query), query);
   const articleHref = routePath(
-    { name: 'article', lawSlug: doc.lawId, articleNumber: doc.n },
+    {
+      name: 'article',
+      lawSlug: lawSlugById(doc.lawId) ?? doc.lawId,
+      articleNumber: doc.n,
+    },
     getLocale(),
   );
   const sourceNote =
@@ -34,13 +39,17 @@ export function renderResultCard(result: SearchResult, options: ResultCardOption
     ? `
       <div class="mt-3 space-y-3 border-t border-border pt-3" ${contentAttrs}>
         <div>
-          <h4 class="mb-1 text-sm font-semibold text-accent">${t('article.conditions')}</h4>
+          <h4 class="mb-1 text-sm font-semibold text-accent">${doc.penalties ? t('article.conditions') : t('article.text')}</h4>
           <p class="leading-8">${highlightMatches(doc.conditions, query)}</p>
         </div>
-        <div>
+        ${
+          doc.penalties
+            ? `<div>
           <h4 class="mb-1 text-sm font-semibold text-accent">${t('article.penalty')}</h4>
           <p class="leading-8">${highlightMatches(doc.penalties, query)}</p>
-        </div>
+        </div>`
+            : ''
+        }
         ${sourceNote}
       </div>`
     : '';
@@ -54,7 +63,7 @@ export function renderResultCard(result: SearchResult, options: ResultCardOption
       }"
     >
       <div class="flex flex-wrap items-center gap-2">
-        <span class="rounded-md bg-accent px-2 py-0.5 text-sm font-semibold text-bg" dir="ltr">
+        <span class="rounded-md bg-accent px-2 py-0.5 text-sm font-semibold text-bg">
           ${t('article.number', { n: doc.n })}
         </span>
         <span class="text-xs text-text-secondary">${lawLabel(doc.lawId as LawId)}</span>

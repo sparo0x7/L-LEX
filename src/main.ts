@@ -92,7 +92,7 @@ function renderShell(): void {
     <div class="flex min-h-dvh flex-col bg-bg text-text-primary">
       ${renderBetaBanner()}
       ${renderHeader(currentRoute.name)}
-      <main id="main" class="mx-auto w-full max-w-5xl flex-1 px-4 pb-16"></main>
+      <main id="main" tabindex="-1" class="mx-auto w-full max-w-5xl flex-1 px-4 pb-16 outline-none"></main>
       ${renderFooter()}
     </div>`;
   wireHeader(app);
@@ -106,7 +106,10 @@ function renderShell(): void {
     app.querySelector('[data-beta-banner]')?.remove();
   });
   const main = app.querySelector<HTMLElement>('#main');
-  if (main) mountPage(main, currentRoute);
+  if (main) {
+    mountPage(main, currentRoute);
+    main.focus({ preventScroll: true });
+  }
 }
 
 setRouteListener((route) => {
@@ -161,6 +164,7 @@ window.addEventListener('popstate', () => {
   } else {
     renderShell();
   }
+  window.scrollTo(0, 0);
 });
 
 // Locale changes (switcher or adopt): mirror the prefix into the URL, re-render.

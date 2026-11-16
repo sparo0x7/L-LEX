@@ -1,7 +1,7 @@
-import { getStored, setStored } from './storage.ts';
+import { getStringArray, setStored } from './storage.ts';
 
 export function getFavorites(): string[] {
-  return getStored<string[]>('favorites') ?? [];
+  return getStringArray('favorites');
 }
 
 export function isFavorite(articleId: string): boolean {

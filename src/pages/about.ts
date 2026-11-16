@@ -17,7 +17,7 @@ export function mountAboutPage(container: HTMLElement): void {
         <p class="mt-1 text-sm text-text-secondary" lang="ckb" dir="rtl">${escapeHtml(law.officialCitation.ckb ?? '')}</p>
         <p class="mt-1 text-sm text-text-secondary">
           ${t('law.articleCount', { count: law.articleCount })} ·
-          ${t('law.imported', { date: law.lastVerified })} —
+          ${t('law.imported', { date: law.importedAt })} —
           ${t('law.verificationPending')}
         </p>
         ${
@@ -40,6 +40,7 @@ export function mountAboutPage(container: HTMLElement): void {
       <section class="space-y-3">
         <h2 class="text-lg font-semibold">${t('about.sources')}</h2>
         <ul class="space-y-3">${sources}</ul>
+        <p class="text-sm leading-7 text-text-secondary">${t('about.method')}</p>
       </section>
       <section class="rounded-xl border border-accent-gold/40 bg-accent-gold/5 p-4">
         <p class="text-sm leading-7">${t('footer.disclaimer')}</p>
