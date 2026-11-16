@@ -157,8 +157,7 @@ export function mountLandingPage(container: HTMLElement): void {
 
     <section class="mx-auto max-w-4xl py-12" data-reveal>
       <div class="rounded-2xl border border-accent-gold/40 bg-accent-gold/5 p-6 shadow-sm sm:p-8">
-        <p class="leading-8">${t('footer.disclaimer')}</p>
-        <div class="mt-5 flex flex-wrap items-center gap-4">
+        <div class="flex flex-wrap items-center gap-4">
           <a data-link href="${routePath({ name: 'about' }, locale)}"
             class="rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-bg shadow-sm transition-all duration-300 ease-premium hover:-translate-y-0.5 hover:shadow-md active:scale-[0.98]"
           >${t('landing.aboutCta')}</a>

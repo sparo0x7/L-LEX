@@ -9,7 +9,6 @@ export function renderFooter(): string {
   return `
     <footer class="mt-auto border-t border-border bg-bg-subtle">
       <div class="mx-auto max-w-5xl space-y-3 px-4 py-6 text-sm text-text-secondary">
-        <p>${t('footer.disclaimer')}</p>
         <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
           <a
             class="link-underline hover:text-text-primary"

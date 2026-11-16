@@ -5,6 +5,9 @@ import { escapeHtml } from '../lib/search.ts';
 import { lawLabel } from '../components/search/Filters.ts';
 import { REPORT_EMAIL } from '../components/layout/Footer.ts';
 
+const CREATOR_GITHUB = 'https://github.com/MrGuevar4';
+const CREATOR_FACEBOOK = 'https://www.facebook.com/las.mhamad.1';
+
 export function mountAboutPage(container: HTMLElement): void {
   document.title = `L-LEX — ${t('about.title')}`;
   const locale = getLocale();
@@ -32,24 +35,43 @@ export function mountAboutPage(container: HTMLElement): void {
   ).join('');
 
   container.innerHTML = `
-    <div class="mx-auto max-w-2xl space-y-8 py-8">
-      <header class="space-y-3">
-        <h1 class="text-2xl font-bold">${t('about.title')}</h1>
-        <p class="leading-8 text-text-secondary">${t('about.body')}</p>
+    <div class="mx-auto max-w-3xl space-y-10 py-10">
+      <header class="space-y-4">
+        <h1 class="text-3xl font-bold">${t('about.title')}</h1>
+        <p class="text-lg leading-9 text-text-secondary">${t('about.body')}</p>
       </header>
-      <section class="space-y-3">
-        <h2 class="text-lg font-semibold">${t('about.sources')}</h2>
-        <ul class="space-y-3">${sources}</ul>
-        <p class="text-sm leading-7 text-text-secondary">${t('about.method')}</p>
+
+      <section class="grid gap-4 md:grid-cols-2">
+        <div class="rounded-xl border border-border bg-surface p-5">
+          <h2 class="text-lg font-semibold">${t('about.missionTitle')}</h2>
+          <p class="mt-2 leading-8 text-text-secondary">${t('about.missionBody')}</p>
+        </div>
+        <div class="rounded-xl border border-border bg-surface p-5">
+          <h2 class="text-lg font-semibold">${t('about.scopeTitle')}</h2>
+          <p class="mt-2 leading-8 text-text-secondary">${t('about.scopeBody')}</p>
+        </div>
       </section>
-      <section class="rounded-xl border border-accent-gold/40 bg-accent-gold/5 p-4">
-        <p class="text-sm leading-7">${t('footer.disclaimer')}</p>
+
+      <section class="space-y-4">
+        <h2 class="text-xl font-semibold">${t('about.sources')}</h2>
+        <ul class="grid gap-3 md:grid-cols-2">${sources}</ul>
+        <p class="leading-8 text-text-secondary">${t('about.method')}</p>
       </section>
-      <footer class="space-y-1 text-sm text-text-secondary">
-        <p>${t('about.creator')}</p>
-        <a class="underline underline-offset-4 hover:text-text-primary"
-          href="mailto:${REPORT_EMAIL}?subject=L-LEX"
-        >${t('footer.reportError')}</a>
-      </footer>
+
+      <section class="rounded-xl border border-accent/30 bg-surface p-6">
+        <h2 class="text-xl font-semibold">${t('about.creatorTitle')}</h2>
+        <p class="mt-3 leading-8 text-text-secondary">${t('about.creatorBody')}</p>
+        <div class="mt-5 flex flex-wrap gap-x-6 gap-y-3 text-sm">
+          <a class="link-underline hover:text-text-primary" href="${CREATOR_GITHUB}" rel="me" dir="ltr">GitHub — MrGuevar4</a>
+          <a class="link-underline hover:text-text-primary" href="${CREATOR_FACEBOOK}" rel="me" dir="ltr">Facebook — Las Khoshnaw</a>
+          <a class="link-underline hover:text-text-primary"
+            href="mailto:${REPORT_EMAIL}?subject=${encodeURIComponent('L-LEX')}">${t('about.contact')}</a>
+        </div>
+      </section>
+
+      <section class="rounded-xl border border-border bg-bg-subtle p-5">
+        <h2 class="text-lg font-semibold">${t('about.legalTitle')}</h2>
+        <p class="mt-2 text-sm leading-7 text-text-secondary">${t('about.legalNotice')}</p>
+      </section>
     </div>`;
 }

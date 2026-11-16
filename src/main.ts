@@ -46,39 +46,6 @@ function mountPage(main: HTMLElement, route: Route): void {
   }
 }
 
-// Beta banner (§0 deployment safety): shown on every page until the data set
-// is complete and §15-verified; dismissal lasts one browser session only.
-const BANNER_DISMISS_KEY = 'laws:beta-banner-dismissed';
-
-function bannerDismissed(): boolean {
-  try {
-    return sessionStorage.getItem(BANNER_DISMISS_KEY) === '1';
-  } catch {
-    return false;
-  }
-}
-
-function renderBetaBanner(): string {
-  if (bannerDismissed()) return '';
-  return `
-    <div
-      data-beta-banner
-      role="status"
-      class="no-print flex items-center justify-center gap-3 border-b border-accent-gold/40 bg-accent-gold/10 px-4 py-2 text-sm"
-    >
-      <span class="text-center">
-        ${t('banner.beta')}
-        <a data-link href="${routePath({ name: 'about' }, getLocale())}"
-          class="underline underline-offset-4 hover:text-accent-gold">${t('nav.about')}</a>
-      </span>
-      <button type="button" data-banner-dismiss aria-label="${t('banner.dismiss')}"
-        class="shrink-0 rounded-md p-1 hover:bg-surface-hover">
-        <svg class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-          stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" /></svg>
-      </button>
-    </div>`;
-}
-
 // The whole shell re-renders on locale change and navigation — cheap at this
 // scale and keeps translated strings, lang/dir, and nav state consistent.
 function renderShell(): void {
@@ -90,21 +57,12 @@ function renderShell(): void {
       class="sr-only focus:not-sr-only focus:absolute focus:start-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-surface focus:px-4 focus:py-2 focus:text-text-primary focus:shadow-lg"
     >${t('nav.skipToContent')}</a>
     <div class="flex min-h-dvh flex-col bg-bg text-text-primary">
-      ${renderBetaBanner()}
       ${renderHeader(currentRoute.name)}
       <main id="main" tabindex="-1" class="mx-auto w-full max-w-5xl flex-1 px-4 pb-16 outline-none"></main>
       ${renderFooter()}
     </div>`;
   wireHeader(app);
   wireFooter(app);
-  app.querySelector('[data-banner-dismiss]')?.addEventListener('click', () => {
-    try {
-      sessionStorage.setItem(BANNER_DISMISS_KEY, '1');
-    } catch {
-      /* dismissal just won't persist */
-    }
-    app.querySelector('[data-beta-banner]')?.remove();
-  });
   const main = app.querySelector<HTMLElement>('#main');
   if (main) {
     mountPage(main, currentRoute);
